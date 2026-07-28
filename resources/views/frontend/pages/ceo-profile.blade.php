@@ -278,7 +278,7 @@
         <div class="glass-card">
             <div class="grid-2col">
                 <div class="avatar-large">
-                    <img src="./assets/images/IA-Roni.jpeg" alt="Md.Istak Ahmmed Roni"
+                    <img src="{{ asset('static/frontend/assets/images/IA-Roni.jpeg') }}" alt="Md.Istak Ahmmed Roni"
                         onerror="
                                 this.style.display = 'none';
                                 this.nextElementSibling.style.display =

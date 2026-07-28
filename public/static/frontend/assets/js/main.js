@@ -1,34 +1,20 @@
 (function () {
-    // ── LOGO CANVAS (unchanged) ──
+    // ── Logo Canvas ──
     const logoCanvas = document.getElementById("logo-canvas");
     const logoCtx = logoCanvas.getContext("2d");
     const logoW = logoCanvas.width,
         logoH = logoCanvas.height;
     const margin = 16,
         topY = margin + 4,
-        bottomY = logoH - margin,
-        leftX = margin,
+        bottomY = logoH - margin;
+    const leftX = margin,
         rightX = logoW - margin,
         midX = logoW / 2,
         crossY = logoH * 0.52;
-    const segments = [{
-        x1: leftX + 4,
-        y1: bottomY,
-        x2: midX,
-        y2: topY
-    },
-    {
-        x1: rightX - 4,
-        y1: bottomY,
-        x2: midX,
-        y2: topY
-    },
-    {
-        x1: leftX + 12,
-        y1: crossY,
-        x2: rightX - 12,
-        y2: crossY
-    },
+    const segments = [
+        { x1: leftX + 4, y1: bottomY, x2: midX, y2: topY },
+        { x1: rightX - 4, y1: bottomY, x2: midX, y2: topY },
+        { x1: leftX + 12, y1: crossY, x2: rightX - 12, y2: crossY },
     ];
     const logoParticles = [];
 
@@ -39,18 +25,16 @@
         };
     }
     for (let i = 0; i < 90; i++) {
-        const seg = segments[Math.floor(Math.random() * 3)],
-            t = Math.random(),
-            base = pointOnSegment(seg, t);
+        const seg = segments[Math.floor(Math.random() * 3)];
+        const t = Math.random();
+        const base = pointOnSegment(seg, t);
         logoParticles.push({
             baseX: base.x,
             baseY: base.y,
-            x: base.x + (Math.random() -
-                0.5) * 20,
+            x: base.x + (Math.random() - 0.5) * 20,
             y: base.y + (Math.random() - 0.5) * 20,
             vx: (Math.random() - 0.5) * 0.3,
-            vy: (Math.random() - 0.5) *
-                0.3,
+            vy: (Math.random() - 0.5) * 0.3,
             radius: 0.8 + Math.random() * 1.6,
             alpha: 0.5 + Math.random() * 0.5,
             phase: Math.random() * Math.PI * 2,
@@ -60,24 +44,23 @@
     function animateLogo() {
         logoCtx.clearRect(0, 0, logoW, logoH);
         const time = Date.now() * 0.001;
-        for (const
-            p of logoParticles) {
-            const wx = Math.cos(time * 1.3 + p.phase) * 4,
-                wy = Math.sin(time * 1.7 + p.phase) * 4;
-            const
-                tx = p.baseX + wx,
+        for (const p of logoParticles) {
+            const wx = Math.cos(time * 1.3 + p.phase) * 4;
+            const wy = Math.sin(time * 1.7 + p.phase) * 4;
+            const tx = p.baseX + wx,
                 ty = p.baseY + wy;
             p.x += (tx - p.x) * 0.04 + p.vx;
             p.y += (ty - p.y) * 0.04 + p.vy;
-            const dx = p.x -
-                p.baseX,
+            const dx = p.x - p.baseX,
                 dy = p.y - p.baseY,
                 dist = Math.sqrt(dx * dx + dy * dy);
             if (dist > 10) {
                 p.vx -= (dx / dist) * 0.05;
                 p.vy -= (dy / dist) * 0.05;
             }
-            const alpha = p.alpha * (0.7 + 0.3 * Math.sin(time * 2 + p.phase));
+            const alpha =
+                p.alpha *
+                (0.7 + 0.3 * Math.sin(time * 2 + p.phase));
             const g = logoCtx.createRadialGradient(
                 p.x,
                 p.y,
@@ -102,7 +85,7 @@
     }
     animateLogo();
 
-    // ── THREE.JS BACKGROUND (unchanged) ──
+    // ── Three.js Background Network ──
     const bgCanvas = document.getElementById("bg-canvas");
     const bgRenderer = new THREE.WebGLRenderer({
         canvas: bgCanvas,
@@ -125,8 +108,15 @@
         c.width = size;
         c.height = size;
         const ctx = c.getContext("2d"),
-            half = size / 2,
-            grad = ctx.createRadialGradient(half, half, 0, half, half, half);
+            half = size / 2;
+        const grad = ctx.createRadialGradient(
+            half,
+            half,
+            0,
+            half,
+            half,
+            half,
+        );
         grad.addColorStop(0, color);
         grad.addColorStop(0.15, color);
         grad.addColorStop(0.5, "rgba(0,180,220,0.25)");
@@ -136,30 +126,33 @@
         return new THREE.CanvasTexture(c);
     }
     const glowTex = createGlowTex("rgba(0,229,255,0.9)", 64);
-    const bgParticlesGeo = new THREE.BufferGeometry(),
-        bgParticleCount = 200,
-        bgPositions = new Float32Array(bgParticleCount * 3),
-        bgSizes = new Float32Array(bgParticleCount),
-        bgParticleData = [];
+    const bgParticlesGeo = new THREE.BufferGeometry();
+    const bgParticleCount = 200;
+    const bgPositions = new Float32Array(bgParticleCount * 3);
+    const bgSizes = new Float32Array(bgParticleCount);
+    const bgParticleData = [];
     for (let i = 0; i < bgParticleCount; i++) {
         bgPositions[i * 3] = (Math.random() - 0.5) * 50;
-        bgPositions[i * 3 +
-            1] = (Math.random() - 0.5) * 35;
+        bgPositions[i * 3 + 1] = (Math.random() - 0.5) * 35;
         bgPositions[i * 3 + 2] = (Math.random() - 0.5) * 30;
-        bgSizes[i] = 0.08 +
-            Math.random() * 0.35;
+        bgSizes[i] = 0.08 + Math.random() * 0.35;
         bgParticleData.push({
             vx: (Math.random() - 0.5) * 0.015,
-            vy: (Math.random() - 0.5) *
-                0.015,
+            vy: (Math.random() - 0.5) * 0.015,
             vz: (Math.random() - 0.5) * 0.01,
             origX: bgPositions[i * 3],
             origY: bgPositions[i * 3 + 1],
             origZ: bgPositions[i * 3 + 2],
         });
     }
-    bgParticlesGeo.setAttribute("position", new THREE.BufferAttribute(bgPositions, 3),);
-    bgParticlesGeo.setAttribute("size", new THREE.BufferAttribute(bgSizes, 1),);
+    bgParticlesGeo.setAttribute(
+        "position",
+        new THREE.BufferAttribute(bgPositions, 3),
+    );
+    bgParticlesGeo.setAttribute(
+        "size",
+        new THREE.BufferAttribute(bgSizes, 1),
+    );
     const bgParticlesMat = new THREE.PointsMaterial({
         map: glowTex,
         color: 0x00e5ff,
@@ -169,409 +162,107 @@
         transparent: true,
         opacity: 0.7,
     });
-    const bgParticles = new THREE.Points(bgParticlesGeo, bgParticlesMat);
+    const bgParticles = new THREE.Points(
+        bgParticlesGeo,
+        bgParticlesMat,
+    );
     bgScene.add(bgParticles);
-    const
-        linesMaterial = new THREE.LineBasicMaterial({
-            color: 0x00c8e8,
-            transparent: true,
-            opacity: 0.12,
-            blending: THREE.AdditiveBlending,
-            depthWrite: false,
-        }),
-        linesGroup = new THREE.Group();
+    const linesMaterial = new THREE.LineBasicMaterial({
+        color: 0x00c8e8,
+        transparent: true,
+        opacity: 0.12,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+    });
+    const linesGroup = new THREE.Group();
     bgScene.add(linesGroup);
-    const
-        maxConnections = 80;
+    let connTimer = 0;
 
     function updateConnections() {
-        while (linesGroup.children.length > 0) {
+        while (linesGroup.children.length)
             linesGroup.remove(linesGroup.children[0]);
-        }
-        const pos = bgPositions,
-            count = bgParticleCount;
-        let connections = 0;
-        for (let i = 0; i < count && connections < maxConnections; i++) {
-            for (let j = i + 1; j < count &&
-                connections < maxConnections; j++) {
+        const pos = bgPositions;
+        let c = 0;
+        for (let i = 0; i < bgParticleCount && c < 80; i++) {
+            for (
+                let j = i + 1;
+                j < bgParticleCount && c < 80;
+                j++
+            ) {
                 const dx = pos[i * 3] - pos[j * 3],
-                    dy = pos[i * 3 + 1] - pos[j * 3 +
-                        1],
-                    dz = pos[i * 3 + 2] - pos[j * 3 + 2],
-                    dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-                if (dist < 6.5 &&
-                    Math.random() < 0.25) {
-                    const lineGeo = new THREE.BufferGeometry();
-                    lineGeo.setAttribute("position", new THREE.Float32BufferAttribute([pos[i * 3], pos[i * 3 +
-                        1], pos[i * 3 + 2], pos[j * 3], pos[j * 3 + 1],
-                    pos[j * 3 + 2],
-                    ], 3,),);
-                    const line = new THREE.Line(lineGeo, linesMaterial.clone());
-                    line.material.opacity = 0.08 + Math.random() * 0.14;
+                    dy = pos[i * 3 + 1] - pos[j * 3 + 1],
+                    dz = pos[i * 3 + 2] - pos[j * 3 + 2];
+                const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+                if (dist < 6.5 && Math.random() < 0.25) {
+                    const geo = new THREE.BufferGeometry();
+                    geo.setAttribute(
+                        "position",
+                        new THREE.Float32BufferAttribute(
+                            [
+                                pos[i * 3],
+                                pos[i * 3 + 1],
+                                pos[i * 3 + 2],
+                                pos[j * 3],
+                                pos[j * 3 + 1],
+                                pos[j * 3 + 2],
+                            ],
+                            3,
+                        ),
+                    );
+                    const line = new THREE.Line(
+                        geo,
+                        linesMaterial.clone(),
+                    );
+                    line.material.opacity =
+                        0.08 + Math.random() * 0.14;
                     linesGroup.add(line);
-                    connections++;
+                    c++;
                 }
             }
         }
     }
     updateConnections();
-    let connectionUpdateTimer = 0;
-    let mouseX = 0,
-        mouseY = 0,
-        targetMouseX = 0,
-        targetMouseY = 0;
+    let mx = 0,
+        my = 0,
+        tmx = 0,
+        tmy = 0;
     document.addEventListener("mousemove", (e) => {
-        targetMouseX = (e.clientX / window.innerWidth) * 2 - 1;
-        targetMouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+        tmx = (e.clientX / window.innerWidth) * 2 - 1;
+        tmy = -(e.clientY / window.innerHeight) * 2 + 1;
     });
 
     function animateBg() {
         requestAnimationFrame(animateBg);
-        const time = Date.now() * 0.001;
-        mouseX += (targetMouseX - mouseX) * 0.03;
-        mouseY += (targetMouseY - mouseY) * 0.03;
+        mx += (tmx - mx) * 0.03;
+        my += (tmy - my) * 0.03;
         const pos = bgParticlesGeo.attributes.position.array;
         for (let i = 0; i < bgParticleCount; i++) {
             const pd = bgParticleData[i];
             pos[i * 3] += pd.vx;
-            pos[i * 3 +
-                1] += pd.vy;
+            pos[i * 3 + 1] += pd.vy;
             pos[i * 3 + 2] += pd.vz;
             if (Math.abs(pos[i * 3] - pd.origX) > 12) pd.vx *= -1;
-            if (Math.abs(pos[i * 3 + 1] - pd.origY) > 10) pd.vy *= -1;
-            if (Math.abs(pos[i * 3 + 2] - pd.origZ) > 10) pd.vz *= -1;
+            if (Math.abs(pos[i * 3 + 1] - pd.origY) > 10)
+                pd.vy *= -1;
+            if (Math.abs(pos[i * 3 + 2] - pd.origZ) > 10)
+                pd.vz *= -1;
         }
         bgParticlesGeo.attributes.position.needsUpdate = true;
-        bgCamera.position.x += (mouseX * 1.8 - bgCamera.position.x) * 0.02;
-        bgCamera.position.y += (mouseY * 1.2 - bgCamera.position.y) * 0.02;
+        bgCamera.position.x +=
+            (mx * 1.8 - bgCamera.position.x) * 0.02;
+        bgCamera.position.y +=
+            (my * 1.2 - bgCamera.position.y) * 0.02;
         bgCamera.lookAt(0, 0, 0);
         bgScene.rotation.y += 0.0008;
         bgScene.rotation.x += 0.0003;
-        connectionUpdateTimer++;
-        if (connectionUpdateTimer > 90) {
-            connectionUpdateTimer = 0;
+        connTimer++;
+        if (connTimer > 90) {
+            connTimer = 0;
             updateConnections();
         }
         bgRenderer.render(bgScene, bgCamera);
     }
     animateBg();
-
-    // ── GLOBE (unchanged) ──
-    const globeContainer = document.getElementById("globeContainer"),
-        globeCanvas = document.getElementById("globe-canvas");
-    const globeRenderer = new THREE.WebGLRenderer({
-        canvas: globeCanvas,
-        antialias: true,
-        alpha: true,
-    });
-    globeRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    const globeScene = new THREE.Scene(),
-        globeCamera = new THREE.PerspectiveCamera(45, 1, 0.3, 30);
-    globeCamera.position.z = 8;
-
-    function resizeGlobe() {
-        const rect = globeContainer.getBoundingClientRect(),
-            w = rect.width,
-            h = Math.min(rect.height, w * 0.9);
-        globeRenderer.setSize(w, h, false);
-        globeCamera.aspect = w / Math.max(h, 1);
-        globeCamera.updateProjectionMatrix();
-    }
-    resizeGlobe();
-    const sphereGeo = new THREE.SphereGeometry(2.6, 48, 36),
-        sphereWire = new THREE.LineSegments(
-            new THREE.WireframeGeometry(sphereGeo, 1),
-            new THREE.LineBasicMaterial({
-                color: 0x1a3a4a,
-                transparent: true,
-                opacity: 0.35,
-                depthWrite: false,
-            }),
-        );
-    globeScene.add(sphereWire);
-    const innerSphere = new THREE.Mesh(
-        new THREE.SphereGeometry(2.55, 64, 48),
-        new THREE.MeshBasicMaterial({
-            color: 0x0a1a24,
-            transparent: true,
-            opacity: 0.3,
-            depthWrite: false,
-        }),
-    );
-    globeScene.add(innerSphere);
-    const hubLocations = [{
-        lat: 37.77,
-        lng: -122.42
-    },
-    {
-        lat: 40.71,
-        lng: -74.01
-    },
-    {
-        lat: 51.51,
-        lng: -0.13
-    },
-    {
-        lat: 52.52,
-        lng: 13.4
-    },
-    {
-        lat: 25.2,
-        lng: 55.27
-    },
-    {
-        lat: 12.97,
-        lng: 77.59
-    },
-    {
-        lat: 1.35,
-        lng: 103.82
-    },
-    {
-        lat: 35.68,
-        lng: 139.76
-    },
-    {
-        lat: -33.87,
-        lng: 151.21
-    },
-    {
-        lat: -23.55,
-        lng: -46.63
-    },
-    {
-        lat: 55.75,
-        lng: 37.62
-    },
-    {
-        lat: 30.04,
-        lng: 31.24
-    },
-    ];
-    const dotGroup = new THREE.Group(),
-        hubDots = [],
-        R = 2.62;
-    hubLocations.forEach((loc) => {
-        const phi = (90 - loc.lat) * (Math.PI / 180),
-            theta = (loc.lng + 90) * (Math.PI / 180),
-            x = -R * Math.sin(phi) * Math.cos(theta),
-            y = R * Math.cos(phi),
-            z = R * Math.sin(phi) * Math.sin(theta);
-        const spriteMat = new THREE.SpriteMaterial({
-            map: glowTex,
-            color: 0x00e5ff,
-            blending: THREE.AdditiveBlending,
-            depthWrite: false,
-            transparent: true,
-            opacity: 0.9,
-        }),
-            sprite = new THREE.Sprite(spriteMat);
-        sprite.position.set(x, y, z);
-        sprite.scale.set(0.25, 0.25, 1);
-        dotGroup.add(sprite);
-        const dotGeo = new THREE.SphereGeometry(0.04, 8, 8),
-            dotMat = new THREE.MeshBasicMaterial({
-                color: 0xffffff,
-                depthWrite: false,
-            }),
-            dot = new THREE.Mesh(dotGeo, dotMat);
-        dot.position.copy(sprite.position);
-        dotGroup.add(dot);
-        hubDots.push({
-            sprite,
-            dot,
-            x,
-            y,
-            z
-        });
-    });
-    globeScene.add(dotGroup);
-    const ringGeo = new THREE.TorusGeometry(2.75, 0.015, 16, 120),
-        ringMat = new THREE.MeshBasicMaterial({
-            color: 0x00c8e8,
-            transparent: true,
-            opacity: 0.3,
-            depthWrite: false,
-            blending: THREE.AdditiveBlending,
-        }),
-        ring = new THREE.Mesh(ringGeo, ringMat);
-    ring.rotation.x = Math.PI * 0.55;
-    ring.rotation.y = Math.PI * 0.2;
-    globeScene.add(ring);
-    const ring2 = new THREE.Mesh(
-        new THREE.TorusGeometry(2.8, 0.012, 12, 100),
-        new THREE.MeshBasicMaterial({
-            color: 0x4de8ff,
-            transparent: true,
-            opacity: 0.2,
-            depthWrite: false,
-            blending: THREE.AdditiveBlending,
-        }),
-    );
-    ring2.rotation.x = Math.PI * 0.3;
-    ring2.rotation.y = -Math.PI * 0.35;
-    globeScene.add(ring2);
-    const arcGroup = new THREE.Group(),
-        hubPairs = [
-            [0, 1],
-            [0, 3],
-            [1, 2],
-            [2, 3],
-            [4, 7],
-            [5, 6],
-            [6, 7],
-            [8, 9],
-            [0, 6],
-            [2, 7],
-        ];
-    hubPairs.forEach(([a, b]) => {
-        const pA = new THREE.Vector3(
-            hubDots[a].x,
-            hubDots[a].y,
-            hubDots[a].z,
-        ),
-            pB = new THREE.Vector3(hubDots[b].x, hubDots[b].y, hubDots[b].z),
-            mid = pA.clone().add(pB).multiplyScalar(0.5),
-            dist = pA.distanceTo(pB),
-            ctrl = mid
-                .clone()
-                .normalize()
-                .multiplyScalar(R + dist * 0.35),
-            curve = new THREE.QuadraticBezierCurve3(
-                pA.clone(),
-                ctrl,
-                pB.clone(),
-            ),
-            curvePoints = curve.getPoints(40),
-            curveGeo = new THREE.BufferGeometry().setFromPoints(curvePoints),
-            curveLine = new THREE.Line(
-                curveGeo,
-                new THREE.LineBasicMaterial({
-                    color: 0x00d4ee,
-                    transparent: true,
-                    opacity: 0.18,
-                    depthWrite: false,
-                    blending: THREE.AdditiveBlending,
-                }),
-            );
-        arcGroup.add(curveLine);
-    });
-    globeScene.add(arcGroup);
-    let globeRotX = 0.3,
-        globeRotY = 0,
-        targetGlobeRotX = 0.3,
-        targetGlobeRotY = 0,
-        isDragging = false,
-        autoRotate = true,
-        dragVelocity = {
-            x: 0,
-            y: 0
-        };
-    globeContainer.addEventListener("mousedown", (e) => {
-        isDragging = true;
-        autoRotate = false;
-        prevMouse = {
-            x: e.clientX,
-            y: e.clientY
-        };
-        dragVelocity = {
-            x: 0,
-            y: 0
-        };
-    });
-    window.addEventListener("mouseup", () => {
-        if (isDragging) {
-            autoRotate = true;
-            targetGlobeRotY += dragVelocity.x * 0.5;
-            targetGlobeRotX += dragVelocity.y * 0.5;
-        }
-        isDragging = false;
-    });
-    window.addEventListener("mousemove", (e) => {
-        if (isDragging) {
-            const dx = e.clientX - prevMouse.x,
-                dy = e.clientY - prevMouse.y;
-            dragVelocity = {
-                x: dx * 0.005,
-                y: dy * 0.005
-            };
-            targetGlobeRotY += dx * 0.005;
-            targetGlobeRotX += dy * 0.005;
-            targetGlobeRotX = Math.max(-1.2, Math.min(1.2, targetGlobeRotX));
-            prevMouse.x = e.clientX;
-            prevMouse.y = e.clientY;
-        } else if (!isDragging && globeContainer.matches(":hover")) {
-            const rect = globeContainer.getBoundingClientRect(),
-                cx = rect.left + rect.width / 2,
-                cy = rect.top + rect.height / 2,
-                mx = (e.clientX - cx) / (rect.width / 2),
-                my = (e.clientY - cy) / (rect.height / 2);
-            if (autoRotate) {
-                targetGlobeRotY = mx * 0.5;
-                targetGlobeRotX = my * 0.35;
-            }
-        }
-    });
-    globeContainer.addEventListener("touchstart", (e) => {
-        if (e.touches.length === 1) {
-            isDragging = true;
-            autoRotate = false;
-            prevMouse.x = e.touches[0].clientX;
-            prevMouse.y = e.touches[0].clientY;
-            dragVelocity = {
-                x: 0,
-                y: 0
-            };
-        }
-    });
-    window.addEventListener("touchend", () => {
-        if (isDragging) {
-            autoRotate = true;
-            targetGlobeRotY += dragVelocity.x * 0.5;
-            targetGlobeRotX += dragVelocity.y * 0.5;
-        }
-        isDragging = false;
-    });
-    window.addEventListener("touchmove", (e) => {
-        if (isDragging && e.touches.length === 1) {
-            const dx = e.touches[0].clientX - prevMouse.x,
-                dy = e.touches[0].clientY - prevMouse.y;
-            dragVelocity = {
-                x: dx * 0.005,
-                y: dy * 0.005
-            };
-            targetGlobeRotY += dx * 0.005;
-            targetGlobeRotX += dy * 0.005;
-            targetGlobeRotX = Math.max(-1.2, Math.min(1.2, targetGlobeRotX));
-            prevMouse.x = e.touches[0].clientX;
-            prevMouse.y = e.touches[0].clientY;
-        }
-    });
-
-    function animateGlobe() {
-        requestAnimationFrame(animateGlobe);
-        const time = Date.now() * 0.001;
-        if (autoRotate && !isDragging) targetGlobeRotY += 0.003;
-        globeRotY += (targetGlobeRotY - globeRotY) * 0.06;
-        globeRotX += (targetGlobeRotX - globeRotX) * 0.06;
-        dotGroup.rotation.y = globeRotY;
-        dotGroup.rotation.x = globeRotX;
-        arcGroup.rotation.y = globeRotY;
-        arcGroup.rotation.x = globeRotX;
-        sphereWire.rotation.y = globeRotY;
-        sphereWire.rotation.x = globeRotX;
-        innerSphere.rotation.y = globeRotY;
-        innerSphere.rotation.x = globeRotX;
-        ring.rotation.z += 0.004;
-        ring2.rotation.z -= 0.003;
-        hubDots.forEach((hd, i) => {
-            const pulse = 0.8 + 0.2 * Math.sin(time * 2.5 + i * 0.9);
-            hd.sprite.scale.set(0.25 * pulse, 0.25 * pulse, 1);
-            hd.sprite.material.opacity = 0.6 + 0.4 * pulse;
-        });
-        globeRenderer.render(globeScene, globeCamera);
-    }
-    animateGlobe();
 
     // ── UI Interactions ──
     const header = document.getElementById("header");
