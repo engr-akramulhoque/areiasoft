@@ -180,10 +180,11 @@ body {
 }
 
 .dropdown-arrow {
-    font-size: 0.6rem;
+    font-size: 1.2rem;
     transition: transform var(--transition);
     display: inline-block;
     margin-left: 2px;
+    margin-top: 3px;
     color: var(--white-muted);
 }
 
@@ -379,7 +380,7 @@ body {
     }
 
     .dropdown-arrow {
-        font-size: 0.7rem;
+        font-size: 1rem;
     }
 
     .dropdown-menu {

@@ -36,4 +36,9 @@ class FrontendController extends Controller
     {
         return view('frontend.pages.terms');
     }
+    
+    public function caseStudy()
+    {
+        return view('frontend.pages.case-study');
+    }
 }

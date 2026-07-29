@@ -223,110 +223,17 @@
 
     <!-- Hero -->
     <section class="page-hero">
-        <p class="section-label">What We Offer</p>
-        <h1>End‑to‑End Digital Services</h1>
-        <p>From concept to deployment, we deliver intelligent solutions that transform businesses and delight users.</p>
+        <p class="section-label">Our Services</p>
+        <h1>Custom Software & Website Development Services</h1>
+        <p>
+            From modern websites to enterprise software, AI-powered solutions, ERP, CRM, and mobile applications, we
+            build scalable digital products tailored to your business goals.
+        </p>
     </section>
 
-    <!-- Services Grid (expanded) -->
+    <!-- Services Grid -->
     <div class="services-grid">
-        <div class="service-card">
-            <div class="card-icon"><svg viewBox="0 0 24 24">
-                    <rect x="3" y="3" width="18" height="13" rx="2" />
-                    <line x1="7" y1="19" x2="17" y2="19" />
-                    <line x1="12" y1="16" x2="12" y2="19" />
-                    <polyline points="7,9 10,6 13,9 17,5" />
-                </svg></div>
-            <h3>Custom Web & Mobile Apps</h3>
-            <p>Scalable, high‑performance applications built with React, Next.js, Swift, and Kotlin. We craft seamless
-                cross‑platform experiences that your users will love.</p>
-            <div class="card-glow-line"></div>
-        </div>
-        <div class="service-card">
-            <div class="card-icon"><svg viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="9" />
-                    <circle cx="12" cy="12" r="4" />
-                    <line x1="12" y1="3" x2="12" y2="8" />
-                    <line x1="12" y1="16" x2="12" y2="21" />
-                    <line x1="3" y1="12" x2="8" y2="12" />
-                    <line x1="16" y1="12" x2="21" y2="12" />
-                    <line x1="5.6" y1="5.6" x2="9.2" y2="9.2" />
-                    <line x1="14.8" y1="14.8" x2="18.4" y2="18.4" />
-                </svg></div>
-            <h3>AI & Machine Learning</h3>
-            <p>Custom LLM pipelines, computer vision, and predictive models that turn raw data into actionable insights
-                — deployed at scale with MLOps best practices.</p>
-            <div class="card-glow-line"></div>
-        </div>
-        <div class="service-card">
-            <div class="card-icon"><svg viewBox="0 0 24 24">
-                    <path d="M6 18C6 15.8 9 14 12 14S18 15.8 18 18" />
-                    <ellipse cx="12" cy="6" rx="5" ry="3" />
-                    <line x1="7" y1="6" x2="7" y2="18" />
-                    <line x1="17" y1="6" x2="17" y2="18" />
-                    <rect x="4" y="18" width="16" height="3" rx="1" />
-                </svg></div>
-            <h3>Cloud Infrastructure</h3>
-            <p>Multi‑cloud architectures on AWS, GCP, and Azure. We design resilient, auto‑scaling systems with
-                Kubernetes, Terraform, and zero‑downtime pipelines.</p>
-            <div class="card-glow-line"></div>
-        </div>
-        <div class="service-card">
-            <div class="card-icon"><svg viewBox="0 0 24 24">
-                    <rect x="2" y="3" width="20" height="15" rx="2" />
-                    <circle cx="8" cy="10.5" r="1.5" />
-                    <circle cx="16" cy="10.5" r="1.5" />
-                    <path d="M8 13.5C9.5 15 14.5 15 16 13.5" />
-                    <line x1="12" y1="18" x2="12" y2="21" />
-                    <line x1="9" y1="21" x2="15" y2="21" />
-                </svg></div>
-            <h3>UI/UX Design</h3>
-            <p>Research‑driven design systems that balance beauty with usability. From wireframes to interactive
-                prototypes, we create experiences that convert.</p>
-            <div class="card-glow-line"></div>
-        </div>
-        <div class="service-card">
-            <div class="card-icon"><svg viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10" />
-                    <polyline points="12,6 12,12 16,14" />
-                </svg></div>
-            <h3>DevOps & CI/CD</h3>
-            <p>Automated deployment pipelines, monitoring, and site reliability engineering that keep your products
-                running 24/7 with zero touch.</p>
-            <div class="card-glow-line"></div>
-        </div>
-        <div class="service-card">
-            <div class="card-icon"><svg viewBox="0 0 24 24">
-                    <ellipse cx="12" cy="5" rx="9" ry="3" />
-                    <path d="M3 5v6c0 1.7 4 3 9 3s9-1.3 9-3V5" />
-                    <path d="M3 11v6c0 1.7 4 3 9 3s9-1.3 9-3v-6" />
-                </svg></div>
-            <h3>Data & Analytics</h3>
-            <p>Big data pipelines, real‑time dashboards, and data warehousing solutions that empower your team to make
-                smarter decisions faster.</p>
-            <div class="card-glow-line"></div>
-        </div>
-        <div class="service-card">
-            <div class="card-icon"><svg viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10" />
-                    <polyline points="12,6 12,12 16,14" />
-                </svg></div>
-            <h3>DevOps & CI/CD</h3>
-            <p>Automated deployment pipelines, monitoring, and site reliability engineering that keep your products
-                running 24/7 with zero touch.</p>
-            <div class="card-glow-line"></div>
-        </div>
-        <div class="service-card">
-            <div class="card-icon"><svg viewBox="0 0 24 24">
-                    <ellipse cx="12" cy="5" rx="9" ry="3" />
-                    <path d="M3 5v6c0 1.7 4 3 9 3s9-1.3 9-3V5" />
-                    <path d="M3 11v6c0 1.7 4 3 9 3s9-1.3 9-3v-6" />
-                </svg></div>
-            <h3>Data & Analytics</h3>
-            <p>Big data pipelines, real‑time dashboards, and data warehousing solutions that empower your team to make
-                smarter decisions faster.</p>
-            <div class="card-glow-line"></div>
-        </div>
+        <x-common.service-card />
     </div>
 
     <!-- Our Approach -->

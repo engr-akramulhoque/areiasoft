@@ -7,16 +7,21 @@ use App\Http\Controllers\Frontend\ServiceController;
 use App\Http\Controllers\Frontend\WorkController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [FrontendController::class, 'index'])->name('home');
+Route::controller(FrontendController::class)->group(function () {
+    Route::get('/', 'index')->name('home');
+    Route::get('/about', 'about')->name('about.index');
+    Route::get('/global-impact', 'globalImpact')->name('global-impact');
+    Route::get('/message-from-ceo', 'ceoProfile')->name('ceo-speech');
+    Route::get('/privacy-policy', 'policy')->name('privacy.policy');
+    Route::get('/case-studies', 'caseStudy')->name('case-studies');
+    Route::get('/terms-and-conditions', 'terms')->name('terms.conditions');
+});
+
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
-Route::get('/contact/store', [ContactController::class, 'store'])->name('contact.store');
-Route::get('/about', [FrontendController::class, 'about'])->name('about.index');
+Route::post('/contact/store', [ContactController::class, 'store'])->name('contact.store');
+Route::get('/submission-successfull', [ContactController::class, 'success'])->name('contact.success');
 Route::get('/services', [ServiceController::class, 'index'])->name('service.index');
 Route::get('/service/{service}', [ServiceController::class, 'show'])->name('service.show');
-Route::get('/global-impact', [FrontendController::class, 'globalImpact'])->name('global-impact');
-Route::get('/message-from-ceo', [FrontendController::class, 'ceoProfile'])->name('ceo-speech');
-Route::get('/privacy-policy', [FrontendController::class, 'policy'])->name('privacy.policy');
-Route::get('/terms-and-conditions', [FrontendController::class, 'terms'])->name('terms.conditions');
 Route::get('/our-works', [WorkController::class, 'index'])->name('work.index');
 Route::get('/work/{work}', [WorkController::class, 'show'])->name('work.show');
 

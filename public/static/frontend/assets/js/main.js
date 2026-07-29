@@ -269,6 +269,7 @@
     const menuToggle = document.getElementById("menuToggle");
     const navLinks = document.getElementById("navLinks");
     const workDropdown = document.getElementById("workDropdown");
+    const companyDropdown = document.getElementById("companyDropdown");
 
     window.addEventListener("scroll", () => {
         header.classList.toggle("scrolled", window.scrollY > 50);
@@ -276,6 +277,7 @@
 
     // ── Mobile dropdown toggle (click on .dropdown-trigger) ──
     const dropdownTrigger = workDropdown.querySelector(".dropdown-trigger");
+    const cDropdownTrigger = companyDropdown.querySelector(".dropdown-trigger");
 
     dropdownTrigger.addEventListener("click", function (e) {
         // On mobile (≤768px) we toggle the dropdown
@@ -285,12 +287,24 @@
         }
         // On desktop, default behavior (navigation) + hover handles dropdown
     });
+    
+    cDropdownTrigger.addEventListener("click", function (e) {
+        // On mobile (≤768px) we toggle the dropdown
+        if (window.innerWidth <= 768) {
+            e.preventDefault();
+            companyDropdown.classList.toggle("open");
+        }
+        // On desktop, default behavior (navigation) + hover handles dropdown
+    });
 
     // ── Close dropdown when clicking outside ──
     document.addEventListener("click", function (e) {
         if (window.innerWidth <= 768) {
             if (!workDropdown.contains(e.target)) {
                 workDropdown.classList.remove("open");
+            }
+            if (!companyDropdown.contains(e.target)) {
+                companyDropdown.classList.remove("open");
             }
         }
     });
@@ -303,6 +317,9 @@
         if (!navLinks.classList.contains("open")) {
             workDropdown.classList.remove("open");
         }
+        if (!navLinks.classList.contains("open")) {
+            companyDropdown.classList.remove("open");
+        }
     });
 
     // ── Close mobile menu on link click (except dropdown trigger) ──
@@ -311,6 +328,7 @@
             navLinks.classList.remove("open");
             menuToggle.classList.remove("open");
             workDropdown.classList.remove("open");
+            companyDropdown.classList.remove("open");
         });
     });
 
@@ -323,6 +341,7 @@
             navLinks.classList.remove("open");
             menuToggle.classList.remove("open");
             workDropdown.classList.remove("open");
+            companyDropdown.classList.remove("open");
         }
     });
 
@@ -335,6 +354,7 @@
             navLinks.classList.remove("open");
             menuToggle.classList.remove("open");
             workDropdown.classList.remove("open");
+            companyDropdown.classList.remove("open");
         }
     });
 })();

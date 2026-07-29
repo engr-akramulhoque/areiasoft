@@ -215,22 +215,36 @@
     <section class="contact-section">
         <!-- Form -->
         <div class="contact-form">
-            <form id="contactForm">
+            <form id="contactForm" action="{{ route('contact.store') }}" method="POST">
+                @csrf
+
                 <div class="form-group">
                     <label for="name">Full Name</label>
-                    <input type="text" id="name" placeholder="Alex Johnson" required>
+                    <input type="text" id="name" name="name" placeholder="Alex Johnson" required>
+                    @error('name')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="email">Work Email</label>
-                    <input type="email" id="email" placeholder="alex@company.com" required>
+                    <input type="email" id="email" name="email" placeholder="alex@company.com" required>
+                    @error('email')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="subject">Subject</label>
-                    <input type="text" id="subject" placeholder="Project Discussion">
+                    <input type="text" id="subject" name="subject" placeholder="Project Discussion">
+                    @error('subject')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="message">Message</label>
-                    <textarea id="message" placeholder="Tell us about your project, timeline, and goals..." required></textarea>
+                    <textarea id="message" name="message" placeholder="Tell us about your project, timeline, and goals..." required></textarea>
+                    @error('message')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <button type="submit" class="btn-submit">Send Message</button>
             </form>
@@ -242,7 +256,7 @@
                 <div class="info-icon">✉️</div>
                 <div class="info-text">
                     <h4>Email</h4>
-                    <p><a href="mailto:hello@areiasoft.com">hello@areiasoft.com</a></p>
+                    <p><a href="mailto:info@areiasoft.com">info@areiasoft.com</a></p>
                     <p>For general inquiries & partnerships</p>
                 </div>
             </div>
@@ -250,7 +264,7 @@
                 <div class="info-icon">📞</div>
                 <div class="info-text">
                     <h4>Phone</h4>
-                    <p>+1 (650) 555-0199</p>
+                    <p>+880-1631-444165</p>
                     <p>Mon–Fri, 9am–6pm PST</p>
                 </div>
             </div>
@@ -258,11 +272,14 @@
                 <div class="info-icon">📍</div>
                 <div class="info-text">
                     <h4>Global HQ</h4>
-                    <p>1600 Amphitheatre Parkway<br>Mountain View, CA 94043</p>
+                    <p>House 17, Uttara Sector 12<br>Dhaka, 1230</p>
                 </div>
             </div>
             <div class="map-placeholder">
-                [ Interactive map loading… ]
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1403.4183263326183!2d90.37444864540204!3d23.876691806600483!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sbd!4v1785347320878!5m2!1sen!2sbd"
+                    width="100%" height="100%" style="border:0;border-radius: 5%;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="strict-origin-when-cross-origin"></iframe>
             </div>
         </div>
     </section>
