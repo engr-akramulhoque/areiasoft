@@ -1,15 +1,24 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <x-welcome />
-            </div>
-        </div>
+        <x-dashboard.stats-card title="Contacts" :value="$stats['contacts']"
+            icon="fas fa-address-book text-areia-600 dark:text-areia-300" bgColor="bg-areia-100"
+            borderColor="border-areia-600" />
+
+        <x-dashboard.stats-card title="Admin Users" :value="$stats['admin_users']"
+            icon="fas fa-users-cog text-blue-600 dark:text-blue-300" bgColor="bg-blue-100"
+            borderColor="border-blue-600" />
+
+    </div>
+
+    <!-- Recent Contacts and Activity -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+        <!-- Recent Contacts -->
+        <x-dashboard.contact-table :contacts="$contacts" />
+
+        <!-- Recent Activity -->
+        <x-dashboard.recent-activity :recentActivities="$recentActivities" />
+
     </div>
 </x-app-layout>

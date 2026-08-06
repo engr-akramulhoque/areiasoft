@@ -16,8 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('subject');
-            $table->text('message');
-            $table->boolean('is_read')->default(false);
+            $table->text('message')->nullable();
+            $table->tinyInteger('status')->default(0)->comment('Status: 0=Unread, 1=Read, 2=Archived');
+            $table->boolean('is_starred')->default(false);
             $table->timestamps();
         });
     }

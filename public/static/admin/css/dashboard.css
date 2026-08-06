@@ -1,0 +1,49 @@
+/* Custom z-index layers */
+.z-sidebar {
+    z-index: 40;
+}
+
+.z-mobile-sidebar {
+    z-index: 50;
+}
+
+.z-topbar {
+    z-index: 30;
+}
+
+.z-dropdown {
+    z-index: 60;
+}
+
+.z-modal {
+    z-index: 70;
+}
+
+.z-overlay {
+    z-index: 10;
+}
+
+/* Scrollable sidebar */
+.sidebar-container {
+    height: calc(100vh - 4rem);
+    /* Adjust based on your header height */
+    overflow-y: auto;
+}
+
+/* Hide scrollbar but keep functionality */
+.sidebar-container::-webkit-scrollbar {
+    width: 4px;
+}
+
+.sidebar-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar-container::-webkit-scrollbar-thumb {
+    background: rgba(156, 163, 175, 0.3);
+    border-radius: 2px;
+}
+
+.sidebar-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(156, 163, 175, 0.5);
+}

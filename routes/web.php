@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Frontend\ContactController;
-use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\ServiceController;
 use App\Http\Controllers\Frontend\WorkController;
@@ -29,6 +31,19 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-])->group(function () {
+])->prefix('admin')->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
+    
+    Route::resource('/users', UserController::class)->names('admin.users');
+    Route::resource('/roles', RoleController::class)->names('admin.roles');
+    
+    Route::resource('/contacts', ContactController::class)->names('admin.contacts');
+    Route::post('/contacts/{contact}/toggle-star', [ContactController::class, 'toggleStar'])->name('admin.contacts.toggleStar');
+    Route::post('/contacts/{contact}/archive', [ContactController::class, 'archive'])->name('admin.contacts.archive');
+});
+
+Route::controller(ProfileController::class)->prefix('account')->group(function () {
+    Route::get('/change-password', 'updatePassword')->name('profile.password.update');
+    Route::get('/two-factor-authentication', 'twoFactorAuthentication')->name('profile.two_factor_authentication');
+    Route::get('/settings', 'profileSettings')->name('profile.settings');
 });
