@@ -26,7 +26,7 @@
         </p>
 
         <div class="hero-buttons">
-            <a href="#services"
+            <a href="{{ route('service.index') }}"
                class="btn-primary"
                aria-label="Explore our software development services">
                 {{ $primaryButton }}

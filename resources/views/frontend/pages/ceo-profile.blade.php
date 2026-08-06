@@ -307,7 +307,7 @@
                             design, and a culture of curiosity.
                         </p>
                         <p>
-                            Today, our team of 120+ dreamers and doers
+                            Today, our team of 20+ dreamers and doers
                             serves clients across 18 countries, but we
                             still approach every project like our first.
                             Whether it's a predictive analytics suite
@@ -345,8 +345,8 @@
                 <div class="timeline-item">
                     <div class="timeline-year">2026– Present</div>
                     <div class="timeline-desc">
-                        Co‑founded Areia Soft, grew the team from 3 to
-                        120+ with operations in 14 countries.
+                        Chief Executive Officer at Areia Soft, grew the team from 3 to
+                        20+ with operations in 14 countries.
                     </div>
                 </div>
                 <div class="timeline-item">
@@ -360,16 +360,15 @@
                 <div class="timeline-item">
                     <div class="timeline-year">2022 – 2023</div>
                     <div class="timeline-desc">
-                        Senior Product Manager at Google Cloud,
-                        launching ML APIs used by over 1 million
-                        developers.
+                        Maintainer of open-source Laravel packages on Packagist, 
+                        helping developers build scalable and modern PHP applications.
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-year">2024 – 2029</div>
                     <div class="timeline-desc">
-                        Ongoing Bsc in Computer Science (AI) from
-                        Stanford University, published 12 papers in
+                        Ongoing Bsc in Computer Science (CSE) from
+                        Northern University Bangladesh, published 2 papers in
                         top-tier conferences.
                     </div>
                 </div>
@@ -384,14 +383,14 @@
                         color: var(--cyan);
                         margin-bottom: 1rem;
                     ">
-                Connect with Anika
+                Connect with Md. Istak Ahmmed Roni
             </h2>
             <p style="color: var(--white-muted); margin-bottom: 1.5rem">
-                Follow her insights on AI leadership and product
+                Follow his insights on AI leadership and product
                 innovation.
             </p>
-            <a href="#" class="btn-outline" style="margin-right: 1rem">🔗 LinkedIn</a>
-            <a href="contact.html" class="btn-primary">Send a Message</a>
+            <a href="https://www.linkedin.com/in/istak-ahmed-roni-389a39425" class="btn-outline" style="margin-right: 1rem" target="_blank">🔗 LinkedIn</a>
+            <a href="mailto:ceo@areiasoft.com" class="btn-primary">Send a Message</a>
         </div>
     </div>
 </x-guest-layout>

@@ -32,7 +32,6 @@
             }
 
             .story-image {
-                background: var(--card-bg);
                 border: 1px solid var(--glass-border);
                 border-radius: var(--radius-lg);
                 height: 320px;
@@ -41,13 +40,17 @@
                 align-items: center;
                 justify-content: center;
                 font-size: 1rem;
-                color: var(--white-muted);
-                position: relative;
                 overflow: hidden;
+                position: relative;
+                color: var(--white-muted);
+                background: url('/static/frontend/assets/images/our-story.png');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;                
             }
 
             .story-image::before {
-                content: "🌐";
+                content: " ";
                 font-size: 3rem;
                 opacity: 0.2;
             }
@@ -208,34 +211,17 @@
             }
         </style>
     @endpush
+    
     <!-- Hero -->
     <section class="about-hero">
         <p class="section-label">Who We Are</p>
-        <h1>Engineering the Future,<br>Driven by Curiosity.</h1>
+        <h1>Building Intelligent Software for a Smarter Future</h1>
         <p class="section-subtitle" style="margin-top:1.5rem;">We are a team of engineers, designers, and AI researchers
             dedicated to building intelligent digital experiences that shape industries.</p>
     </section>
 
     <!-- Our Story -->
-    <section class="page-section container">
-        <div class="story-grid">
-            <div class="story-text">
-                <h2 class="section-title" style="text-align:left;">Our Story</h2>
-                <p>Founded in 2018, Areia Soft began as a small collective of engineers passionate about bridging the
-                    gap between cutting‑edge AI and human‑centered design. What started in a garage in San Francisco has
-                    grown into a global team of 120+ specialists, delivering enterprise‑grade solutions to Fortune 500
-                    companies and agile startups alike.</p>
-                <p>We believe that technology should be invisible — it should just work, elegantly. Every product we
-                    ship is a testament to our relentless pursuit of performance, aesthetics, and impact.</p>
-            </div>
-            <div class="story-image">
-                <!-- placeholder for visual -->
-                <div
-                    style="position:absolute; bottom:1rem; right:1rem; background:rgba(0,0,0,0.5); padding:0.5rem 1rem; border-radius:20px; font-size:0.8rem;">
-                    📍 San Francisco · 2018</div>
-            </div>
-        </div>
-    </section>
+    <x-about.our-story />
 
     <!-- Mission -->
     <section class="page-section container" style="padding-top:0;">
@@ -248,72 +234,15 @@
     </section>
 
     <!-- Core Values -->
-    <section class="page-section container">
-        <p class="section-label">Principles</p>
-        <h2 class="section-title">Core Values</h2>
-        <div class="values-grid">
-            <div class="value-card">
-                <div class="value-icon">⚡</div>
-                <h4>Precision Engineering</h4>
-                <p>We obsess over performance, clean code, and robust architecture — because reliability is a feature.
-                </p>
-            </div>
-            <div class="value-card">
-                <div class="value-icon">🎨</div>
-                <h4>Design-First Thinking</h4>
-                <p>Every pixel and interaction matters. We craft experiences that users love from the very first tap.
-                </p>
-            </div>
-            <div class="value-card">
-                <div class="value-icon">🤖</div>
-                <h4>AI at the Core</h4>
-                <p>We embed intelligence into everything we build, making software adaptive, predictive, and truly
-                    smart.</p>
-            </div>
-            <div class="value-card">
-                <div class="value-icon">🌍</div>
-                <h4>Global Collaboration</h4>
-                <p>Distributed across 14 countries, we bring diverse perspectives to solve problems without borders.</p>
-            </div>
-        </div>
-    </section>
+    <x-about.core-values />
 
     <!-- Leadership -->
-    <section class="page-section container">
-        <p class="section-label">Leadership</p>
-        <h2 class="section-title">Meet the Team</h2>
-        <div class="team-grid">
-            <div class="team-member">
-                <div class="avatar">AK</div>
-                <h4>Anika Khanna</h4>
-                <div class="role">CEO & Co-Founder</div>
-                <p>Former AI lead at DeepMind. Visionary behind Areia's product strategy.</p>
-            </div>
-            <div class="team-member">
-                <div class="avatar">MR</div>
-                <h4>Marcus Reyes</h4>
-                <div class="role">CTO</div>
-                <p>Cloud-native architect with 15+ years building distributed systems at scale.</p>
-            </div>
-            <div class="team-member">
-                <div class="avatar">SL</div>
-                <h4>Sophie Laurent</h4>
-                <div class="role">VP of Design</div>
-                <p>Award-winning UX strategist who shaped products used by 100M+ people.</p>
-            </div>
-            <div class="team-member">
-                <div class="avatar">DG</div>
-                <h4>David Guo</h4>
-                <div class="role">Head of AI</div>
-                <p>PhD in machine learning. Pioneered real‑time NLP systems for financial analytics.</p>
-            </div>
-        </div>
-    </section>
+    <x-about.team />
 
     <!-- Stats -->
     <section class="page-section container" style="text-align:center;">
         <div class="stats-row">
-            <div class="stat-item"><span class="stat-number">120+</span><span class="stat-label">Team Members</span>
+            <div class="stat-item"><span class="stat-number">20+</span><span class="stat-label">Team Members</span>
             </div>
             <div class="stat-item"><span class="stat-number">14</span><span class="stat-label">Countries</span></div>
             <div class="stat-item"><span class="stat-number">2018</span><span class="stat-label">Founded</span></div>

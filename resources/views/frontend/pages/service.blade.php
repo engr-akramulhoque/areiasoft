@@ -268,6 +268,6 @@
     <div class="cta-banner">
         <h2>Ready to Start Your Project?</h2>
         <p>Let's discuss how Areia Soft can bring your vision to life. We'll reply within one business day.</p>
-        <a href="contact.html" class="btn-primary">Get in Touch</a>
+        <a href="{{ route('contact.index') }}" class="btn-primary">Get in Touch</a>
     </div>
 </x-guest-layout>
