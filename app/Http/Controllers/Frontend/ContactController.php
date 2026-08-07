@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ContactFormConfirmation;
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -22,7 +24,11 @@ class ContactController extends Controller
             'message' => ['required', 'string'],
         ]);
 
-        Contact::create($validated);
+        $contact = Contact::create($validated);
+        
+        // Send confirmation email to the user
+        Mail::to($contact->email)
+            ->send(new ContactFormConfirmation($contact));
 
         return redirect()
             ->route('contact.success')
