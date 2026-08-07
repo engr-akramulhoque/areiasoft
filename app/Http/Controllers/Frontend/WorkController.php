@@ -9,7 +9,9 @@ class WorkController extends Controller
 {
     public function index()
     {
-        return view('frontend.pages.work');
+        $portfolios = config('global.portfolios', []);
+
+        return view('frontend.pages.work', compact('portfolios'));
     }
     
     public function show($work)

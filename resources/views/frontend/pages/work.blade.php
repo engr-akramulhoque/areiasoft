@@ -1,4 +1,112 @@
 <x-guest-layout>
+    <!-- Hero -->
+    <section class="page-hero">
+        <p class="section-label">Portfolio</p>
+        <h1>Selected Projects</h1>
+        <p>Explore our latest work across AI, cloud, mobile, and design — each one crafted with precision and passion.
+        </p>
+    </section>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="ecommerce">E-Commerce</button>
+        <button class="filter-btn" data-filter="web">Business Websites</button>
+        <button class="filter-btn" data-filter="software">Business Software</button>
+    </div>
+
+    <!-- Work Grid -->
+    <div class="work-grid" id="workGrid">
+
+        @forelse ($portfolios as $portfolio)
+            <div class="work-card" data-category="{{ implode(' ', $portfolio['category']) }}">
+
+                <div class="work-image">
+                    <img src="{{ \Illuminate\Support\Str::startsWith($portfolio['image'], ['http://', 'https://'])
+                        ? $portfolio['image']
+                        : asset($portfolio['image']) }}"
+                        alt="{{ $portfolio['title'] }}" loading="lazy">
+                </div>
+
+                <div class="work-details">
+
+                    <div class="work-tags">
+                        @foreach ($portfolio['tags'] as $tag)
+                            <span class="work-tag">{{ $tag }}</span>
+                        @endforeach
+                    </div>
+
+                    <h3>{{ $portfolio['title'] }}</h3>
+
+                    <p>{{ $portfolio['description'] }}</p>
+
+                    <a href="{{ $portfolio['url'] }}" class="work-link">
+                        View Case Study
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </a>
+
+                </div>
+
+            </div>
+        @empty
+
+            <div style="grid-column:1/-1;text-align:center;">
+                <h3>No portfolio found.</h3>
+            </div>
+
+        @endforelse
+
+    </div>
+
+    @push('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+
+                const buttons = document.querySelectorAll('.filter-btn');
+                const cards = document.querySelectorAll('.work-card');
+
+                buttons.forEach(button => {
+
+                    button.addEventListener('click', function() {
+
+                        buttons.forEach(btn => btn.classList.remove('active'));
+                        this.classList.add('active');
+
+                        const filter = this.dataset.filter;
+
+                        cards.forEach(card => {
+
+                            const categories = card.dataset.category
+                                .split(' ')
+                                .map(item => item.trim());
+
+                            if (filter === 'all' || categories.includes(filter)) {
+
+                                card.style.display = '';
+                                card.style.opacity = '0';
+
+                                setTimeout(() => {
+                                    card.style.opacity = '1';
+                                }, 50);
+
+                            } else {
+
+                                card.style.display = 'none';
+
+                            }
+
+                        });
+
+                    });
+
+                });
+
+            });
+        </script>
+    @endpush
+
     @push('styles')
         <style>
             /* ── Page Hero ── */
@@ -101,6 +209,18 @@
                 overflow: hidden;
             }
 
+            .work-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+                transition: transform .5s ease;
+            }
+
+            .work-card:hover .work-image img {
+                transform: scale(1.08);
+            }
+
             .work-image .project-img-placeholder {
                 width: 100%;
                 height: 100%;
@@ -112,6 +232,8 @@
                 color: rgba(255, 255, 255, 0.15);
                 background: radial-gradient(circle at 30% 30%, rgba(0, 229, 255, 0.05) 0%, transparent 60%);
             }
+
+
 
             .work-details {
                 padding: 1.5rem 1.8rem 2rem;
@@ -184,181 +306,5 @@
                 }
             }
         </style>
-    @endpush
-
-    <!-- Hero -->
-    <section class="page-hero">
-        <p class="section-label">Portfolio</p>
-        <h1>Selected Projects</h1>
-        <p>Explore our latest work across AI, cloud, mobile, and design — each one crafted with precision and passion.
-        </p>
-    </section>
-
-    <!-- Filter Bar -->
-    <div class="filter-bar" id="filterBar">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="ai">AI / ML</button>
-        <button class="filter-btn" data-filter="web">Web Apps</button>
-        <button class="filter-btn" data-filter="mobile">Mobile</button>
-        <button class="filter-btn" data-filter="cloud">Cloud</button>
-        <button class="filter-btn" data-filter="design">UI/UX Design</button>
-    </div>
-
-    <!-- Work Grid -->
-    <div class="work-grid" id="workGrid">
-        <!-- project cards with category data -->
-        <div class="work-card" data-category="ai web">
-            <div class="work-image">
-                <div class="project-img-placeholder">⚡ NEXUS</div>
-            </div>
-            <div class="work-details">
-                <div class="work-tags"><span class="work-tag">AI Platform</span><span class="work-tag">Web App</span>
-                </div>
-                <h3>Nexus Analytics Suite</h3>
-                <p>Real-time predictive analytics dashboard processing 2M+ events daily for enterprise supply chains.
-                </p>
-                <a href="#" class="work-link">View Case Study <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg></a>
-            </div>
-        </div>
-        <div class="work-card" data-category="mobile ai">
-            <div class="work-image">
-                <div class="project-img-placeholder">📱 PULSE</div>
-            </div>
-            <div class="work-details">
-                <div class="work-tags"><span class="work-tag">Mobile</span><span class="work-tag">HealthTech</span>
-                </div>
-                <h3>Pulse Health App</h3>
-                <p>AI-driven telemedicine platform connecting 500k+ patients with specialists in under 60 seconds.</p>
-                <a href="#" class="work-link">View Case Study <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg></a>
-            </div>
-        </div>
-        <div class="work-card" data-category="cloud web">
-            <div class="work-image">
-                <div class="project-img-placeholder">☁️ STRATOS</div>
-            </div>
-            <div class="work-details">
-                <div class="work-tags"><span class="work-tag">Cloud</span><span class="work-tag">Infrastructure</span>
-                </div>
-                <h3>Stratos Multi‑Cloud</h3>
-                <p>Kubernetes control plane managing hybrid deployments across AWS, GCP, and Azure with 99.99% uptime.
-                </p>
-                <a href="#" class="work-link">View Case Study <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg></a>
-            </div>
-        </div>
-        <div class="work-card" data-category="design web">
-            <div class="work-image">
-                <div class="project-img-placeholder">🎨 LUMINA</div>
-            </div>
-            <div class="work-details">
-                <div class="work-tags"><span class="work-tag">Design System</span><span class="work-tag">UI/UX</span>
-                </div>
-                <h3>Lumina Design Language</h3>
-                <p>Unified design system for a fintech unicorn, accelerating product velocity by 40% across 12 teams.
-                </p>
-                <a href="#" class="work-link">View Case Study <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg></a>
-            </div>
-        </div>
-        <div class="work-card" data-category="ai cloud">
-            <div class="work-image">
-                <div class="project-img-placeholder">🧠 CORTEX</div>
-            </div>
-            <div class="work-details">
-                <div class="work-tags"><span class="work-tag">AI</span><span class="work-tag">Cloud</span></div>
-                <h3>Cortex NLP Engine</h3>
-                <p>Serverless natural language processing pipeline handling 10M+ requests/day with sub‑100ms latency.
-                </p>
-                <a href="#" class="work-link">View Case Study <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg></a>
-            </div>
-        </div>
-        <div class="work-card" data-category="mobile design">
-            <div class="work-image">
-                <div class="project-img-placeholder">📲 WAVE</div>
-            </div>
-            <div class="work-details">
-                <div class="work-tags"><span class="work-tag">Mobile</span><span class="work-tag">Fintech</span></div>
-                <h3>Wave Banking App</h3>
-                <p>Award‑winning neobank app with gesture‑based navigation and real‑time spending insights.</p>
-                <a href="#" class="work-link">View Case Study <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg></a>
-            </div>
-        </div>
-        <div class="work-card" data-category="design web">
-            <div class="work-image">
-                <div class="project-img-placeholder">🎨 LUMINA</div>
-            </div>
-            <div class="work-details">
-                <div class="work-tags"><span class="work-tag">Design System</span><span class="work-tag">UI/UX</span>
-                </div>
-                <h3>Lumina Design Language</h3>
-                <p>Unified design system for a fintech unicorn, accelerating product velocity by 40% across 12 teams.
-                </p>
-                <a href="#" class="work-link">View Case Study <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg></a>
-            </div>
-        </div>
-        <div class="work-card" data-category="ai cloud">
-            <div class="work-image">
-                <div class="project-img-placeholder">🧠 CORTEX</div>
-            </div>
-            <div class="work-details">
-                <div class="work-tags"><span class="work-tag">AI</span><span class="work-tag">Cloud</span></div>
-                <h3>Cortex NLP Engine</h3>
-                <p>Serverless natural language processing pipeline handling 10M+ requests/day with sub‑100ms latency.
-                </p>
-                <a href="#" class="work-link">View Case Study <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg></a>
-            </div>
-        </div>
-        <div class="work-card" data-category="mobile design">
-            <div class="work-image">
-                <div class="project-img-placeholder">📲 WAVE</div>
-            </div>
-            <div class="work-details">
-                <div class="work-tags"><span class="work-tag">Mobile</span><span class="work-tag">Fintech</span></div>
-                <h3>Wave Banking App</h3>
-                <p>Award‑winning neobank app with gesture‑based navigation and real‑time spending insights.</p>
-                <a href="#" class="work-link">View Case Study <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg></a>
-            </div>
-        </div>
-    </div>
-
-    @push('scripts')
-        <script>
-            (function() {
-
-                // ── Filter functionality ──
-                const filterButtons = document.querySelectorAll('.filter-btn');
-                const workCards = document.querySelectorAll('.work-card');
-                filterButtons.forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        filterButtons.forEach(b => b.classList.remove('active'));
-                        btn.classList.add('active');
-                        const filter = btn.dataset.filter;
-                        workCards.forEach(card => {
-                            if (filter === 'all' || card.dataset.category.includes(filter)) {
-                                card.style.display = '';
-                            } else {
-                                card.style.display = 'none';
-                            }
-                        });
-                    });
-                });
-            })();
-        </script>
     @endpush
 </x-guest-layout>

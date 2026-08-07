@@ -698,7 +698,7 @@
     <x-home.globee />
 
     <!-- OUR WORK SECTION -->
-    <x-home.our-work />
+    <x-home.our-work :portfolios="$portfolios" />
 
     <!-- METHODOLOGY -->
     <x-home.methodology />

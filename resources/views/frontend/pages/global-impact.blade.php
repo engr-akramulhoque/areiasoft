@@ -232,10 +232,10 @@
 
     <!-- Stats -->
     <div class="stats-grid">
-        <div class="stat-item"><span class="stat-number">200+</span><span class="stat-label">Enterprise Clients</span>
+        <div class="stat-item"><span class="stat-number">50+</span><span class="stat-label">Enterprise Clients</span>
         </div>
-        <div class="stat-item"><span class="stat-number">18</span><span class="stat-label">Countries Served</span></div>
-        <div class="stat-item"><span class="stat-number">50M+</span><span class="stat-label">End Users Impacted</span>
+        <div class="stat-item"><span class="stat-number">10+</span><span class="stat-label">Countries Served</span></div>
+        <div class="stat-item"><span class="stat-number">500+</span><span class="stat-label">End Users Impacted</span>
         </div>
         <div class="stat-item"><span class="stat-number">99.99%</span><span class="stat-label">Uptime Global</span>
         </div>
@@ -346,7 +346,7 @@
     <div class="cta-banner">
         <h2>Let's Create Global Impact Together</h2>
         <p>Whether you're a startup or a Fortune 500, our team is ready to scale your vision across continents.</p>
-        <a href="contact.html" class="btn-primary">Start a Conversation</a>
+        <a href="{{ route('contact.index') }}" class="btn-primary">Start a Conversation</a>
     </div>
 
 </x-guest-layout>

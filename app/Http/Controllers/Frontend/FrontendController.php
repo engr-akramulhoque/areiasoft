@@ -9,9 +9,10 @@ class FrontendController extends Controller
 {
     public function index()
     {
+        $portfolios = config('global.portfolios', []);
         $clients = config('global.clients', []);
 
-        return view('welcome', compact('clients'));
+        return view('welcome', compact('clients', 'portfolios'));
     }
     
     public function about()

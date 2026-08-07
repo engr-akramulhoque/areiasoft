@@ -1,121 +1,79 @@
 <section class="work-section" id="work">
-    <p class="section-label">Our Portfolio</p>
-    <h2 class="section-title">Explore Our Recent Work</h2>
+    <div class="container">
 
-    <div class="work-grid">
-        <div class="work-card">
-            <div class="work-image">
-                <div class="placeholder-pattern">⚡ NEXUS</div>
-            </div>
-            <div class="work-details">
-                <div class="work-tags">
-                    <span class="work-tag">AI Platform</span><span class="work-tag">Web App</span>
+        <p class="section-label">Our Portfolio</p>
+        <h2 class="section-title">Explore Our Recent Work</h2>
+
+        <div class="work-grid">
+
+            @forelse($portfolios as $portfolio)
+                <article class="work-card">
+
+                    <div class="work-image">
+                        <img src="{{ $portfolio['image'] }}" alt="{{ $portfolio['title'] }}" loading="lazy">
+                    </div>
+
+                    <div class="work-details">
+
+                        <div class="work-tags">
+                            @foreach ($portfolio['tags'] as $tag)
+                                <span class="work-tag">{{ $tag }}</span>
+                            @endforeach
+                        </div>
+
+                        <h3>{{ $portfolio['title'] }}</h3>
+
+                        <p>{{ $portfolio['description'] }}</p>
+
+                        <a href="{{ $portfolio['url'] }}" class="work-link">
+                            View Case Study
+
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </a>
+
+                    </div>
+
+                </article>
+
+            @empty
+
+                <div class="col-12 text-center">
+                    <p>No portfolio items found.</p>
                 </div>
-                <h3>Nexus Analytics Suite</h3>
-                <p>
-                    Real-time predictive analytics dashboard for enterprise supply
-                    chains, processing 2M+ events daily.
-                </p>
-                <a href="#" class="work-link">View Case Study
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg></a>
-            </div>
+
+            @endforelse
+
         </div>
-        <div class="work-card">
-            <div class="work-image">
-                <div class="placeholder-pattern">📱 PULSE</div>
-            </div>
-            <div class="work-details">
-                <div class="work-tags">
-                    <span class="work-tag">Mobile</span><span class="work-tag">HealthTech</span>
-                </div>
-                <h3>Pulse Health App</h3>
-                <p>
-                    AI-driven telemedicine platform connecting 500k+ patients with
-                    specialists in under 60 seconds.
-                </p>
-                <a href="#" class="work-link">View Case Study
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg></a>
-            </div>
-        </div>
-        <div class="work-card">
-            <div class="work-image">
-                <div class="placeholder-pattern">☁️ STRATOS</div>
-            </div>
-            <div class="work-details">
-                <div class="work-tags">
-                    <span class="work-tag">Cloud</span><span class="work-tag">Infrastructure</span>
-                </div>
-                <h3>Stratos Multi-Cloud</h3>
-                <p>
-                    Kubernetes-native control plane managing hybrid deployments
-                    across AWS, GCP, and Azure with 99.99% uptime.
-                </p>
-                <a href="#" class="work-link">View Case Study
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg></a>
-            </div>
-        </div>
-        <div class="work-card">
-            <div class="work-image">
-                <div class="placeholder-pattern">🎨 LUMINA</div>
-            </div>
-            <div class="work-details">
-                <div class="work-tags">
-                    <span class="work-tag">Design System</span><span class="work-tag">UI/UX</span>
-                </div>
-                <h3>Lumina Design Language</h3>
-                <p>
-                    A unified design system for a fintech unicorn, accelerating
-                    product velocity by 40% across 12 teams.
-                </p>
-                <a href="#" class="work-link">View Case Study
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg></a>
-            </div>
-        </div>
-        <div class="work-card">
-            <div class="work-image">
-                <div class="placeholder-pattern">☁️ STRATOS</div>
-            </div>
-            <div class="work-details">
-                <div class="work-tags">
-                    <span class="work-tag">Cloud</span><span class="work-tag">Infrastructure</span>
-                </div>
-                <h3>Stratos Multi-Cloud</h3>
-                <p>
-                    Kubernetes-native control plane managing hybrid deployments
-                    across AWS, GCP, and Azure with 99.99% uptime.
-                </p>
-                <a href="#" class="work-link">View Case Study
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg></a>
-            </div>
-        </div>
-        <div class="work-card">
-            <div class="work-image">
-                <div class="placeholder-pattern">🎨 LUMINA</div>
-            </div>
-            <div class="work-details">
-                <div class="work-tags">
-                    <span class="work-tag">Design System</span><span class="work-tag">UI/UX</span>
-                </div>
-                <h3>Lumina Design Language</h3>
-                <p>
-                    A unified design system for a fintech unicorn, accelerating
-                    product velocity by 40% across 12 teams.
-                </p>
-                <a href="#" class="work-link">View Case Study
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg></a>
-            </div>
-        </div>
+
     </div>
 </section>
+
+<style>
+    /*======================================
+    Portfolio Section
+    ======================================*/
+
+    .work-image {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 16/10;
+        background: #f8fafc;
+    }
+
+    .work-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform .6s ease;
+    }
+
+    .work-card:hover .work-image img {
+        transform: scale(1.08);
+    }
+</style>
