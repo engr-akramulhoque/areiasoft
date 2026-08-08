@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
@@ -21,6 +22,7 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -31,6 +33,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'status',
+        'is_admin',
     ];
 
     /**
@@ -64,6 +68,24 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'status' => 'boolean',
+            'is_admin' => 'boolean',
         ];
+    }
+
+    /**
+     * Scope a query to only include admin.
+     */
+    public function scopeAdmin($query)
+    {
+        return $query->where('is_admin', true);
+    }
+
+    /**
+     * Scope a query to only include active admin.
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('status', true);
     }
 }
