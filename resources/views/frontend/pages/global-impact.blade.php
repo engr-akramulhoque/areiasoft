@@ -123,49 +123,6 @@
                 font-size: 0.9rem;
             }
 
-            /* Client logos (same as before) */
-            .client-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-                gap: 1.5rem;
-                max-width: 1000px;
-                margin: 2rem auto 4rem;
-                padding: 0 2rem;
-            }
-
-            .client-logo-item {
-                background: var(--card-bg);
-                backdrop-filter: blur(16px);
-                border: 1px solid var(--glass-border);
-                border-radius: var(--radius-md);
-                padding: 1.5rem 1rem;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: var(--transition);
-                aspect-ratio: 3/2;
-                filter: grayscale(100%) brightness(0.8);
-            }
-
-            .client-logo-item:hover {
-                filter: grayscale(0%) brightness(1);
-                border-color: var(--cyan);
-                box-shadow: 0 0 30px rgba(0, 229, 255, 0.2);
-                transform: translateY(-4px);
-            }
-
-            .client-logo-item svg {
-                width: 60%;
-                height: auto;
-                max-height: 40px;
-                fill: rgba(255, 255, 255, 0.7);
-                transition: fill 0.3s;
-            }
-
-            .client-logo-item:hover svg {
-                fill: var(--white);
-            }
-
             /* CTA */
             .cta-banner {
                 background: var(--card-bg);
@@ -214,10 +171,6 @@
 
                 .stats-grid {
                     gap: 2rem;
-                }
-
-                .client-grid {
-                    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
                 }
             }
         </style>
@@ -290,57 +243,7 @@
     </div>
 
     <!-- Client logos -->
-    <h2 style="text-align:center; font-size:2rem; margin-bottom:2rem;">Trusted Worldwide</h2>
-    <div class="client-grid">
-        <div class="client-logo-item"><svg viewBox="0 0 120 40">
-                <rect x="15" y="8" width="28" height="24" rx="4" fill="currentColor" opacity="0.7" />
-                <text x="50" y="28" font-size="16" font-weight="600" fill="currentColor">Vortex</text>
-            </svg></div>
-        <div class="client-logo-item"><svg viewBox="0 0 120 40">
-                <circle cx="30" cy="20" r="12" fill="currentColor" opacity="0.7" /><text x="50" y="26"
-                    font-size="15" font-weight="700" fill="currentColor">Synth</text>
-            </svg></div>
-        <div class="client-logo-item"><svg viewBox="0 0 120 40">
-                <polygon points="20,8 40,20 20,32" fill="currentColor" opacity="0.7" /><text x="50" y="26"
-                    font-size="15" font-weight="600" fill="currentColor">Nova</text>
-            </svg></div>
-        <div class="client-logo-item"><svg viewBox="0 0 120 40">
-                <rect x="15" y="10" width="22" height="20" rx="10" fill="none"
-                    stroke="currentColor" stroke-width="3" /><text x="45" y="27" font-size="16" font-weight="600"
-                    fill="currentColor">Aether</text>
-            </svg></div>
-        <div class="client-logo-item"><svg viewBox="0 0 120 40">
-                <path d="M20 20 L30 10 L40 20 L30 30 Z" fill="currentColor" opacity="0.7" /><text x="50" y="26"
-                    font-size="15" font-weight="700" fill="currentColor">Prism</text>
-            </svg></div>
-        <div class="client-logo-item"><svg viewBox="0 0 120 40">
-                <circle cx="24" cy="20" r="8" fill="currentColor" opacity="0.5" />
-                <circle cx="34" cy="20" r="5" fill="currentColor" /><text x="48" y="27" font-size="16"
-                    font-weight="600" fill="currentColor">Orbit</text>
-            </svg></div>
-        <div class="client-logo-item"><svg viewBox="0 0 120 40">
-                <rect x="15" y="12" width="14" height="16" rx="2" fill="currentColor"
-                    opacity="0.7" />
-                <rect x="31" y="8" width="8" height="24" rx="2" fill="currentColor" /><text x="50"
-                    y="26" font-size="15" font-weight="700" fill="currentColor">Flux</text>
-            </svg></div>
-        <div class="client-logo-item"><svg viewBox="0 0 120 40">
-                <path d="M20 10 L30 20 L20 30 M30 10 L20 20 L30 30" stroke="currentColor" stroke-width="3"
-                    fill="none" /><text x="45" y="27" font-size="16" font-weight="600"
-                    fill="currentColor">Zenith</text>
-            </svg></div>
-        <div class="client-logo-item"><svg viewBox="0 0 120 40">
-                <rect x="15" y="12" width="14" height="16" rx="2" fill="currentColor"
-                    opacity="0.7" />
-                <rect x="31" y="8" width="8" height="24" rx="2" fill="currentColor" /><text x="50"
-                    y="26" font-size="15" font-weight="700" fill="currentColor">Flux</text>
-            </svg></div>
-        <div class="client-logo-item"><svg viewBox="0 0 120 40">
-                <path d="M20 10 L30 20 L20 30 M30 10 L20 20 L30 30" stroke="currentColor" stroke-width="3"
-                    fill="none" /><text x="45" y="27" font-size="16" font-weight="600"
-                    fill="currentColor">Zenith</text>
-            </svg></div>
-    </div>
+    <x-global-impact.clients />
 
     <!-- CTA -->
     <div class="cta-banner">

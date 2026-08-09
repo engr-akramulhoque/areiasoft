@@ -40,12 +40,20 @@
         <!-- Premium Footer -->
         <footer class="premium-footer">
             <div class="footer-grid">
-                <div class="footer-col">
-                    <h4>Areia Soft</h4>
+                <div class="footer-col footer-company">
+
+                    <h4 itemprop="name">Areia Soft</h4>
+
+                    <p itemprop="description">
+                        Areia Soft is a software development company building custom
+                        software, websites, web applications, ERP, CRM, SaaS and
+                        eCommerce solutions for businesses worldwide.
+                    </p>
+
                     <p>
-                        We engineer intelligent digital experiences at the
-                        intersection of design, AI, and cloud infrastructure
-                        — trusted by 200+ enterprises across 18 countries.
+                        We combine thoughtful design, modern technology and
+                        business-focused engineering to create scalable digital
+                        solutions that help organizations grow.
                     </p>
                 </div>
                 <div class="footer-col">
@@ -60,24 +68,24 @@
                 <div class="footer-col">
                     <h4>Follow Us</h4>
                     <div class="social-icons">
-                        <a href="#" aria-label="LinkedIn">🔗</a>
-                        <a href="#" aria-label="Twitter">𝕏</a>
-                        <a href="#" aria-label="Instagram">📷</a>
-                        <a href="#" aria-label="GitHub">🐙</a>
+                        <a href="https://www.facebook.com/areiasoft" aria-label="Facebook" target="_blank">F</a>
+                        <a href="https://www.linkedin.com/company/areiasoft" aria-label="LinkedIn" target="_blank">🔗</a>
+                        <a href="https://twitter.com/areiasoft" aria-label="Twitter" target="_blank">𝕏</a>
+                        <a href="https://www.instagram.com/areiasoft" aria-label="Instagram" target="_blank">📷</a>
+                        <a href="https://github.com/areiasoft" aria-label="GitHub" target="_blank">🐙</a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
                 <span>&copy; 2026 Areia Soft. All rights reserved.</span>
-                <span>1600 Amphitheatre Parkway, Mountain View, CA
-                    94043</span>
+                <span>Head Office: Sector 12, Uttara, Dhaka - 1230</span>
             </div>
         </footer>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/three@0.157.0/build/three.min.js"></script>
-    <script src="{{ asset('static/frontend/assets/js/main.js') }}"></script>
     <script src="{{ asset('static/frontend/assets/js/globee.js') }}"></script>
+    <script src="{{ asset('static/frontend/assets/js/main.js') }}"></script>
 
     @livewireScripts
     @stack('scripts')

@@ -28,7 +28,7 @@ return [
             'category' => ['ecommerce', 'web'],
             'tags' => ['Multi Vendor', 'E-Commerce', 'Marketplace'],
             'description' => 'A modern multi-vendor marketplace enabling multiple sellers to manage products, orders, inventory, and secure online payments from a unified platform.',
-            'url' => '#',
+            'url' => 'https://pizeon.com',
         ],
 
         [
@@ -46,7 +46,7 @@ return [
             'category' => ['web', 'software'],
             'tags' => ['Real Estate', 'Property', 'Laravel'],
             'description' => 'A complete real estate platform for showcasing residential and commercial properties with advanced property listings, inquiry management, and location-based search.',
-            'url' => '#',
+            'url' => 'https://chaya-properties.bniclbd.com',
         ],
 
         [
@@ -55,7 +55,7 @@ return [
             'category' => ['web', 'software'],
             'tags' => ['Cleaning', 'Service Booking', 'Business'],
             'description' => 'An online cleaning service management platform allowing customers to book professional cleaning services, schedule appointments, and manage service requests efficiently.',
-            'url' => '#',
+            'url' => 'https://cleanandservice.xyz',
         ],
 
     ],

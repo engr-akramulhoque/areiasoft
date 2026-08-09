@@ -277,7 +277,7 @@
             </div>
             <div class="map-placeholder">
                 <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1403.4183263326183!2d90.37444864540204!3d23.876691806600483!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sbd!4v1785347320878!5m2!1sen!2sbd"
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d6603.150829485623!2d90.3761155!3d23.876864200000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sbd!4v1786298783519!5m2!1sen!2sbd"
                     width="100%" height="100%" style="border:0;border-radius: 5%;" allowfullscreen="" loading="lazy"
                     referrerpolicy="strict-origin-when-cross-origin"></iframe>
             </div>
