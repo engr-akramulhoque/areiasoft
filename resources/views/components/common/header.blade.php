@@ -1,3 +1,33 @@
+<style>
+    .logo-container {
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
+        line-height: 0;
+    }
+
+    .web-logo {
+        display: block;
+        width: 180px;
+        height: auto;
+        max-width: 100%;
+        object-fit: contain;
+    }
+
+    /* Tablet */
+    @media (max-width: 991.98px) {
+        .web-logo {
+            width: 160px;
+        }
+    }
+
+    /* Mobile */
+    @media (max-width: 575.98px) {
+        .web-logo {
+            width: 140px;
+        }
+    }
+</style>
 @php
     $companyActive = request()->routeIs(['about.index', 'global-impact', 'ceo-speech']);
 
@@ -6,10 +36,7 @@
 
 <header class="header" id="header">
     <a href="{{ route('home') }}" class="logo-container" title="Areia Soft" aria-label="Areia Soft Home">
-        <canvas id="logo-canvas" width="88" height="88"></canvas>
-        <span class="logo-text">
-            Areia<span>Soft</span>
-        </span>
+        <img src="{{ asset('static/logos/logo.png') }}" alt="Areia Soft" class="web-logo" width="180" height="72">
     </a>
 
     <button type="button" class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-controls="navLinks"
