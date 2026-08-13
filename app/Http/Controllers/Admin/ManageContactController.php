@@ -97,4 +97,108 @@ class ManageContactController extends Controller
 
         return back()->with('success', 'Starred status updated.');
     }
+
+    public function bulkAction(Request $request)
+    {
+        $validated = $request->validate([
+            'action' => [
+                'required',
+                'string',
+                'in:read,unread,star,unstar,archive,delete',
+            ],
+            'contacts' => [
+                'required',
+                'array',
+                'min:1',
+            ],
+            'contacts.*' => [
+                'integer',
+                'exists:contacts,id',
+            ],
+        ]);
+
+        $contacts = Contact::whereIn('id', $validated['contacts'])->get();
+
+        switch ($validated['action']) {
+
+            case 'read':
+
+                $contacts->each(function (Contact $contact) {
+                    $contact->update([
+                        'status' => Contact::STATUS_READ,
+                    ]);
+                });
+
+                $message = 'Selected messages marked as read.';
+
+                break;
+
+
+            case 'unread':
+
+                $contacts->each(function (Contact $contact) {
+                    $contact->update([
+                        'status' => Contact::STATUS_UNREAD,
+                    ]);
+                });
+
+                $message = 'Selected messages marked as unread.';
+
+                break;
+
+
+            case 'star':
+
+                $contacts->each(function (Contact $contact) {
+                    $contact->update([
+                        'is_starred' => true,
+                    ]);
+                });
+
+                $message = 'Selected messages starred.';
+
+                break;
+
+
+            case 'unstar':
+
+                $contacts->each(function (Contact $contact) {
+                    $contact->update([
+                        'is_starred' => false,
+                    ]);
+                });
+
+                $message = 'Selected messages unstarred.';
+
+                break;
+
+
+            case 'archive':
+
+                $contacts->each(function (Contact $contact) {
+                    $contact->update([
+                        'status' => Contact::STATUS_ARCHIVED,
+                    ]);
+                });
+
+                $message = 'Selected messages archived.';
+
+                break;
+
+
+            case 'delete':
+
+                $contacts->each(function (Contact $contact) {
+                    $contact->delete();
+                });
+
+                $message = 'Selected messages deleted.';
+
+                break;
+        }
+
+        return redirect()
+            ->back()
+            ->with('success', $message);
+    }
 }

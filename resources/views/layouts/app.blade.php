@@ -13,7 +13,7 @@
     <link rel="apple-touch-icon" href="{{ asset('static/logos/favicon.png') }}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link href="{{ asset('static/frontend/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.13.1/font/bootstrap-icons.min.css"/>
 
     <!-- Scripts -->
     @if (app()->environment('local'))
