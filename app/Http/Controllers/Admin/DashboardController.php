@@ -13,7 +13,6 @@ class DashboardController extends Controller
 {
     public function __invoke()
     {
-        // Latest unread contacts (inbox preview)
         $contacts = Contact::unread()->latest()->take(8)->get();
 
         // Cached dashboard stats (5 min)
@@ -40,7 +39,7 @@ class DashboardController extends Controller
             })
         );
 
-        // Sort by latest time (desc)
+        // Sort by latest time
         $recentActivities = $recentActivities
             ->sortByDesc('time')
             ->take(6)

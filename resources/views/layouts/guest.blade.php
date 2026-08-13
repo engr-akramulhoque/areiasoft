@@ -1,5 +1,5 @@
 @props([
-    'title' => 'Custom Software & Website Development Company | Areia Soft'
+    'title' => 'Custom Software & Website Development Company | Areia Soft',
 ])
 
 <!DOCTYPE html>
@@ -13,13 +13,15 @@
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('static/logos/favicon.jpg') }}">
     <link rel="apple-touch-icon" href="{{ asset('static/logos/favicon.jpg') }}">
-    
-    <!-- Areia SEO Solutions -->
-    @seoAutoPage
 
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap"
         rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
+    <!-- Areia SEO Solutions -->
+    @seoAutoPage
 
     <link rel="stylesheet" href="{{ asset('static/frontend/assets/css/main.css') }}" />
     <link rel="stylesheet" href="{{ asset('static/frontend/assets/css/style.css') }}" />
@@ -27,6 +29,38 @@
     <!-- Styles -->
     @livewireStyles
     @stack('styles')
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YC4GW05WHR"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-YC4GW05WHR');
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>
+        (function(w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-NDB6T39B');
+    </script>
+    <!-- End Google Tag Manager -->
 </head>
 
 <body>
@@ -69,7 +103,8 @@
                     <h4>Follow Us</h4>
                     <div class="social-icons">
                         <a href="https://www.facebook.com/areiasoft" aria-label="Facebook" target="_blank">F</a>
-                        <a href="https://www.linkedin.com/company/areiasoft" aria-label="LinkedIn" target="_blank">🔗</a>
+                        <a href="https://www.linkedin.com/company/areiasoft" aria-label="LinkedIn"
+                            target="_blank">🔗</a>
                         <a href="https://twitter.com/areiasoft" aria-label="Twitter" target="_blank">𝕏</a>
                         <a href="https://www.instagram.com/areiasoft" aria-label="Instagram" target="_blank">📷</a>
                         <a href="https://github.com/areiasoft" aria-label="GitHub" target="_blank">🐙</a>
@@ -83,12 +118,24 @@
         </footer>
     </div>
 
+    @include('layouts.partials.whatsapp')
+
     <script src="https://cdn.jsdelivr.net/npm/three@0.157.0/build/three.min.js"></script>
     <script src="{{ asset('static/frontend/assets/js/globee.js') }}"></script>
     <script src="{{ asset('static/frontend/assets/js/main.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
+    </script>
 
     @livewireScripts
     @stack('scripts')
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NDB6T39B" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
 </body>
 
 </html>

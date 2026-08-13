@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ManageContactController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Frontend\ContactController;
@@ -14,8 +15,8 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/about', 'about')->name('about.index');
     Route::get('/global-impact', 'globalImpact')->name('global-impact');
     Route::get('/message-from-ceo', 'ceoProfile')->name('ceo-speech');
-    Route::get('/privacy-policy', 'policy')->name('privacy.policy');
     Route::get('/case-studies', 'caseStudy')->name('case-studies');
+    Route::get('/privacy-policy', 'policy')->name('privacy.policy');
     Route::get('/terms-and-conditions', 'terms')->name('terms.conditions');
 });
 
@@ -37,9 +38,9 @@ Route::middleware([
     Route::resource('/users', UserController::class)->names('admin.users');
     Route::resource('/roles', RoleController::class)->names('admin.roles');
     
-    Route::resource('/contacts', ContactController::class)->names('admin.contacts');
-    Route::post('/contacts/{contact}/toggle-star', [ContactController::class, 'toggleStar'])->name('admin.contacts.toggleStar');
-    Route::post('/contacts/{contact}/archive', [ContactController::class, 'archive'])->name('admin.contacts.archive');
+    Route::resource('/contacts', ManageContactController::class)->names('admin.contacts');
+    Route::post('/contacts/{contact}/toggle-star', [ManageContactController::class, 'toggleStar'])->name('admin.contacts.toggleStar');
+    Route::post('/contacts/{contact}/archive', [ManageContactController::class, 'archive'])->name('admin.contacts.archive');
 });
 
 Route::controller(ProfileController::class)->prefix('account')->group(function () {
