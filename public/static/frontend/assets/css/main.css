@@ -54,7 +54,7 @@ body {
     z-index: 1;
 }
 
-/* ── Header Fixed CSS ── */
+/* Header CSS */
 .header {
     position: fixed;
     top: 0;
@@ -167,7 +167,7 @@ body {
     display: none !important;
 }
 
-/* ── DROPDOWN ── */
+/* Dropdown */
 .dropdown {
     position: relative;
 }
@@ -273,7 +273,7 @@ body {
     }
 }
 
-/* ── Mobile Toggle Fixed Right Corner ── */
+/* Mobile Toggle Right Corner */
 .menu-toggle {
     display: none;
     position: absolute;
@@ -323,7 +323,7 @@ body {
     background: var(--cyan);
 }
 
-/* ── Responsive ── */
+/* Responsive */
 @media (max-width: 768px) {
     .header {
         padding: 0 1.25rem;
@@ -368,7 +368,7 @@ body {
         font-size: 1rem;
     }
 
-    /* mobile dropdown: nested accordion */
+    /* mobile nested dropdown */
     .dropdown {
         position: static;
     }
@@ -464,7 +464,7 @@ body {
     }
 }
 
-/* ── Premium Footer ── */
+/* Footer */
 .premium-footer {
     background: var(--card-bg);
     backdrop-filter: blur(20px);
@@ -550,7 +550,7 @@ body {
     text-decoration: none;
 }
 
-/* ── Responsive ── */
+/* Responsive */
 @media (max-width: 768px) {
     .footer-grid {
         grid-template-columns: 1fr;

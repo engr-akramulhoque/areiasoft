@@ -1,7 +1,7 @@
 <x-guest-layout>
     @push('styles')
         <style>
-            /* ── Page Hero ── */
+            /* Page Hero */
             .page-hero {
                 padding: 10rem 2rem 4rem;
                 text-align: center;
@@ -30,7 +30,7 @@
                 font-size: 1.1rem;
             }
 
-            /* ── Services Grid ── */
+            /* Services Grid */
             .services-grid {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -116,7 +116,7 @@
                 transform: scaleX(1);
             }
 
-            /* ── Process Section ── */
+            /* Process Section */
             .process-section {
                 max-width: 1000px;
                 margin: 0 auto 4rem;
@@ -161,7 +161,7 @@
                 color: var(--white-muted);
             }
 
-            /* ── CTA Banner ── */
+            /* CTA Banner */
             .cta-banner {
                 background: var(--card-bg);
                 border: 1px solid var(--glass-border);
@@ -203,7 +203,7 @@
                 transform: translateY(-2px);
             }
 
-            /* ── Responsive ── */
+            /* Responsive */
             @media (max-width: 768px) {
                 .services-grid {
                     grid-template-columns: 1fr;
@@ -233,7 +233,7 @@
 
     <!-- Services Grid -->
     <div class="services-grid">
-        <x-common.service-card />
+        <x-common.service-card :services="$services" />
     </div>
 
     <!-- Our Approach -->

@@ -2,10 +2,7 @@
 
     <div class="container mx-auto px-4 py-6 bg-white dark:bg-gray-800">
 
-        {{-- =========================================================
-            HEADER
-        ========================================================== --}}
-
+        <!-- HEADER -->
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-5">
 
             <div>
@@ -22,11 +19,7 @@
 
         </div>
 
-
-        {{-- =========================================================
-            SUCCESS MESSAGE
-        ========================================================== --}}
-
+        <!-- SUCCESS MESSAGE -->
         @if (session('success'))
             <div
                 class="mb-4 flex items-center gap-3 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700 dark:border-green-800 dark:bg-green-900/30 dark:text-green-300">
@@ -40,14 +33,9 @@
             </div>
         @endif
 
-
-        {{-- =========================================================
-            FILTERS
-        ========================================================== --}}
-
+        <!-- FILTERS -->
         <div class="flex flex-wrap gap-2 mb-4 overflow-x-auto">
 
-            {{-- All --}}
             <a href="{{ route('admin.contacts.index', ['filter' => 'all']) }}"
                 class="flex items-center gap-2 px-3 py-2 rounded-md border text-sm transition
                 {{ $filter == 'all'
@@ -59,7 +47,7 @@
             </a>
 
 
-            {{-- Unread --}}
+            <!-- Unread -->
             <a href="{{ route('admin.contacts.index', ['filter' => 'unread']) }}"
                 class="flex items-center gap-2 px-3 py-2 rounded-md border text-sm transition
                 {{ $filter == 'unread'
@@ -71,7 +59,7 @@
             </a>
 
 
-            {{-- Read --}}
+            <!-- Read -->
             <a href="{{ route('admin.contacts.index', ['filter' => 'read']) }}"
                 class="flex items-center gap-2 px-3 py-2 rounded-md border text-sm transition
                 {{ $filter == 'read'
@@ -83,7 +71,7 @@
             </a>
 
 
-            {{-- Archived --}}
+            <!-- Archived -->
             <a href="{{ route('admin.contacts.index', ['filter' => 'archived']) }}"
                 class="flex items-center gap-2 px-3 py-2 rounded-md border text-sm transition
                 {{ $filter == 'archived'
@@ -95,7 +83,7 @@
             </a>
 
 
-            {{-- Starred --}}
+            <!-- Starred -->
             <a href="{{ route('admin.contacts.index', ['filter' => 'starred']) }}"
                 class="flex items-center gap-2 px-3 py-2 rounded-md border text-sm transition
                 {{ $filter == 'starred'
@@ -109,14 +97,10 @@
         </div>
 
 
-        {{-- =========================================================
-            BULK ACTION BAR
-        ========================================================== --}}
-
+        <!-- BULK ACTION BAR -->
         <form id="bulkActionForm" method="POST" action="{{ route('admin.contacts.bulkAction') }}">
 
             @csrf
-
 
             <div id="bulkActionBar"
                 class="hidden mb-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 p-3">
@@ -124,7 +108,7 @@
                 <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
 
 
-                    {{-- Selection Info --}}
+                    <!-- Selection Info -->
                     <div class="flex items-center gap-3">
 
                         <div
@@ -155,11 +139,11 @@
                     </div>
 
 
-                    {{-- Actions --}}
+                    <!-- Actions -->
                     <div class="flex flex-wrap items-center gap-2">
 
 
-                        {{-- Mark Read --}}
+                        <!-- Mark Read -->
                         @can('edit contact')
                             <button type="submit" name="action" value="read"
                                 class="bulk-action-btn bg-green-500 hover:bg-green-600" title="Mark as read">
@@ -173,7 +157,7 @@
                             </button>
 
 
-                            {{-- Mark Unread --}}
+                            <!-- Mark Unread -->
                             <button type="submit" name="action" value="unread"
                                 class="bulk-action-btn bg-yellow-500 hover:bg-yellow-600" title="Mark as unread">
 
@@ -186,7 +170,7 @@
                             </button>
 
 
-                            {{-- Star --}}
+                            <!-- Star -->
                             <button type="submit" name="action" value="star"
                                 class="bulk-action-btn bg-indigo-500 hover:bg-indigo-600" title="Star selected">
 
@@ -199,7 +183,7 @@
                             </button>
 
 
-                            {{-- Unstar --}}
+                            <!-- Unstar -->
                             <button type="submit" name="action" value="unstar"
                                 class="bulk-action-btn bg-gray-500 hover:bg-gray-600" title="Remove star">
 
@@ -212,7 +196,7 @@
                             </button>
 
 
-                            {{-- Archive --}}
+                            <!-- Archive -->
                             <button type="submit" name="action" value="archive"
                                 class="bulk-action-btn bg-gray-600 hover:bg-gray-700" title="Archive selected">
 
@@ -226,7 +210,7 @@
                         @endcan
 
 
-                        {{-- Delete --}}
+                        <!-- Delete -->
                         @can('delete contact')
                             <button type="submit" name="action" value="delete"
                                 class="bulk-action-btn bg-red-500 hover:bg-red-600" title="Delete selected"
@@ -248,10 +232,7 @@
             </div>
 
 
-            {{-- =====================================================
-                INBOX TABLE
-            ====================================================== --}}
-
+            <!-- INBOX TABLE -->
             <div class="overflow-x-auto rounded-lg shadow bg-white dark:bg-gray-800">
 
                 <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
@@ -260,7 +241,7 @@
 
                         <tr>
 
-                            {{-- Select All --}}
+                            <!-- Select All -->
                             <th class="px-3 py-3 text-center w-10">
 
                                 <input type="checkbox" id="selectAll"
@@ -270,49 +251,49 @@
                             </th>
 
 
-                            {{-- Star --}}
+                            <!-- Star -->
                             <th
                                 class="px-3 py-2 text-left text-xs sm:text-sm font-medium text-gray-500 dark:text-gray-300">
                                 ⭐
                             </th>
 
 
-                            {{-- Status --}}
+                            <!-- Status -->
                             <th
                                 class="px-3 py-2 text-left text-xs sm:text-sm font-medium text-gray-500 dark:text-gray-300">
                                 Status
                             </th>
 
 
-                            {{-- Name --}}
+                            <!-- Name -->
                             <th
                                 class="px-3 py-2 text-left text-xs sm:text-sm font-medium text-gray-500 dark:text-gray-300">
                                 Name
                             </th>
 
 
-                            {{-- Email --}}
+                            <!-- Email -->
                             <th
                                 class="px-3 py-2 text-left text-xs sm:text-sm font-medium text-gray-500 dark:text-gray-300">
                                 Email
                             </th>
 
 
-                            {{-- Subject --}}
+                            <!-- Subject -->
                             <th
                                 class="px-3 py-2 text-left text-xs sm:text-sm font-medium text-gray-500 dark:text-gray-300">
                                 Subject
                             </th>
 
 
-                            {{-- Received --}}
+                            <!-- Received -->
                             <th
                                 class="px-3 py-2 text-left text-xs sm:text-sm font-medium text-gray-500 dark:text-gray-300">
                                 Received
                             </th>
 
 
-                            {{-- Actions --}}
+                            <!-- Actions -->
                             <th
                                 class="px-3 py-2 text-left text-xs sm:text-sm font-medium text-gray-500 dark:text-gray-300">
                                 Actions
@@ -329,7 +310,7 @@
 
                             <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 text-xs sm:text-sm transition">
 
-                                {{-- Select --}}
+                                <!-- Select -->
                                 <td class="px-3 py-2 text-center">
 
                                     <input type="checkbox" name="contacts[]" value="{{ $contact->id }}"
@@ -338,7 +319,7 @@
                                 </td>
 
 
-                                {{-- Star --}}
+                                <!-- Star -->
                                 <td class="px-3 py-2 text-center">
 
                                     <form action="{{ route('admin.contacts.toggleStar', $contact) }}" method="POST">
@@ -361,7 +342,7 @@
                                 </td>
 
 
-                                {{-- Status --}}
+                                <!-- Status -->
                                 <td class="px-3 py-2">
 
                                     <span
@@ -397,31 +378,31 @@
                                 </td>
 
 
-                                {{-- Name --}}
+                                <!-- Name -->
                                 <td class="px-3 py-2 text-gray-700 dark:text-gray-200">
                                     {{ $contact->name }}
                                 </td>
 
 
-                                {{-- Email --}}
+                                <!-- Email -->
                                 <td class="px-3 py-2 text-gray-700 dark:text-gray-200">
                                     {{ $contact->email }}
                                 </td>
 
 
-                                {{-- Subject --}}
+                                <!-- Subject -->
                                 <td class="px-3 py-2 font-medium text-gray-900 dark:text-gray-100">
                                     {{ $contact->subject }}
                                 </td>
 
 
-                                {{-- Received --}}
+                                <!-- Received -->
                                 <td class="px-3 py-2 text-gray-500 dark:text-gray-400 whitespace-nowrap">
                                     {{ $contact->created_at->diffForHumans() }}
                                 </td>
 
 
-                                {{-- Actions --}}
+                                <!-- Actions -->
                                 <td class="px-3 py-2">
 
                                     <div class="flex flex-wrap gap-1">
@@ -510,11 +491,6 @@
 
             </div>
 
-
-            {{-- =====================================================
-                PAGINATION
-            ====================================================== --}}
-
             <div class="mt-4">
 
                 {{ $contacts->links('pagination::tailwind') }}
@@ -526,10 +502,7 @@
     </div>
 
 
-    {{-- =============================================================
-        BULK ACTION JAVASCRIPT
-    ============================================================== --}}
-
+    <!-- BULK ACTION JAVASCRIPT -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
 
@@ -756,50 +729,36 @@
     <style>
         .bulk-action-btn {
             display: inline-flex;
-
             align-items: center;
             justify-content: center;
-
             gap: 6px;
-
             padding: 7px 10px;
-
             color: white;
-
             border-radius: 7px;
-
             font-size: 0.75rem;
-
             font-weight: 600;
-
             transition:
                 background-color 0.2s ease,
                 transform 0.15s ease;
         }
 
-
         .bulk-action-btn:hover {
             transform: translateY(-1px);
         }
-
 
         .bulk-action-btn:active {
             transform: translateY(0);
         }
 
-
         .contact-checkbox {
             width: 16px;
             height: 16px;
-
             cursor: pointer;
         }
-
 
         #bulkActionBar {
             animation: bulkBarIn 0.2s ease-out;
         }
-
 
         @keyframes bulkBarIn {
 
