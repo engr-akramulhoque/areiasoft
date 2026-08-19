@@ -5,7 +5,7 @@ return [
     'portfolios' => [
 
         [
-            'image' => 'static/frontend/assets/images/portfolio/exclusive-khushaal.png',
+            'image' => 'static/frontend/assets/images/portfolio/exclusive-khushaal.webp',
             'title' => 'Exclusive Khushaal',
             'category' => ['ecommerce', 'web'],
             'tags' => ['E-Commerce', 'Laravel', 'Fashion'],
@@ -14,7 +14,7 @@ return [
         ],
 
         [
-            'image' => 'static/frontend/assets/images/portfolio/babul-itc.png',
+            'image' => 'static/frontend/assets/images/portfolio/babul-itc.webp',
             'title' => 'Babul International Training Center',
             'category' => ['web', 'software'],
             'tags' => ['Training', 'Overseas', 'Laravel'],
@@ -23,7 +23,7 @@ return [
         ],
 
         [
-            'image' => 'static/frontend/assets/images/portfolio/pizeon.png',
+            'image' => 'static/frontend/assets/images/portfolio/pizeon.webp',
             'title' => 'Pizeon Luxury Liners',
             'category' => ['ecommerce', 'web'],
             'tags' => ['Multi Vendor', 'E-Commerce', 'Marketplace'],
@@ -32,7 +32,7 @@ return [
         ],
 
         [
-            'image' => 'static/frontend/assets/images/portfolio/fiha-aliya.png',
+            'image' => 'static/frontend/assets/images/portfolio/fiha-aliya.webp',
             'title' => 'Fiha Aliya Overseas & Training Center',
             'category' => ['web', 'software'],
             'tags' => ['Recruitment', 'Training', 'Overseas'],
@@ -41,7 +41,7 @@ return [
         ],
 
         [
-            'image' => 'static/frontend/assets/images/portfolio/chaya-properties.png',
+            'image' => 'static/frontend/assets/images/portfolio/chaya-properties.webp',
             'title' => 'Chaya Properties',
             'category' => ['web', 'software'],
             'tags' => ['Real Estate', 'Property', 'Laravel'],
@@ -50,7 +50,7 @@ return [
         ],
 
         [
-            'image' => 'static/frontend/assets/images/portfolio/clean-service.png',
+            'image' => 'static/frontend/assets/images/portfolio/clean-service.webp',
             'title' => 'Clean & Service XYZ',
             'category' => ['web', 'software'],
             'tags' => ['Cleaning', 'Service Booking', 'Business'],
@@ -65,35 +65,35 @@ return [
 
         'logos' => [
             [
-                'image' => 'static/frontend/assets/images/clients/bitc.png',
+                'image' => 'static/frontend/assets/images/clients/bitc.webp',
                 'name' => 'Babul International Training Center',
             ],
             [
-                'image' => 'static/frontend/assets/images/clients/fiha-aliya-overseas.png',
+                'image' => 'static/frontend/assets/images/clients/fiha-aliya-overseas.webp',
                 'name' => 'Fiha Aliya Oversease & Training Center',
             ],
             [
-                'image' => 'static/frontend/assets/images/clients/areiatech.png',
+                'image' => 'static/frontend/assets/images/clients/areiatech.webp',
                 'name' => 'Areia Tech',
             ],
             [
-                'image' => 'static/frontend/assets/images/clients/bnicl.png',
+                'image' => 'static/frontend/assets/images/clients/bnicl.webp',
                 'name' => 'Bangladesh National Insurance Company Limited',
             ],
             [
-                'image' => 'static/frontend/assets/images/clients/exclusive-khushaal.png',
+                'image' => 'static/frontend/assets/images/clients/exclusive-khushaal.webp',
                 'name' => 'Exclusive Khushaal',
             ],
             [
-                'image' => 'static/frontend/assets/images/clients/chaya-properties.png',
+                'image' => 'static/frontend/assets/images/clients/chaya-properties.webp',
                 'name' => 'Chaya Properties',
             ],
             [
-                'image' => 'static/frontend/assets/images/clients/pizeon.png',
+                'image' => 'static/frontend/assets/images/clients/pizeon.webp',
                 'name' => 'Pizeon Luxury Liners',
             ],
             [
-                'image' => 'static/frontend/assets/images/clients/cleaning-service.png',
+                'image' => 'static/frontend/assets/images/clients/cleaning-service.webp',
                 'name' => 'Cleaning & Service',
             ],
         ],

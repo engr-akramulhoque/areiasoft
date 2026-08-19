@@ -36,7 +36,7 @@
 
 <header class="header" id="header">
     <a href="{{ route('home') }}" class="logo-container" title="Areia Soft" aria-label="Areia Soft Home">
-        <img src="{{ asset('static/logos/logo.png') }}" alt="Areia Soft" class="web-logo" width="180" height="72">
+        <img src="{{ asset('static/logos/logo.webp') }}" alt="Areia Soft" class="web-logo" width="180" height="72">
     </a>
 
     <button type="button" class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-controls="navLinks"
