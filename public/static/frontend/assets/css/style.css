@@ -1,0 +1,104 @@
+/* HERO */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem 2rem 6rem;
+    position: relative;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 900px;
+    z-index: 2;
+}
+
+.hero-badge {
+    display: inline-block;
+    padding: 0.45rem 1.2rem;
+    border: 1px solid var(--cyan);
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+    background: rgba(0, 229, 255, 0.04);
+}
+
+.hero h1 {
+    font-size: clamp(2.6rem, 6vw, 5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+    margin-bottom: 1.5rem;
+    color: var(--white);
+}
+
+.hero h1 .highlight {
+    background: linear-gradient(135deg, #00e5ff, #6ee7ff, #00b8d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 30px rgba(0, 229, 255, 0.4));
+}
+
+.hero-subtitle {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--white-muted);
+    max-width: 550px;
+    margin: 0 auto 2.5rem;
+    letter-spacing: 0.01em;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-primary {
+    padding: 0.85rem 2.2rem;
+    background: var(--cyan);
+    color: var(--bg-deep);
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: var(--transition);
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: 0 0 40px rgba(0, 229, 255, 0.3);
+}
+
+.btn-primary:hover {
+    box-shadow: 0 0 70px rgba(0, 229, 255, 0.55);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    padding: 0.85rem 2.2rem;
+    background: transparent;
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: var(--transition);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-secondary:hover {
+    border-color: var(--white);
+    background: rgba(255, 255, 255, 0.04);
+}

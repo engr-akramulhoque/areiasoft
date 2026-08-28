@@ -9,11 +9,18 @@ class ServiceController extends Controller
 {
     public function index()
     {
-        return view('frontend.pages.service');
+        $services= config('areiasoft.services', []);
+
+        return view('frontend.pages.service', compact('services'));
     }
     
-    public function show($service)
+    public function show(string $service)
     {
-        return view('frontend.pages.service-detail');
+        $services = config('areiasoft.services');
+
+        $service = collect($services)->firstWhere('slug', $service);
+        abort_unless($service, 404);
+
+        return view('frontend.pages.service-detail', compact('service', 'services'));
     }
 }

@@ -1,112 +1,31 @@
 <x-guest-layout>
+    <!-- HERO -->
+    <x-home.hero :hero="$hero" />
+
+    <!-- SERVICES -->
+    <section class="services" id="services">
+        <p class="section-label">What We Build</p>
+        <h2 class="section-title">Scalable Software, Websites & AI Solutions</h2>
+        <div class="card-grid">
+            <x-common.service-card :services="$services" />
+        </div>
+    </section>
+
+    <!-- GLOBE -->
+    <x-home.globee :globe="$globe" />
+
+    <!-- OUR WORK SECTION -->
+    <x-home.our-work :portfolios="$portfolios" />
+
+    <!-- METHODOLOGY -->
+    <x-home.methodology />
+
+    <!-- CLIENTS -->
+    <x-home.client :clients="$clients" />
+
     @push('styles')
         <style>
-            /* ── HERO (unchanged) ── */
-            .hero {
-                min-height: 100vh;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 8rem 2rem 6rem;
-                position: relative;
-                text-align: center;
-            }
-
-            .hero-content {
-                max-width: 900px;
-                z-index: 2;
-            }
-
-            .hero-badge {
-                display: inline-block;
-                padding: 0.45rem 1.2rem;
-                border: 1px solid var(--cyan);
-                border-radius: 50px;
-                font-size: 0.8rem;
-                font-weight: 600;
-                letter-spacing: 0.08em;
-                text-transform: uppercase;
-                color: var(--cyan);
-                margin-bottom: 2rem;
-                backdrop-filter: blur(10px);
-                background: rgba(0, 229, 255, 0.04);
-            }
-
-            .hero h1 {
-                font-size: clamp(2.6rem, 6vw, 5rem);
-                font-weight: 800;
-                letter-spacing: -0.03em;
-                line-height: 1.08;
-                margin-bottom: 1.5rem;
-                color: var(--white);
-            }
-
-            .hero h1 .highlight {
-                background: linear-gradient(135deg, #00e5ff, #6ee7ff, #00b8d4);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                background-clip: text;
-                filter: drop-shadow(0 0 30px rgba(0, 229, 255, 0.4));
-            }
-
-            .hero-subtitle {
-                font-size: 1rem;
-                font-weight: 400;
-                color: var(--white-muted);
-                max-width: 550px;
-                margin: 0 auto 2.5rem;
-                letter-spacing: 0.01em;
-            }
-
-            .hero-buttons {
-                display: flex;
-                gap: 1.2rem;
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-
-            .btn-primary {
-                padding: 0.85rem 2.2rem;
-                background: var(--cyan);
-                color: var(--bg-deep);
-                border: none;
-                border-radius: 50px;
-                font-weight: 700;
-                font-size: 0.95rem;
-                cursor: pointer;
-                letter-spacing: 0.02em;
-                transition: var(--transition);
-                text-decoration: none;
-                display: inline-block;
-                box-shadow: 0 0 40px rgba(0, 229, 255, 0.3);
-            }
-
-            .btn-primary:hover {
-                box-shadow: 0 0 70px rgba(0, 229, 255, 0.55);
-                transform: translateY(-2px);
-            }
-
-            .btn-secondary {
-                padding: 0.85rem 2.2rem;
-                background: transparent;
-                color: var(--white);
-                border: 1px solid rgba(255, 255, 255, 0.25);
-                border-radius: 50px;
-                font-weight: 600;
-                font-size: 0.95rem;
-                cursor: pointer;
-                letter-spacing: 0.02em;
-                transition: var(--transition);
-                text-decoration: none;
-                display: inline-block;
-            }
-
-            .btn-secondary:hover {
-                border-color: var(--white);
-                background: rgba(255, 255, 255, 0.04);
-            }
-
-            /* ── SERVICES (unchanged) ── */
+            /* SERVICES */
             .services {
                 padding: 5rem 2rem;
                 max-width: 1300px;
@@ -240,7 +159,7 @@
                 transform: scaleX(1);
             }
 
-            /* ── GLOBE (unchanged) ── */
+            /* GLOBE SECTION */
             .globe-section {
                 padding: 4rem 2rem 6rem;
                 position: relative;
@@ -293,7 +212,7 @@
                 letter-spacing: 0.03em;
             }
 
-            /* ── NEW SECTIONS: WORK, CLIENTS, METHODOLOGY ── */
+            /* WORK, CLIENTS, METHODOLOGY */
             /* Common spacing & labels */
             .work-section,
             .clients-section,
@@ -464,6 +383,23 @@
                 transition: fill 0.3s;
             }
 
+            .client-logo-item img {
+                max-width: 150px;
+                max-height: 60px;
+                width: auto;
+                height: auto;
+                object-fit: contain;
+                opacity: .75;
+                transition: .35s ease;
+                filter: grayscale(100%);
+            }
+
+            .client-logo-item:hover img {
+                opacity: 1;
+                filter: grayscale(0%);
+                transform: scale(1.05);
+            }
+
             .client-logo-item:hover svg {
                 fill: var(--white);
             }
@@ -546,7 +482,7 @@
                 line-height: 1.5;
             }
 
-            /* ── SCROLL INDICATOR (unchanged) ── */
+            /* SCROLL INDICATOR */
             .scroll-indicator {
                 position: absolute;
                 bottom: 2.5rem;
@@ -588,7 +524,7 @@
                 }
             }
 
-            /* ── RESPONSIVE ADJUSTMENTS (existing + new) ── */
+            /* RESPONSIVE ADJUSTMENTS */
             @media (max-width: 768px) {
                 .hero {
                     padding: 7rem 1.2rem 4rem;
@@ -681,29 +617,4 @@
             }
         </style>
     @endpush
-
-    <!-- HERO -->
-    <x-home.hero />
-
-    <!-- SERVICES -->
-    <section class="services" id="services">
-        <p class="section-label">What We Build</p>
-        <h2 class="section-title">Scalable Software, Websites & AI Solutions</h2>
-        <div class="card-grid">
-            <x-common.service-card />
-        </div>
-    </section>
-
-    <!-- GLOBE -->
-    <x-home.globee />
-
-    <!-- OUR WORK SECTION -->
-    <x-home.our-work :portfolios="$portfolios" />
-
-    <!-- METHODOLOGY -->
-    <x-home.methodology />
-
-    <!-- CLIENTS -->
-    <x-home.client :clients="$clients" />
-
 </x-guest-layout>

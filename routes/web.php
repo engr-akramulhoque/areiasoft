@@ -38,9 +38,10 @@ Route::middleware([
     Route::resource('/users', UserController::class)->names('admin.users');
     Route::resource('/roles', RoleController::class)->names('admin.roles');
     
-    Route::resource('/contacts', ManageContactController::class)->names('admin.contacts');
     Route::post('/contacts/{contact}/toggle-star', [ManageContactController::class, 'toggleStar'])->name('admin.contacts.toggleStar');
     Route::post('/contacts/{contact}/archive', [ManageContactController::class, 'archive'])->name('admin.contacts.archive');
+    Route::post('/contacts/bulk-action', [ManageContactController::class, 'bulkAction'])->name('admin.contacts.bulkAction');
+    Route::resource('/contacts', ManageContactController::class)->names('admin.contacts');
 });
 
 Route::controller(ProfileController::class)->prefix('account')->group(function () {
