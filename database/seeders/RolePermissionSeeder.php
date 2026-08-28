@@ -39,6 +39,20 @@ class RolePermissionSeeder extends Seeder
                 'delete contact',
             ],
 
+            'blog_categories' => [
+                'view_blog_category',
+                'create_blog_category',
+                'edit_blog_category',
+                'delete_blog_category',
+            ],
+
+            'blogs' => [
+                'view_blog',
+                'create_blog',
+                'edit_blog',
+                'delete_blog',
+            ],
+
             'others' => [
                 'view seo-manager',
             ],
@@ -54,6 +68,5 @@ class RolePermissionSeeder extends Seeder
         // role with all permissions
         $admin = Role::firstOrCreate(['name' => 'administration']);
         $admin->syncPermissions(Permission::all());
-        
     }
 }

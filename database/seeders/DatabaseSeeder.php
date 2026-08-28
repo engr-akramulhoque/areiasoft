@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         if (! app()->environment('production')) {
             $seeders = array_merge($seeders, [
                 // Add any additional seeders for non-production environments here
+                BlogSeeder::class,
             ]);
         }
 

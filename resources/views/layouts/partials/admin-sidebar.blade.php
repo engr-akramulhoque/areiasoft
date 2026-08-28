@@ -88,6 +88,40 @@
                     </div>
                 @endcanany
 
+                @canany(['view_blog_category', 'view_blog'])
+                    <div class="dropdown">
+                        <button
+                            class="dropdown-toggle flex items-center justify-between w-full p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 {{ request()->routeIs('admin.blog.*') ? 'bg-gray-200 dark:bg-gray-700' : '' }}">
+
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-blog w-5"></i>
+                                <span>Blog</span>
+                            </div>
+
+                            <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+                        </button>
+
+                        <div
+                            class="dropdown-content pl-8 mt-1 space-y-1 {{ request()->routeIs('admin.blog.*') ? '' : 'hidden' }}">
+
+                            @can('view_blog_category')
+                                <a href="{{ route('admin.blog.categories.index') }}"
+                                    class="block p-2 rounded-lg {{ request()->routeIs('admin.blog.categories.*') ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700' }}">
+                                    Categories
+                                </a>
+                            @endcan
+
+                            @can('view_blog')
+                                <a href="{{ route('admin.blogs.index') }}"
+                                    class="block p-2 rounded-lg {{ request()->routeIs('admin.blogs.*') ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700' }}">
+                                    Posts
+                                </a>
+                            @endcan
+
+                        </div>
+                    </div>
+                @endcanany
+
                 @canany(['view seo-manager', 'view sitemap', 'view robots-txt'])
                     <div class="dropdown">
                         <button

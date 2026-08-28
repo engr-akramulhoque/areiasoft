@@ -121,6 +121,13 @@
             </li>
 
             <li>
+                <a href="{{ route('blog.index') }}" class="{{ request()->routeIs('blog.*') ? 'active' : '' }}"
+                    @if (request()->routeIs('blog.index')) aria-current="page" @endif>
+                    Blog
+                </a>
+            </li>
+
+            <li>
                 <a href="{{ route('contact.index') }}"
                     class="nav-cta {{ request()->routeIs('contact.index') ? 'active' : '' }}"
                     @if (request()->routeIs('contact.index')) aria-current="page" @endif>

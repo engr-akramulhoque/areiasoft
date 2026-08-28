@@ -1,9 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\BlogCategoryController;
+use App\Http\Controllers\Admin\BlogPostController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ManageContactController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Frontend\BlogCommentController;
+use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\ServiceController;
@@ -28,16 +32,36 @@ Route::get('/service/{service}', [ServiceController::class, 'show'])->name('serv
 Route::get('/our-works', [WorkController::class, 'index'])->name('work.index');
 Route::get('/work/{work}', [WorkController::class, 'show'])->name('work.show');
 
+Route::prefix('blog')->name('blog.')->group(function () {
+    Route::get('/', [BlogController::class, 'index'])->name('index');
+    Route::get('/category/{slug}', [BlogController::class, 'category'])->name('category');
+    Route::get('/{slug}', [BlogController::class, 'show'])->name('show');
+
+    Route::post('/{blogPost}/comments', [BlogCommentController::class, 'store'])->name('comments.store');
+    Route::post('/comments/{comment}/reply', [BlogCommentController::class, 'reply'])->name('comments.reply');
+});
+
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->prefix('admin')->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
-    
+
     Route::resource('/users', UserController::class)->names('admin.users');
     Route::resource('/roles', RoleController::class)->names('admin.roles');
-    
+
+    Route::resource('blogs', BlogPostController::class)->names('admin.blogs');
+    Route::patch('blogs/{blog}/toggle-status', [BlogPostController::class, 'toggleStatus'])->name('admin.blogs.toggle-status');
+
+    Route::resource('blog/categories', BlogCategoryController::class)
+        ->parameters([
+            'categories' => 'blogCategory',
+        ])
+        ->names('admin.blog.categories');
+    Route::patch('blog/categories/{blogCategory}/toggle-status', [BlogCategoryController::class, 'toggleStatus'])->name('admin.blog.categories.toggle-status');
+
     Route::post('/contacts/{contact}/toggle-star', [ManageContactController::class, 'toggleStar'])->name('admin.contacts.toggleStar');
     Route::post('/contacts/{contact}/archive', [ManageContactController::class, 'archive'])->name('admin.contacts.archive');
     Route::post('/contacts/bulk-action', [ManageContactController::class, 'bulkAction'])->name('admin.contacts.bulkAction');
