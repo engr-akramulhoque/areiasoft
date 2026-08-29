@@ -1,8 +1,4 @@
-@php
-    $pageTitle = 'Blog | Areia Soft';
-@endphp
-
-<x-guest-layout :title="$pageTitle">
+<x-guest-layout :title="'Blog | Areia Soft'">
 
     @push('styles')
         <style>

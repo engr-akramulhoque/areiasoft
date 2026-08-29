@@ -81,7 +81,13 @@ class BlogCategoryController extends Controller
     {
         $blogCategory->loadCount('posts');
 
-        return view('admin.blog.category.show', compact('category'));
+        $blogCategory->load([
+            'posts' => function ($query) {
+                $query->latest()->limit(10);
+            },
+        ]);
+
+        return view('admin.blog.category.show', compact('blogCategory'));
     }
 
     /**

@@ -3,7 +3,7 @@
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow">
             <div
                 class="px-5 py-4 border-b border-gray-200 dark:border-gray-700 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                <div>
+                <div class="px-4">
                     <h1 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100">
                         Blog Category Details
                     </h1>
@@ -12,8 +12,8 @@
                     </p>
                 </div>
 
-                <div class="flex flex-wrap items-center gap-2">
-                    @can('edit blog category')
+                <div class="flex flex-wrap items-center gap-2 px-4">
+                    @can('edit_blog_category')
                         <a href="{{ route('admin.blog.categories.edit', $blogCategory) }}"
                             class="inline-flex items-center justify-center gap-2 px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 text-sm font-medium transition">
                             <i class="bi bi-pencil-fill"></i>
@@ -169,7 +169,7 @@
                             </div>
                         </div>
 
-                        @can('delete blog category')
+                        @can('delete_blog_category')
                             @if (!$blogCategory->posts()->exists())
                                 <div
                                     class="p-5 rounded-lg border border-red-200 dark:border-red-900/50 bg-red-50 dark:bg-red-900/10">
@@ -314,8 +314,8 @@
                                             </td>
 
                                             <td class="px-4 py-3">
-                                                @can('view blog post')
-                                                    <a href="{{ route('admin.blog.posts.show', $post) }}"
+                                                @can('view_blog')
+                                                    <a href="{{ route('admin.blogs.show', $post) }}"
                                                         class="inline-flex items-center justify-center w-8 h-8 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
                                                         title="View Post">
                                                         <i class="bi bi-eye-fill text-xs"></i>

@@ -1,56 +1,71 @@
 <x-app-layout>
 
-    <div class="container mx-auto px-4 py-6 bg-white dark:bg-gray-800 rounded-lg shadow">
+    <div class="container mx-auto px-4 py-6">
 
-        {{-- Page Header --}}
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
+        <div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 
-            <div>
-                <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">
+            <div class="min-w-0">
+
+                <div class="mb-2 flex items-center gap-2">
+
+                    <span
+                        class="inline-flex items-center gap-1.5 rounded-full bg-blue-100 px-2.5 py-1 text-xs font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
+                        <i class="bi bi-journal-text"></i>
+                        Blog Post
+                    </span>
+
+                    <span
+                        class="inline-flex items-center gap-1.5 rounded-full bg-green-100 px-2.5 py-1 text-xs font-medium text-green-700 dark:bg-green-900/30 dark:text-green-400">
+                        <i class="bi bi-plus-circle"></i>
+                        Create
+                    </span>
+
+                </div>
+
+                <h1 class="break-words text-2xl font-bold text-gray-900 dark:text-gray-100 sm:text-3xl">
                     Create Blog Post
                 </h1>
 
                 <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                    Create and publish a new blog post.
+                    Create and publish a new blog post with content, image and publication settings.
                 </p>
+
             </div>
 
-            <a href="{{ route('admin.blogs.index') }}"
-                class="inline-flex items-center justify-center gap-2 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 text-sm transition">
+            <div class="flex flex-wrap items-center gap-2">
 
-                <i class="bi bi-arrow-left"></i>
-                Back to Blogs
+                <a href="{{ route('admin.blogs.index') }}"
+                    class="inline-flex items-center justify-center gap-2 rounded-lg bg-gray-500 px-4 py-2 text-sm text-white transition hover:bg-gray-600">
 
-            </a>
+                    <i class="bi bi-arrow-left"></i>
+                    Back
+
+                </a>
+
+            </div>
 
         </div>
 
-
-        {{-- Validation Errors --}}
         @if ($errors->any())
 
             <div
-                class="mb-6 p-4 rounded-lg bg-red-100 border border-red-200 text-red-800 dark:bg-red-900/30 dark:border-red-800 dark:text-red-300">
+                class="mb-6 flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 px-4 py-4 text-red-800 dark:border-red-800/50 dark:bg-red-900/20 dark:text-red-300">
 
-                <div class="flex items-start gap-3">
+                <i class="bi bi-exclamation-triangle-fill mt-0.5"></i>
 
-                    <i class="bi bi-exclamation-triangle-fill mt-0.5"></i>
+                <div>
 
-                    <div>
+                    <p class="mb-1 text-sm font-semibold">
+                        Please fix the following errors:
+                    </p>
 
-                        <p class="font-semibold mb-1">
-                            Please fix the following errors:
-                        </p>
+                    <ul class="list-disc space-y-1 pl-5 text-xs">
 
-                        <ul class="list-disc pl-5 text-sm space-y-1">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
 
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-
-                        </ul>
-
-                    </div>
+                    </ul>
 
                 </div>
 
@@ -58,418 +73,481 @@
 
         @endif
 
-
         <form action="{{ route('admin.blogs.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
 
             @csrf
 
+            <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                <div class="space-y-6 lg:col-span-2">
 
-                {{-- Blog Title --}}
-                <div class="min-w-0">
+                    <div
+                        class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
 
-                    <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                        <div class="border-b border-gray-200 px-5 py-4 dark:border-gray-700">
 
-                        Blog Title <span class="text-red-500">*</span>
+                            <div class="flex items-center gap-3 px-4">
 
-                    </label>
+                                <div
+                                    class="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
 
-                    <input type="text" name="title" id="title" value="{{ old('title') }}"
-                        placeholder="Enter blog post title" required autofocus
-                        class="mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                    <i class="bi bi-pencil-square"></i>
 
-                    @error('title')
-                        <p class="mt-1 text-xs text-red-500">
-                            {{ $message }}
-                        </p>
-                    @enderror
+                                </div>
 
-                </div>
+                                <div>
 
+                                    <h2 class="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                                        Blog Information
+                                    </h2>
 
-                {{-- Category --}}
-                <div class="min-w-0">
-
-                    <label for="category_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-
-                        Category <span class="text-red-500">*</span>
-
-                    </label>
-
-                    <select name="category_id" id="category_id" required
-                        class="mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-
-                        <option value="">
-                            Select Category
-                        </option>
-
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->id }}"
-                                {{ old('category_id') == $category->id ? 'selected' : '' }}>
-
-                                {{ $category->name }}
-
-                            </option>
-                        @endforeach
-
-                    </select>
-
-                    @error('category_id')
-                        <p class="mt-1 text-xs text-red-500">
-                            {{ $message }}
-                        </p>
-                    @enderror
-
-                </div>
-
-
-                {{-- Slug --}}
-                <div class="min-w-0">
-
-                    <label for="slug" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-
-                        Slug
-
-                    </label>
-
-                    <input type="text" name="slug" id="slug" value="{{ old('slug') }}"
-                        placeholder="blog-post-slug"
-                        class="mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-
-                    <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
-
-                        Leave empty to generate automatically from the title.
-
-                    </p>
-
-                    @error('slug')
-                        <p class="mt-1 text-xs text-red-500">
-                            {{ $message }}
-                        </p>
-                    @enderror
-
-                </div>
-
-
-                {{-- Featured Image --}}
-                <div class="min-w-0">
-
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-
-                        Featured Image
-
-                    </label>
-
-
-                    <div id="imageDropZone"
-                        class="relative w-full min-h-[180px] cursor-pointer overflow-hidden rounded-xl border-2 border-dashed border-gray-300 bg-gray-50 px-4 py-5 text-center transition hover:border-blue-400 hover:bg-blue-50/50 dark:border-gray-600 dark:bg-gray-900 dark:hover:border-blue-500 dark:hover:bg-blue-900/10">
-
-
-                        <input type="file" name="featured_image" id="featured_image"
-                            accept="image/jpeg,image/png,image/webp,image/jpg" class="hidden">
-
-
-                        {{-- Upload State --}}
-                        <div id="imageUploadState">
-
-                            <div
-                                class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
-
-                                <i class="bi bi-cloud-arrow-up text-xl"></i>
-
-                            </div>
-
-
-                            <p class="text-sm font-semibold text-gray-700 dark:text-gray-200">
-
-                                Drop your image here
-
-                            </p>
-
-
-                            <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
-
-                                or
-
-                                <span class="font-semibold text-blue-600 dark:text-blue-400">
-
-                                    click to browse
-
-                                </span>
-
-                            </p>
-
-
-                            <p class="mt-2 text-[11px] text-gray-400 dark:text-gray-500">
-
-                                JPG, PNG or WEBP · Maximum 5MB
-
-                            </p>
-
-                        </div>
-
-
-                        {{-- Preview State --}}
-                        <div id="imagePreviewState" class="hidden w-full overflow-hidden">
-
-                            <div class="blog-image-preview-card">
-
-
-                                {{-- Fixed Image Frame --}}
-                                <div class="blog-image-preview-frame">
-
-                                    <img id="imagePreview" src="" alt="Featured image preview"
-                                        class="blog-image-preview">
-
-
-                                    {{-- Image Footer --}}
-                                    <div class="blog-image-preview-footer">
-
-                                        <div class="flex min-w-0 items-center gap-2">
-
-                                            <i class="bi bi-image flex-shrink-0"></i>
-
-                                            <span id="imageFileName" class="block min-w-0 truncate text-xs">
-                                            </span>
-
-                                        </div>
-
-
-                                        <button type="button" id="removeImage"
-                                            class="ml-3 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-white/20 text-white transition hover:bg-red-500"
-                                            title="Remove image">
-
-                                            <i class="bi bi-x-lg text-xs"></i>
-
-                                        </button>
-
-                                    </div>
+                                    <p class="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
+                                        Enter the basic information of your blog post.
+                                    </p>
 
                                 </div>
 
                             </div>
 
+                        </div>
 
-                            <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                        <div class="p-5">
 
-                                Click or drop another image to replace it.
+                            <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
 
+                                <div class="min-w-0 md:col-span-2">
+
+                                    <label for="title"
+                                        class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+
+                                        Blog Title
+
+                                        <span class="text-red-500">*</span>
+
+                                    </label>
+
+                                    <input type="text" name="title" id="title" value="{{ old('title') }}"
+                                        placeholder="Enter blog post title" required autofocus
+                                        class="mt-1 block w-full rounded-lg border-gray-300 bg-white text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder-gray-500">
+
+                                    @error('title')
+                                        <p class="mt-1 text-xs text-red-500">
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+
+                                </div>
+
+                                <div class="min-w-0">
+
+                                    <label for="category_id"
+                                        class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+
+                                        Category
+
+                                        <span class="text-red-500">*</span>
+
+                                    </label>
+
+                                    <select name="category_id" id="category_id" required
+                                        class="mt-1 block w-full rounded-lg border-gray-300 bg-white text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100">
+
+                                        <option value="">
+                                            Select Category
+                                        </option>
+
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}"
+                                                {{ old('category_id') == $category->id ? 'selected' : '' }}>
+
+                                                {{ $category->name }}
+
+                                            </option>
+                                        @endforeach
+
+                                    </select>
+
+                                    @error('category_id')
+                                        <p class="mt-1 text-xs text-red-500">
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+
+                                </div>
+
+                                <div class="min-w-0">
+
+                                    <label for="slug"
+                                        class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+
+                                        Slug
+
+                                    </label>
+
+                                    <input type="text" name="slug" id="slug" value="{{ old('slug') }}"
+                                        placeholder="blog-post-slug"
+                                        class="mt-1 block w-full rounded-lg border-gray-300 bg-white text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder-gray-500">
+
+                                    <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                                        Leave empty to generate automatically from the title.
+                                    </p>
+
+                                    @error('slug')
+                                        <p class="mt-1 text-xs text-red-500">
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+
+                                </div>
+
+                                <div class="min-w-0 md:col-span-2">
+
+                                    <label for="excerpt"
+                                        class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+
+                                        Excerpt
+
+                                    </label>
+
+                                    <textarea name="excerpt" id="excerpt" rows="4" placeholder="Write a short summary of this blog post..."
+                                        class="mt-1 block w-full resize-y rounded-lg border-gray-300 bg-white text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder-gray-500">{{ old('excerpt') }}</textarea>
+
+                                    <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                                        A short summary displayed on blog listings and search results.
+                                    </p>
+
+                                    @error('excerpt')
+                                        <p class="mt-1 text-xs text-red-500">
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div
+                        class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
+
+                        <div class="border-b border-gray-200 px-5 py-4 dark:border-gray-700">
+
+                            <div class="flex items-center gap-3 px-4">
+
+                                <div
+                                    class="flex h-9 w-9 items-center justify-center rounded-lg bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400">
+
+                                    <i class="bi bi-image"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <h2 class="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                                        Featured Image
+                                    </h2>
+
+                                    <p class="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
+                                        Upload the main image for this blog post.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="p-5">
+
+                            <div id="imageDropZone"
+                                class="relative min-h-[220px] w-full cursor-pointer overflow-hidden rounded-xl border-2 border-dashed border-gray-300 bg-gray-50 px-4 py-5 text-center transition hover:border-blue-400 hover:bg-blue-50/50 dark:border-gray-600 dark:bg-gray-900 dark:hover:border-blue-500 dark:hover:bg-blue-900/10">
+
+                                <input type="file" name="featured_image" id="featured_image"
+                                    accept="image/jpeg,image/png,image/webp,image/jpg" class="hidden">
+
+                                <div id="imageUploadState">
+
+                                    <div
+                                        class="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
+
+                                        <i class="bi bi-cloud-arrow-up text-2xl"></i>
+
+                                    </div>
+
+                                    <p class="text-sm font-semibold text-gray-700 dark:text-gray-200">
+                                        Drop your image here
+                                    </p>
+
+                                    <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+
+                                        or
+
+                                        <span class="font-semibold text-blue-600 dark:text-blue-400">
+                                            click to browse
+                                        </span>
+
+                                    </p>
+
+                                    <p class="mt-2 text-[11px] text-gray-400 dark:text-gray-500">
+                                        JPG, PNG or WEBP · Maximum 5MB
+                                    </p>
+
+                                </div>
+
+                                <div id="imagePreviewState" class="hidden w-full overflow-hidden">
+
+                                    <div class="blog-image-preview-card">
+
+                                        <div class="blog-image-preview-frame">
+
+                                            <img id="imagePreview" src="" alt="Featured image preview"
+                                                class="blog-image-preview">
+
+                                            <div class="blog-image-preview-footer">
+
+                                                <div class="flex min-w-0 items-center gap-2">
+
+                                                    <i class="bi bi-image flex-shrink-0"></i>
+
+                                                    <span id="imageFileName" class="block min-w-0 truncate text-xs">
+                                                    </span>
+
+                                                </div>
+
+                                                <button type="button" id="removeImage"
+                                                    class="ml-3 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-white/20 text-white transition hover:bg-red-500"
+                                                    title="Remove image">
+
+                                                    <i class="bi bi-x-lg text-xs"></i>
+
+                                                </button>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                                        Click or drop another image to replace it.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <p id="imageError" class="mt-1 hidden text-xs text-red-500">
+                            </p>
+
+                            @error('featured_image')
+                                <p class="mt-1 text-xs text-red-500">
+                                    {{ $message }}
+                                </p>
+                            @enderror
+
+                        </div>
+
+                    </div>
+
+                    <div
+                        class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
+
+                        <div class="border-b border-gray-200 px-5 py-4 dark:border-gray-700">
+
+                            <div class="flex items-center gap-3 px-4">
+
+                                <div
+                                    class="flex h-9 w-9 items-center justify-center rounded-lg bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400">
+
+                                    <i class="bi bi-file-richtext"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <h2 class="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                                        Blog Content
+                                    </h2>
+
+                                    <p class="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
+                                        Write and format the complete blog article.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="p-5">
+
+                            <label for="content"
+                                class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+
+                                Content
+
+                                <span class="text-red-500">*</span>
+
+                            </label>
+
+                            <textarea name="content" id="content" rows="14" placeholder="Write your blog content here...">{{ old('content') }}</textarea>
+
+                            @error('content')
+                                <p class="mt-1 text-xs text-red-500">
+                                    {{ $message }}
+                                </p>
+                            @enderror
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <aside class="space-y-6">
+
+                    <div
+                        class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
+
+                        <div class="border-b border-gray-200 px-4 py-4 dark:border-gray-700">
+
+                            <h2 class="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                                Publication Details
+                            </h2>
+
+                            <p class="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
+                                Manage the visibility of this blog post.
                             </p>
 
                         </div>
 
-                    </div>
+                        <div class="space-y-5 p-5">
 
+                            <div>
 
-                    <p id="imageError" class="mt-1 hidden text-xs text-red-500">
-                    </p>
+                                <label class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                    Publication Status
+                                </label>
 
+                                <div
+                                    class="flex w-full items-center justify-between rounded-lg border border-gray-300 bg-gray-50 px-4 py-3 dark:border-gray-700 dark:bg-gray-900">
 
-                    @error('featured_image')
-                        <p class="mt-1 text-xs text-red-500">
-                            {{ $message }}
-                        </p>
-                    @enderror
+                                    <div class="flex min-w-0 items-center gap-3">
 
-                </div>
+                                        <div id="statusIconWrapper"
+                                            class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-gray-200 text-gray-600 dark:bg-gray-800 dark:text-gray-400">
 
+                                            <i id="statusIcon" class="bi bi-file-earmark-text">
+                                            </i>
 
-                {{-- Excerpt --}}
-                <div class="lg:col-span-2 min-w-0">
+                                        </div>
 
-                    <label for="excerpt" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                        <div class="min-w-0">
 
-                        Excerpt
+                                            <p id="statusText"
+                                                class="text-sm font-semibold text-gray-800 dark:text-gray-200">
+                                                Inactive
+                                            </p>
 
-                    </label>
+                                            <p id="statusDescription"
+                                                class="text-xs text-gray-500 dark:text-gray-400">
+                                                This post is inactive and will remain unpublished.
+                                            </p>
 
+                                        </div>
 
-                    <textarea name="excerpt" id="excerpt" rows="4" placeholder="Write a short summary of this blog post..."
-                        class="mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 placeholder-gray-400 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm resize-y">{{ old('excerpt') }}</textarea>
+                                    </div>
 
+                                    <label for="status" class="ml-4 flex flex-shrink-0 cursor-pointer items-center">
 
-                    <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                                        <input type="hidden" name="status" value="draft">
 
-                        A short summary displayed on blog listings and search results.
+                                        <input type="checkbox" name="status" id="status" value="published"
+                                            {{ old('status') === 'published' ? 'checked' : '' }}
+                                            class="status-checkbox">
 
-                    </p>
+                                        <span class="status-checkmark">
+                                            <i class="bi bi-check-lg"></i>
+                                        </span>
 
+                                    </label>
 
-                    @error('excerpt')
-                        <p class="mt-1 text-xs text-red-500">
-                            {{ $message }}
-                        </p>
-                    @enderror
+                                </div>
 
-                </div>
+                                <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                                    Check the box to make this blog post active and published.
+                                </p>
 
-
-                {{-- Blog Content --}}
-                <div class="lg:col-span-2 min-w-0">
-
-                    <label for="content" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-
-                        Blog Content <span class="text-red-500">*</span>
-
-                    </label>
-
-
-                    <textarea name="content" id="content" rows="12" placeholder="Write your blog content here...">{{ old('content') }}</textarea>
-
-
-                    @error('content')
-                        <p class="mt-1 text-xs text-red-500">
-                            {{ $message }}
-                        </p>
-                    @enderror
-
-                </div>
-
-
-                {{-- Publication Status --}}
-                <div class="min-w-0">
-
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-
-                        Publication Status
-
-                    </label>
-
-
-                    <div
-                        class="flex items-center justify-between w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 px-4 py-3">
-
-
-                        <div class="flex items-center gap-3 min-w-0">
-
-                            <div id="statusIconWrapper"
-                                class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-gray-200 text-gray-600 dark:bg-gray-800 dark:text-gray-400">
-
-                                <i id="statusIcon" class="bi bi-file-earmark-text">
-                                </i>
+                                @error('status')
+                                    <p class="mt-1 text-xs text-red-500">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
 
                             </div>
 
+                            <div>
 
-                            <div class="min-w-0">
+                                <label for="published_at"
+                                    class="block text-sm font-medium text-gray-700 dark:text-gray-300">
 
-                                <p id="statusText" class="text-sm font-semibold text-gray-800 dark:text-gray-200">
+                                    Published At
 
-                                    Draft
+                                </label>
 
+                                <input type="datetime-local" name="published_at" id="published_at"
+                                    value="{{ old('published_at') }}"
+                                    class="mt-1 block w-full rounded-lg border-gray-300 bg-white text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100">
+
+                                <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                                    Leave empty if the post is not ready to be published.
                                 </p>
 
-
-                                <p id="statusDescription" class="text-xs text-gray-500 dark:text-gray-400">
-
-                                    This post will remain unpublished.
-
-                                </p>
+                                @error('published_at')
+                                    <p class="mt-1 text-xs text-red-500">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
 
                             </div>
 
                         </div>
 
+                    </div>
 
-                        {{-- Status Toggle --}}
-                        <label for="status"
-                            class="relative inline-flex flex-shrink-0 cursor-pointer items-center ml-4">
+                    <div
+                        class="overflow-hidden rounded-xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-800">
 
-                            <input type="hidden" name="status" value="draft">
+                        <div class="flex flex-col gap-2">
 
+                            @can('create_blog')
+                                <button type="submit"
+                                    class="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-blue-500 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-blue-600">
 
-                            <input type="checkbox" id="status" name="status" value="published"
-                                {{ old('status') === 'published' ? 'checked' : '' }} class="peer sr-only">
+                                    <i class="bi bi-check-lg"></i>
 
+                                    Create Blog Post
 
-                            <span
-                                class="relative h-6 w-11 rounded-full bg-gray-300 transition-colors duration-200 peer-checked:bg-blue-500 dark:bg-gray-700">
+                                </button>
+                            @endcan
 
-                                <span
-                                    class="absolute left-1 top-1 h-4 w-4 rounded-full bg-white shadow transition-transform duration-200 peer-checked:translate-x-5">
-                                </span>
+                            <a href="{{ route('admin.blogs.index') }}"
+                                class="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-gray-500 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-gray-600">
 
-                            </span>
+                                <i class="bi bi-x-lg"></i>
 
-                        </label>
+                                Cancel
+
+                            </a>
+
+                        </div>
 
                     </div>
 
-
-                    <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
-
-                        Enable the switch to publish the blog post.
-
-                    </p>
-
-
-                    @error('status')
-                        <p class="mt-1 text-xs text-red-500">
-                            {{ $message }}
-                        </p>
-                    @enderror
-
-                </div>
-
-
-                {{-- Published At --}}
-                <div class="min-w-0">
-
-                    <label for="published_at" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-
-                        Published At
-
-                    </label>
-
-
-                    <input type="datetime-local" name="published_at" id="published_at"
-                        value="{{ old('published_at') }}"
-                        class="mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-
-
-                    <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
-
-                        Leave empty if the post is not ready to be published.
-
-                    </p>
-
-
-                    @error('published_at')
-                        <p class="mt-1 text-xs text-red-500">
-                            {{ $message }}
-                        </p>
-                    @enderror
-
-                </div>
-
-            </div>
-
-
-            {{-- Buttons --}}
-            <div
-                class="flex flex-col-reverse sm:flex-row sm:justify-end gap-2 pt-4 border-t border-gray-200 dark:border-gray-700">
-
-                <a href="{{ route('admin.blogs.index') }}"
-                    class="inline-flex items-center justify-center gap-2 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 text-sm transition">
-
-                    <i class="bi bi-arrow-left"></i>
-
-                    Cancel
-
-                </a>
-
-
-                @can('create_blog')
-                    <button type="submit"
-                        class="inline-flex items-center justify-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 text-sm transition">
-
-                        <i class="bi bi-save-fill"></i>
-
-                        Save Blog Post
-
-                    </button>
-                @endcan
+                </aside>
 
             </div>
 
@@ -477,62 +555,47 @@
 
     </div>
 
-
     @push('styles')
         <style>
-            /* ================================
-                   CKEDITOR
-                ================================= */
-
-            .ck-editor__editable {
-                min-height: 350px;
+            .tox-tinymce {
+                border-radius: 0.75rem !important;
+                border: 1px solid #d1d5db !important;
+                overflow: hidden;
             }
 
-            .ck.ck-editor__main>.ck-editor__editable {
-                background-color: #ffffff;
-                color: #111827;
-                border-color: #d1d5db;
+            .tox .tox-edit-area__iframe {
+                background: #ffffff !important;
             }
 
-            .ck.ck-toolbar {
-                border-color: #d1d5db !important;
-                background: #f9fafb !important;
+            .dark .tox-tinymce {
+                border-color: #374151 !important;
+                background: #1f2937 !important;
             }
 
-            .ck.ck-editor__editable:focus {
-                border-color: #3b82f6 !important;
-                box-shadow: 0 0 0 1px #3b82f6 !important;
-            }
-
-            .dark .ck.ck-editor__main>.ck-editor__editable {
-                background-color: #111827;
-                color: #f3f4f6;
-                border-color: #374151;
-            }
-
-            .dark .ck.ck-toolbar {
+            .dark .tox .tox-toolbar,
+            .dark .tox .tox-toolbar__primary,
+            .dark .tox .tox-toolbar__overflow,
+            .dark .tox .tox-menubar {
                 background: #1f2937 !important;
                 border-color: #374151 !important;
             }
 
-            .dark .ck.ck-button,
-            .dark .ck.ck-toolbar__separator {
-                color: #d1d5db;
+            .dark .tox .tox-tbtn,
+            .dark .tox .tox-mbtn {
+                color: #d1d5db !important;
             }
 
-            .dark .ck.ck-button:hover,
-            .dark .ck.ck-button.ck-on {
+            .dark .tox .tox-tbtn:hover,
+            .dark .tox .tox-tbtn--enabled,
+            .dark .tox .tox-mbtn:hover {
                 background: #374151 !important;
             }
 
-            .dark .ck.ck-editor__editable::placeholder {
-                color: #6b7280;
+            .dark .tox .tox-statusbar {
+                background: #1f2937 !important;
+                border-color: #374151 !important;
+                color: #9ca3af !important;
             }
-
-
-            /* ================================
-                   IMAGE DROP ZONE
-                ================================= */
 
             #imageDropZone {
                 position: relative;
@@ -552,11 +615,6 @@
                 background-color: rgba(59, 130, 246, 0.10);
             }
 
-
-            /* ================================
-                   IMAGE PREVIEW
-                ================================= */
-
             #imagePreviewState {
                 position: relative;
                 width: 100%;
@@ -568,8 +626,8 @@
             .blog-image-preview-card {
                 position: relative;
                 width: 100%;
-                max-width: 420px;
-                height: 220px;
+                max-width: 520px;
+                height: 260px;
                 margin: 0 auto;
                 overflow: hidden;
                 border-radius: 10px;
@@ -584,12 +642,10 @@
                 background: #1f2937;
             }
 
-
-            /* Fixed image area */
             .blog-image-preview-frame {
                 position: relative;
                 width: 100%;
-                height: 220px;
+                height: 260px;
                 overflow: hidden;
                 background: #f3f4f6;
             }
@@ -598,14 +654,12 @@
                 background: #111827;
             }
 
-
-            /* Image can NEVER change the card size */
             #imagePreview.blog-image-preview {
                 display: block !important;
                 width: 100% !important;
-                height: 220px !important;
+                height: 260px !important;
                 max-width: 100% !important;
-                max-height: 220px !important;
+                max-height: 260px !important;
                 min-width: 0 !important;
                 min-height: 0 !important;
                 object-fit: cover !important;
@@ -616,33 +670,24 @@
                 box-sizing: border-box !important;
             }
 
-
-            /* Preview footer */
             .blog-image-preview-footer {
                 position: absolute;
                 left: 0;
                 right: 0;
                 bottom: 0;
                 z-index: 5;
-
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-
                 width: 100%;
                 min-height: 44px;
-
                 padding: 8px 10px;
-
                 color: #ffffff;
                 background: rgba(0, 0, 0, 0.65);
                 backdrop-filter: blur(5px);
-
                 box-sizing: border-box;
             }
 
-
-            /* File name */
             #imageFileName {
                 max-width: calc(100% - 45px);
                 overflow: hidden;
@@ -650,79 +695,105 @@
                 white-space: nowrap;
             }
 
+            .status-checkbox {
+                position: absolute;
+                opacity: 0;
+                width: 0;
+                height: 0;
+                pointer-events: none;
+            }
 
-            /* ================================
-                   RESPONSIVE IMAGE
-                ================================= */
+            .status-checkmark {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 24px;
+                height: 24px;
+                border: 2px solid #d1d5db;
+                border-radius: 6px;
+                background: #ffffff;
+                color: transparent;
+                transition: all 0.2s ease;
+                box-sizing: border-box;
+            }
+
+            .status-checkmark i {
+                font-size: 15px;
+                font-weight: 700;
+                line-height: 1;
+            }
+
+            .status-checkbox:checked+.status-checkmark {
+                border-color: #22c55e;
+                background-color: #22c55e;
+                color: #ffffff;
+            }
+
+            .status-checkbox:focus-visible+.status-checkmark {
+                outline: 2px solid #3b82f6;
+                outline-offset: 2px;
+            }
+
+            .status-checkmark:hover {
+                border-color: #9ca3af;
+            }
+
+            .status-checkbox:checked+.status-checkmark:hover {
+                border-color: #16a34a;
+                background-color: #16a34a;
+            }
+
+            .dark .status-checkmark {
+                border-color: #4b5563;
+                background-color: #111827;
+            }
+
+            .dark .status-checkbox:checked+.status-checkmark {
+                border-color: #22c55e;
+                background-color: #22c55e;
+            }
+
+            .dark .status-checkmark:hover {
+                border-color: #6b7280;
+            }
 
             @media (max-width: 640px) {
 
                 .blog-image-preview-card {
                     max-width: 100%;
-                    height: 200px;
+                    height: 220px;
                 }
 
                 .blog-image-preview-frame {
-                    height: 200px;
+                    height: 220px;
                 }
 
                 #imagePreview.blog-image-preview {
-                    height: 200px !important;
-                    max-height: 200px !important;
+                    height: 220px !important;
+                    max-height: 220px !important;
                 }
 
-            }
-
-
-            /* ================================
-                   STATUS SWITCH
-                ================================= */
-
-            #status {
-                position: absolute;
-                opacity: 0;
-                pointer-events: none;
-            }
-
-            #status+span {
-                display: block;
-                flex-shrink: 0;
-            }
-
-            #status:focus-visible+span {
-                outline: 2px solid #3b82f6;
-                outline-offset: 2px;
             }
         </style>
     @endpush
 
-
     @push('scripts')
-        <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
-
+        <script src="https://cdn.tiny.cloud/1/rdhnj0pg5h59hi9hy2qu2sxmpz8hbffnd6iruw3xmw620qzf/tinymce/7/tinymce.min.js"
+            referrerpolicy="origin"></script>
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-
-
-                /* ==========================================
-                   SLUG GENERATOR
-                ========================================== */
 
                 const titleInput = document.getElementById('title');
                 const slugInput = document.getElementById('slug');
 
                 if (titleInput && slugInput) {
 
-                    let slugManuallyChanged = slugInput.value.trim() !== '';
-
-                    slugInput.addEventListener('input', function() {
-                        slugManuallyChanged = true;
-                    });
+                    let slugManuallyEdited = slugInput.value.trim() !== '';
 
                     titleInput.addEventListener('input', function() {
 
-                        if (slugManuallyChanged) {
+                        if (slugManuallyEdited) {
                             return;
                         }
 
@@ -735,97 +806,154 @@
 
                     });
 
+                    slugInput.addEventListener('input', function() {
+                        slugManuallyEdited = this.value.trim() !== '';
+                    });
+
                 }
 
+                if (typeof tinymce !== 'undefined') {
 
-                /* ==========================================
-                   CKEDITOR
-                ========================================== */
+                    tinymce.init({
 
-                const contentElement = document.getElementById('content');
+                        selector: '#content',
 
-                if (contentElement) {
+                        height: 520,
 
-                    ClassicEditor
-                        .create(contentElement, {
+                        menubar: 'file edit view insert format tools table help',
 
-                            toolbar: {
-                                items: [
-                                    'heading',
-                                    '|',
-                                    'bold',
-                                    'italic',
-                                    'underline',
-                                    'strikethrough',
-                                    '|',
-                                    'link',
-                                    'bulletedList',
-                                    'numberedList',
-                                    '|',
-                                    'blockQuote',
-                                    'insertTable',
-                                    '|',
-                                    'undo',
-                                    'redo'
-                                ]
-                            },
+                        plugins: [
+                            'advlist',
+                            'autolink',
+                            'lists',
+                            'link',
+                            'image',
+                            'charmap',
+                            'preview',
+                            'anchor',
+                            'searchreplace',
+                            'visualblocks',
+                            'code',
+                            'fullscreen',
+                            'insertdatetime',
+                            'media',
+                            'table',
+                            'wordcount'
+                        ],
 
-                            heading: {
-                                options: [{
-                                        model: 'paragraph',
-                                        title: 'Paragraph',
-                                        class: 'ck-heading_paragraph'
-                                    },
-                                    {
-                                        model: 'heading1',
-                                        view: 'h1',
-                                        title: 'Heading 1',
-                                        class: 'ck-heading_heading1'
-                                    },
-                                    {
-                                        model: 'heading2',
-                                        view: 'h2',
-                                        title: 'Heading 2',
-                                        class: 'ck-heading_heading2'
-                                    },
-                                    {
-                                        model: 'heading3',
-                                        view: 'h3',
-                                        title: 'Heading 3',
-                                        class: 'ck-heading_heading3'
-                                    }
-                                ]
-                            },
+                        toolbar: [
+                            'undo redo | blocks | bold italic underline strikethrough',
+                            'alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
+                            'link image media table | blockquote | removeformat code fullscreen'
+                        ],
 
-                            table: {
-                                contentToolbar: [
-                                    'tableColumn',
-                                    'tableRow',
-                                    'mergeTableCells'
-                                ]
-                            },
+                        branding: false,
 
-                            link: {
-                                addTargetToExternalLinks: true,
-                                defaultProtocol: 'https://'
+                        promotion: false,
+
+                        resize: true,
+
+                        statusbar: true,
+
+                        link_target_list: false,
+
+                        default_link_target: '_blank',
+
+                        content_style: `
+                        body {
+                            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+                            font-size: 16px;
+                            line-height: 1.8;
+                            color: #374151;
+                            padding: 18px;
+                        }
+
+                        h1, h2, h3, h4, h5, h6 {
+                            color: #111827;
+                            line-height: 1.3;
+                        }
+
+                        img {
+                            max-width: 100%;
+                            height: auto;
+                            border-radius: 10px;
+                        }
+
+                        blockquote {
+                            border-left: 4px solid #3b82f6;
+                            padding-left: 16px;
+                            margin-left: 0;
+                            color: #4b5563;
+                        }
+
+                        table {
+                            width: 100%;
+                            border-collapse: collapse;
+                        }
+
+                        table td,
+                        table th {
+                            border: 1px solid #d1d5db;
+                            padding: 8px;
+                        }
+                    `
+
+                    }).then(function(editors) {
+
+                        const editor = editors[0];
+
+                        if (!editor) {
+                            return;
+                        }
+
+                        const applyDarkMode = function() {
+
+                            const isDark =
+                                document.documentElement.classList.contains('dark');
+
+                            const body = editor.getBody();
+
+                            if (!body) {
+                                return;
                             }
 
-                        })
-                        .catch(error => {
+                            if (isDark) {
 
-                            console.error(
-                                'CKEditor initialization failed:',
-                                error
-                            );
+                                body.style.backgroundColor = '#111827';
+                                body.style.color = '#f3f4f6';
 
+                            } else {
+
+                                body.style.backgroundColor = '#ffffff';
+                                body.style.color = '#374151';
+
+                            }
+
+                        };
+
+                        applyDarkMode();
+
+                        const observer = new MutationObserver(function() {
+                            applyDarkMode();
                         });
 
+                        observer.observe(
+                            document.documentElement, {
+                                attributes: true,
+                                attributeFilter: ['class']
+                            }
+                        );
+
+                    }).catch(function(error) {
+
+                        console.error(
+                            'TinyMCE initialization failed:',
+                            error
+                        );
+
+                    });
+
                 }
-
-
-                /* ==========================================
-                   FEATURED IMAGE
-                ========================================== */
 
                 const dropZone = document.getElementById('imageDropZone');
                 const imageInput = document.getElementById('featured_image');
@@ -844,7 +972,6 @@
                     'image/webp'
                 ];
 
-
                 function showImageError(message) {
 
                     if (!imageError) {
@@ -855,7 +982,6 @@
                     imageError.classList.remove('hidden');
 
                 }
-
 
                 function clearImageError() {
 
@@ -868,7 +994,6 @@
 
                 }
 
-
                 function showPreview(file) {
 
                     clearImageError();
@@ -876,7 +1001,6 @@
                     if (!file) {
                         return;
                     }
-
 
                     if (!allowedTypes.includes(file.type)) {
 
@@ -889,7 +1013,6 @@
                         return;
                     }
 
-
                     if (file.size > maxFileSize) {
 
                         showImageError(
@@ -901,9 +1024,7 @@
                         return;
                     }
 
-
                     const reader = new FileReader();
-
 
                     reader.onload = function(event) {
 
@@ -917,16 +1038,11 @@
 
                     };
 
-
                     reader.readAsDataURL(file);
 
                 }
 
-
                 if (dropZone && imageInput) {
-
-
-                    /* Click to browse */
 
                     dropZone.addEventListener('click', function(event) {
 
@@ -938,9 +1054,6 @@
 
                     });
 
-
-                    /* File selection */
-
                     imageInput.addEventListener('change', function() {
 
                         const file = this.files[0];
@@ -951,9 +1064,6 @@
 
                     });
 
-
-                    /* Drag enter */
-
                     dropZone.addEventListener('dragenter', function(event) {
 
                         event.preventDefault();
@@ -961,9 +1071,6 @@
                         dropZone.classList.add('drag-over');
 
                     });
-
-
-                    /* Drag over */
 
                     dropZone.addEventListener('dragover', function(event) {
 
@@ -973,23 +1080,15 @@
 
                     });
 
-
-                    /* Drag leave */
-
                     dropZone.addEventListener('dragleave', function(event) {
 
                         event.preventDefault();
 
                         if (!dropZone.contains(event.relatedTarget)) {
-
                             dropZone.classList.remove('drag-over');
-
                         }
 
                     });
-
-
-                    /* Drop */
 
                     dropZone.addEventListener('drop', function(event) {
 
@@ -1017,16 +1116,12 @@
 
                 }
 
-
-                /* ==========================================
-                   REMOVE IMAGE
-                ========================================== */
-
                 if (removeImage) {
 
                     removeImage.addEventListener('click', function(event) {
 
                         event.preventDefault();
+
                         event.stopPropagation();
 
                         imageInput.value = '';
@@ -1045,17 +1140,12 @@
 
                 }
 
-
-                /* ==========================================
-                   PUBLICATION STATUS
-                ========================================== */
-
                 const statusInput = document.getElementById('status');
                 const publishedAtInput = document.getElementById('published_at');
                 const statusText = document.getElementById('statusText');
                 const statusDescription = document.getElementById('statusDescription');
                 const statusIcon = document.getElementById('statusIcon');
-
+                const statusIconWrapper = document.getElementById('statusIconWrapper');
 
                 function getCurrentDateTime() {
 
@@ -1083,24 +1173,24 @@
 
                 }
 
-
                 function updateStatusUI() {
 
                     if (!statusInput) {
                         return;
                     }
 
-
                     if (statusInput.checked) {
 
-                        statusText.textContent = 'Published';
+                        statusText.textContent = 'Active';
 
                         statusDescription.textContent =
-                            'This post will be published and visible to visitors.';
+                            'This post is active and visible to visitors.';
 
                         statusIcon.className =
-                            'bi bi-check-circle-fill text-blue-500';
+                            'bi bi-check-circle-fill';
 
+                        statusIconWrapper.className =
+                            'flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400';
 
                         if (
                             publishedAtInput &&
@@ -1114,18 +1204,20 @@
 
                     } else {
 
-                        statusText.textContent = 'Draft';
+                        statusText.textContent = 'Inactive';
 
                         statusDescription.textContent =
-                            'This post will remain unpublished.';
+                            'This post is inactive and will remain unpublished.';
 
                         statusIcon.className =
                             'bi bi-file-earmark-text';
 
+                        statusIconWrapper.className =
+                            'flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-gray-200 text-gray-600 dark:bg-gray-800 dark:text-gray-400';
+
                     }
 
                 }
-
 
                 if (statusInput) {
 
