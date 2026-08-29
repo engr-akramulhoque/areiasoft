@@ -1,0 +1,44 @@
+# Areia Soft — Complete AI Reference
+
+## About Areia Soft
+
+Areia Soft is a software development company focused on building custom digital solutions for businesses, startups and organizations.
+
+## Website Development
+
+URL:
+https://www.areiasoft.com/service/website-development
+
+Primary topic:
+Website development
+
+Related topics:
+- Custom website development
+- Business website development
+- Responsive website development
+- SEO-friendly websites
+- Website performance
+- Website security
+
+Description:
+Areia Soft develops fast, secure, responsive and SEO-friendly websites designed around business goals and customer needs.
+
+## Custom Software Development
+
+URL:
+https://www.areiasoft.com/service/custom-software-development
+
+Primary topic:
+Custom software development
+
+Related topics:
+- Business software
+- Enterprise software
+- Workflow automation
+- Custom applications
+- Software integrations
+
+Description:
+Areia Soft develops custom software designed around business workflows, operational requirements and long-term scalability.
+
+...

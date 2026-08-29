@@ -1,0 +1,43 @@
+# Areia Soft
+
+> Areia Soft is a software development company providing custom software, website development, web application development, mobile application development, ERP and CRM solutions, eCommerce development, UI/UX design, AI automation, cloud and DevOps, API integration, software maintenance, and digital transformation services.
+
+## Company
+
+- Name: Areia Soft
+- Website: https://www.areiasoft.com
+- Type: Software Development Company
+- Service Area: Worldwide
+- Primary Focus: Custom Software Development and Digital Solutions
+
+## Services
+
+- [Website Development](https://www.areiasoft.com/service/website-development): Custom, responsive and SEO-friendly website development for businesses and organizations.
+- [Custom Software Development](https://www.areiasoft.com/service/custom-software-development): Scalable software solutions designed around business processes and workflows.
+- [Web Application Development](https://www.areiasoft.com/service/web-application-development): Secure and scalable web applications, SaaS platforms, portals and dashboards.
+- [Mobile App Development](https://www.areiasoft.com/service/mobile-app-development): Android and iOS mobile application development.
+- [ERP & CRM Solutions](https://www.areiasoft.com/service/erp-crm-solutions): Custom ERP and CRM software for business operations, customers, sales and reporting.
+- [eCommerce Development](https://www.areiasoft.com/service/ecommerce-development): Custom online stores and eCommerce platforms with product, payment, inventory and order management.
+- [UI/UX Design](https://www.areiasoft.com/service/ui-ux-design): User-centered design for websites, mobile applications and SaaS products.
+- [AI & Automation Solutions](https://www.areiasoft.com/service/ai-automation-solutions): AI software, intelligent automation, chatbots and AI integrations.
+- [Cloud & DevOps Solutions](https://www.areiasoft.com/service/cloud-devops-solutions): Cloud infrastructure, AWS, Docker, CI/CD, deployment and monitoring.
+- [API Development & Integration](https://www.areiasoft.com/service/api-development-integration): REST API development and third-party system integrations.
+- [Software Maintenance & Support](https://www.areiasoft.com/service/software-maintenance-support): Software maintenance, bug fixing, security updates, optimization and technical support.
+- [Digital Transformation](https://www.areiasoft.com/service/digital-transformation): Business modernization, workflow automation, cloud adoption and system integration.
+
+## Important Pages
+
+- [Home](https://www.areiasoft.com/)
+- [Services](https://www.areiasoft.com/services)
+- [About](https://www.areiasoft.com/about)
+- [Our Works](https://www.areiasoft.com/works)
+- [Case Studies](https://www.areiasoft.com/case-studies)
+- [Contact](https://www.areiasoft.com/contact)
+
+## Contact
+
+- Website: https://www.areiasoft.com/contact
+
+## Sitemap
+
+- https://www.areiasoft.com/sitemap.xml

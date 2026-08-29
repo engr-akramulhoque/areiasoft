@@ -80,7 +80,7 @@ return [
     'menu' => [
         'global' => true,  // Show global items
         'pages'  => true,  // Enable custom pages section
-        'model'  => false, // Hide model management by default
+        'model'  => true, // Hide model management by default
     ],
 
 ];
