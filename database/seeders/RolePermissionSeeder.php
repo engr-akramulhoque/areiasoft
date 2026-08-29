@@ -53,6 +53,13 @@ class RolePermissionSeeder extends Seeder
                 'delete_blog',
             ],
 
+            'blog_comments' => [
+                'view_blog_comments',
+                'approve_blog_comment',
+                'reject_blog_comment',
+                'delete_blog_comment',
+            ],
+
             'others' => [
                 'view seo-manager',
             ],

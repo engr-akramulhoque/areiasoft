@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\BlogCategoryController;
 use App\Http\Controllers\Admin\BlogPostController;
+use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ManageContactController;
 use App\Http\Controllers\Admin\RoleController;
@@ -61,6 +62,26 @@ Route::middleware([
         ])
         ->names('admin.blog.categories');
     Route::patch('blog/categories/{blogCategory}/toggle-status', [BlogCategoryController::class, 'toggleStatus'])->name('admin.blog.categories.toggle-status');
+
+    Route::prefix('blog-comments')
+        ->name('admin.blog-comments.')
+        ->group(function () {
+
+            Route::get('/', [CommentController::class, 'index'])
+                ->name('index');
+
+            Route::get('/{comment}', [CommentController::class, 'show'])
+                ->name('show');
+
+            Route::patch('/{comment}/approve', [CommentController::class, 'approve'])
+                ->name('approve');
+
+            Route::patch('/{comment}/reject', [CommentController::class, 'reject'])
+                ->name('reject');
+
+            Route::delete('/{comment}', [CommentController::class, 'destroy'])
+                ->name('destroy');
+        });
 
     Route::post('/contacts/{contact}/toggle-star', [ManageContactController::class, 'toggleStar'])->name('admin.contacts.toggleStar');
     Route::post('/contacts/{contact}/archive', [ManageContactController::class, 'archive'])->name('admin.contacts.archive');
