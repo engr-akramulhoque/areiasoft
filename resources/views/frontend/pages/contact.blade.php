@@ -218,35 +218,49 @@
             <form id="contactForm" action="{{ route('contact.store') }}" method="POST">
                 @csrf
 
+                <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;">
+                    <label for="website">Website</label>
+                    <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                </div>
+
                 <div class="form-group">
                     <label for="name">Full Name</label>
-                    <input type="text" id="name" name="name" placeholder="Alex Johnson" required>
+                    <input type="text" id="name" name="name" placeholder="Alex Johnson" autocomplete="name"
+                        value="{{ old('name') }}" required>
                     @error('name')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
+
                 <div class="form-group">
                     <label for="email">Work Email</label>
-                    <input type="email" id="email" name="email" placeholder="alex@company.com" required>
+                    <input type="email" id="email" name="email" placeholder="alex@company.com"
+                        autocomplete="email" value="{{ old('email') }}" required>
                     @error('email')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
+
                 <div class="form-group">
                     <label for="subject">Subject</label>
-                    <input type="text" id="subject" name="subject" placeholder="Project Discussion">
+                    <input type="text" id="subject" name="subject" placeholder="Project Discussion"
+                        autocomplete="off" value="{{ old('subject') }}" required>
                     @error('subject')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
+
                 <div class="form-group">
                     <label for="message">Message</label>
-                    <textarea id="message" name="message" placeholder="Tell us about your project, timeline, and goals..." required></textarea>
+                    <textarea id="message" name="message" placeholder="Tell us about your project, timeline, and goals..." required>{{ old('message') }}</textarea>
                     @error('message')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                <button type="submit" class="btn-submit">Send Message</button>
+
+                <button type="submit" class="btn-submit">
+                    Send Message
+                </button>
             </form>
         </div>
 

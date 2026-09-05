@@ -1,9 +1,8 @@
 @php
-    $pageTitle = $post->meta_title ?: $post->title . ' | Areia Soft';
     $commentCount = $post->approvedComments->count();
 @endphp
 
-<x-guest-layout :title="$pageTitle">
+<x-guest-layout :post="$post">
 
     @push('styles')
         <style>

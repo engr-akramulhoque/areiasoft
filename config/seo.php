@@ -16,7 +16,7 @@ return [
         'middleware' => ['auth', 'web'], // auth protects the panel
 
         'dashboard_label' => 'Back to Dashboard',
-        'dashboard_url'   => '/dashboard',
+        'dashboard_url'   => '/admin/dashboard',
     ],
 
     /*

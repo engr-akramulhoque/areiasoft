@@ -65,7 +65,7 @@
 
             .project-image {
                 width: 100%;
-                height: 500px;
+                height: auto;
                 border-radius: var(--radius-md);
                 background: linear-gradient(135deg, #0F1722, #1A2332);
                 display: flex;
@@ -87,7 +87,6 @@
             @media (max-width: 768px) {
                 .project-image {
                     height: auto;
-                    aspect-ratio: 1200 / 568;
                 }
 
                 .project-image img {
