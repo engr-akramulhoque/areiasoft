@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\SeoLandingPage;
 use Illuminate\View\View;
 
 class LandingPageController extends Controller
@@ -12,13 +13,7 @@ class LandingPageController extends Controller
      */
     public function show(string $slug): View
     {
-        $pages = config('landing-pages.pages');
-
-        if (!isset($pages[$slug])) {
-            abort(404);
-        }
-
-        $page = $pages[$slug];
+        $page = SeoLandingPage::query()->active()->where('slug', $slug)->firstOrFail();
 
         return view('frontend.landing-pages.show', [
             'page' => $page,

@@ -208,11 +208,9 @@
             border: 1px solid var(--lp-border);
             border-radius: 28px;
             background:
-                linear-gradient(
-                    145deg,
+                linear-gradient(145deg,
                     rgba(255, 255, 255, 0.075),
-                    rgba(255, 255, 255, 0.025)
-                );
+                    rgba(255, 255, 255, 0.025));
             box-shadow:
                 0 35px 90px rgba(0, 0, 0, 0.24),
                 inset 0 1px 0 rgba(255, 255, 255, 0.06);
@@ -399,7 +397,7 @@
             letter-spacing: -0.025em;
         }
 
-        .landing-card > p {
+        .landing-card>p {
             position: relative;
             z-index: 1;
             margin: 18px 0 0;
@@ -818,11 +816,9 @@
             border: 1px solid var(--lp-border);
             border-radius: 27px;
             background:
-                radial-gradient(
-                    circle at 50% -20%,
+                radial-gradient(circle at 50% -20%,
                     rgba(255, 255, 255, 0.08),
-                    transparent 42%
-                ),
+                    transparent 42%),
                 var(--lp-surface);
             text-align: center;
         }
@@ -1102,7 +1098,7 @@
                 font-size: 23px;
             }
 
-            .landing-card > p {
+            .landing-card>p {
                 font-size: 14px;
             }
 
@@ -1256,10 +1252,9 @@
 
     <main class="landing-page">
 
-
         {{-- =====================================================
-             HERO
-        ====================================================== --}}
+         HERO
+    ====================================================== --}}
 
         <section class="landing-hero">
 
@@ -1267,42 +1262,41 @@
 
                 <div class="landing-hero-grid">
 
-
                     {{-- HERO CONTENT --}}
 
                     <div class="landing-hero-content">
 
-                        <div class="landing-eyebrow">
-                            {{ $page['eyebrow'] }}
-                        </div>
+                        @if ($page->eyebrow)
+                            <div class="landing-eyebrow">
+                                {{ $page->eyebrow }}
+                            </div>
+                        @endif
 
                         <h1>
-                            {{ $page['hero_title'] }}
+                            {{ $page->hero_title }}
                         </h1>
 
-                        <p class="landing-hero-description">
-                            {{ $page['hero_description'] }}
-                        </p>
+                        @if ($page->hero_description)
+                            <p class="landing-hero-description">
+                                {{ $page->hero_description }}
+                            </p>
+                        @endif
 
                         <div class="landing-actions">
 
-                            <a href="{{ $page['primary_cta_url'] === 'contact'
-                                ? route('contact.index')
-                                : url($page['primary_cta_url']) }}"
-                                class="btn-primary">
+                            @if ($page->primary_cta)
+                                <a href="{{ $page->primary_cta_url === 'contact' ? route('contact.index') : url($page->primary_cta_url ?? '#') }}"
+                                    class="btn-primary">
+                                    {{ $page->primary_cta }}
+                                </a>
+                            @endif
 
-                                {{ $page['primary_cta'] }}
-
-                            </a>
-
-                            <a href="{{ $page['secondary_cta_url'] === 'services'
-                                ? route('service.index')
-                                : url($page['secondary_cta_url']) }}"
-                                class="btn-secondary">
-
-                                {{ $page['secondary_cta'] }}
-
-                            </a>
+                            @if ($page->secondary_cta)
+                                <a href="{{ $page->secondary_cta_url === 'services' ? route('service.index') : url($page->secondary_cta_url ?? '#') }}"
+                                    class="btn-secondary">
+                                    {{ $page->secondary_cta }}
+                                </a>
+                            @endif
 
                         </div>
 
@@ -1311,27 +1305,21 @@
 
                     {{-- HERO IMAGE --}}
 
-                    @if (!empty($page['hero_image']))
-
+                    @if ($page->hero_image)
                         <div class="landing-hero-visual">
 
                             <div class="landing-hero-image">
 
-                                <img
-                                    src="{{ asset($page['hero_image']) }}"
-                                    alt="{{ $page['title'] }} - Areia Soft"
-                                    loading="eager"
-                                    fetchpriority="high"
-                                >
+                                <img src="{{ asset($page->hero_image) }}" alt="{{ $page->title }} - Areia Soft"
+                                    loading="eager" fetchpriority="high">
 
                                 <div class="landing-visual-label">
-                                    {{ $page['title'] }}
+                                    {{ $page->title }}
                                 </div>
 
                             </div>
 
                         </div>
-
                     @endif
 
                 </div>
@@ -1342,10 +1330,10 @@
 
 
         {{-- =====================================================
-             TRUST STRIP
-        ====================================================== --}}
+         TRUST STRIP
+    ====================================================== --}}
 
-        @if (!empty($page['trust_points']))
+        @if (!empty($page->trust_points))
 
             <section class="landing-trust">
 
@@ -1353,12 +1341,10 @@
 
                     <div class="landing-trust-grid">
 
-                        @foreach ($page['trust_points'] as $point)
-
+                        @foreach ($page->trust_points as $point)
                             <div class="landing-trust-item">
                                 {{ $point }}
                             </div>
-
                         @endforeach
 
                     </div>
@@ -1371,97 +1357,108 @@
 
 
         {{-- =====================================================
-             PROBLEM / SOLUTION
-        ====================================================== --}}
+         PROBLEM / SOLUTION
+    ====================================================== --}}
 
-        <section class="landing-section">
+        @if ($page->problem || $page->solution)
 
-            <div class="container">
+            <section class="landing-section">
 
-                <div class="landing-split">
+                <div class="container">
 
+                    <div class="landing-split">
 
-                    {{-- PROBLEM --}}
+                        {{-- PROBLEM --}}
 
-                    <article class="landing-card">
+                        @if ($page->problem)
 
-                        <div class="landing-section-label">
-                            The challenge
-                        </div>
+                            <article class="landing-card">
 
-                        <h3>
-                            {{ $page['problem']['title'] }}
-                        </h3>
+                                <div class="landing-section-label">
+                                    The challenge
+                                </div>
 
-                        <p>
-                            {{ $page['problem']['text'] }}
-                        </p>
+                                <h3>
+                                    {{ $page->problem['title'] ?? '' }}
+                                </h3>
 
-                        @if (!empty($page['problem']['points']))
+                                @if (!empty($page->problem['text']))
+                                    <p>
+                                        {{ $page->problem['text'] }}
+                                    </p>
+                                @endif
 
-                            <ul class="landing-check-list">
+                                @if (!empty($page->problem['points']))
 
-                                @foreach ($page['problem']['points'] as $point)
+                                    <ul class="landing-check-list">
 
-                                    <li>
-                                        {{ $point }}
-                                    </li>
+                                        @foreach ($page->problem['points'] as $point)
+                                            <li>
+                                                {{ $point }}
+                                            </li>
+                                        @endforeach
 
-                                @endforeach
+                                    </ul>
 
-                            </ul>
+                                @endif
 
-                        @endif
-
-                    </article>
-
-
-                    {{-- SOLUTION --}}
-
-                    <article class="landing-card">
-
-                        <div class="landing-section-label">
-                            Our approach
-                        </div>
-
-                        <h3>
-                            {{ $page['solution']['title'] }}
-                        </h3>
-
-                        <p>
-                            {{ $page['solution']['text'] }}
-                        </p>
-
-                        @if (!empty($page['solution']['points']))
-
-                            <ul class="landing-check-list">
-
-                                @foreach ($page['solution']['points'] as $point)
-
-                                    <li>
-                                        {{ $point }}
-                                    </li>
-
-                                @endforeach
-
-                            </ul>
+                            </article>
 
                         @endif
 
-                    </article>
+
+                        {{-- SOLUTION --}}
+
+                        @if ($page->solution)
+
+                            <article class="landing-card">
+
+                                <div class="landing-section-label">
+                                    Our approach
+                                </div>
+
+                                <h3>
+                                    {{ $page->solution['title'] ?? '' }}
+                                </h3>
+
+                                @if (!empty($page->solution['text']))
+                                    <p>
+                                        {{ $page->solution['text'] }}
+                                    </p>
+                                @endif
+
+                                @if (!empty($page->solution['points']))
+
+                                    <ul class="landing-check-list">
+
+                                        @foreach ($page->solution['points'] as $point)
+                                            <li>
+                                                {{ $point }}
+                                            </li>
+                                        @endforeach
+
+                                    </ul>
+
+                                @endif
+
+                            </article>
+
+                        @endif
+
+                    </div>
 
                 </div>
 
-            </div>
+            </section>
 
-        </section>
+        @endif
 
 
         {{-- =====================================================
-             CAPABILITIES
-        ====================================================== --}}
+         CAPABILITIES
+    ====================================================== --}}
 
-        @if (!empty($page['capabilities']))
+        @if (!empty($page->capabilities))
 
             <section class="landing-section">
 
@@ -1474,7 +1471,7 @@
                         </div>
 
                         <h2>
-                            {{ $page['title'] }} capabilities for real business needs.
+                            {{ $page->title }} capabilities for real business needs.
                         </h2>
 
                         <p>
@@ -1487,8 +1484,7 @@
 
                     <div class="landing-capabilities">
 
-                        @foreach ($page['capabilities'] as $capability)
-
+                        @foreach ($page->capabilities as $capability)
                             <article class="landing-capability">
 
                                 <div class="landing-capability-icon">
@@ -1496,15 +1492,14 @@
                                 </div>
 
                                 <h3>
-                                    {{ $capability['title'] }}
+                                    {{ $capability['title'] ?? '' }}
                                 </h3>
 
                                 <p>
-                                    {{ $capability['text'] }}
+                                    {{ $capability['text'] ?? '' }}
                                 </p>
 
                             </article>
-
                         @endforeach
 
                     </div>
@@ -1517,10 +1512,10 @@
 
 
         {{-- =====================================================
-             PROCESS
-        ====================================================== --}}
+         PROCESS
+    ====================================================== --}}
 
-        @if (!empty($page['process']))
+        @if (!empty($page->process))
 
             <section class="landing-section">
 
@@ -1546,24 +1541,22 @@
 
                     <div class="landing-process">
 
-                        @foreach ($page['process'] as $step)
-
+                        @foreach ($page->process as $step)
                             <article class="landing-process-item">
 
                                 <div class="landing-process-number">
-                                    {{ $step['number'] }}
+                                    {{ $step['number'] ?? '' }}
                                 </div>
 
                                 <h3>
-                                    {{ $step['title'] }}
+                                    {{ $step['title'] ?? '' }}
                                 </h3>
 
                                 <p>
-                                    {{ $step['text'] }}
+                                    {{ $step['text'] ?? '' }}
                                 </p>
 
                             </article>
-
                         @endforeach
 
                     </div>
@@ -1576,10 +1569,10 @@
 
 
         {{-- =====================================================
-             TECHNOLOGIES
-        ====================================================== --}}
+         TECHNOLOGIES
+    ====================================================== --}}
 
-        @if (!empty($page['technologies']))
+        @if (!empty($page->technologies))
 
             <section class="landing-section">
 
@@ -1607,12 +1600,10 @@
 
                         <ul class="landing-tech-list">
 
-                            @foreach ($page['technologies'] as $technology)
-
+                            @foreach ($page->technologies as $technology)
                                 <li>
                                     {{ $technology }}
                                 </li>
-
                             @endforeach
 
                         </ul>
@@ -1627,10 +1618,10 @@
 
 
         {{-- =====================================================
-             BENEFITS
-        ====================================================== --}}
+         BENEFITS
+    ====================================================== --}}
 
-        @if (!empty($page['benefits']))
+        @if (!empty($page->benefits))
 
             <section class="landing-section">
 
@@ -1651,12 +1642,10 @@
 
                     <div class="landing-benefits-grid">
 
-                        @foreach ($page['benefits'] as $benefit)
-
+                        @foreach ($page->benefits as $benefit)
                             <div class="landing-benefit">
                                 {{ $benefit }}
                             </div>
-
                         @endforeach
 
                     </div>
@@ -1669,79 +1658,78 @@
 
 
         {{-- =====================================================
-             RELATED LANDING PAGES
-        ====================================================== --}}
+         RELATED LANDING PAGES
+    ====================================================== --}}
 
-        @if (!empty($page['related_pages']))
+        @if (!empty($page->related_pages))
 
-            <section class="landing-section">
+            @php
+                $relatedPages = \App\Models\SeoLandingPage::query()
+                    ->active()
+                    ->whereIn('slug', $page->related_pages)
+                    ->orderBy('sort_order')
+                    ->get();
+            @endphp
 
-                <div class="container">
+            @if ($relatedPages->isNotEmpty())
 
-                    <div class="landing-section-header">
+                <section class="landing-section">
 
-                        <div class="landing-section-label">
-                            Explore further
+                    <div class="container">
+
+                        <div class="landing-section-header">
+
+                            <div class="landing-section-label">
+                                Explore further
+                            </div>
+
+                            <h2>
+                                Related solutions from Areia Soft.
+                            </h2>
+
+                            <p>
+                                Explore other areas that may complement your project.
+                            </p>
+
                         </div>
 
-                        <h2>
-                            Related solutions from Areia Soft.
-                        </h2>
 
-                        <p>
-                            Explore other areas that may complement your project.
-                        </p>
+                        <div class="landing-related-grid">
 
-                    </div>
-
-
-                    <div class="landing-related-grid">
-
-                        @foreach ($page['related_pages'] as $relatedSlug)
-
-                            @php
-                                $relatedPage = config('landing-pages.pages.' . $relatedSlug);
-                            @endphp
-
-                            @if ($relatedPage)
-
-                                <a
-                                    href="{{ url('/' . $relatedPage['slug']) }}"
-                                    class="landing-related-card"
-                                >
+                            @foreach ($relatedPages as $relatedPage)
+                                <a href="{{ url('/' . $relatedPage->slug) }}" class="landing-related-card">
 
                                     <span>
                                         Related solution
                                     </span>
 
                                     <h3>
-                                        {{ $relatedPage['title'] }}
+                                        {{ $relatedPage->title }}
                                     </h3>
 
                                     <p>
-                                        {{ $relatedPage['hero_description'] }}
+                                        {{ $relatedPage->hero_description }}
                                     </p>
 
                                 </a>
+                            @endforeach
 
-                            @endif
-
-                        @endforeach
+                        </div>
 
                     </div>
 
-                </div>
+                </section>
 
-            </section>
+            @endif
 
         @endif
 
 
         {{-- =====================================================
-             FAQ
-        ====================================================== --}}
+         FAQ
+    ====================================================== --}}
 
-        @if (!empty($page['faqs']))
+        @if (!empty($page->faqs))
 
             <section class="landing-section">
 
@@ -1754,7 +1742,7 @@
                         </div>
 
                         <h2>
-                            Questions about {{ $page['title'] }}.
+                            Questions about {{ $page->title }}.
                         </h2>
 
                     </div>
@@ -1762,20 +1750,18 @@
 
                     <div class="landing-faq">
 
-                        @foreach ($page['faqs'] as $faq)
-
+                        @foreach ($page->faqs as $faq)
                             <details>
 
                                 <summary>
-                                    {{ $faq['question'] }}
+                                    {{ $faq['question'] ?? '' }}
                                 </summary>
 
                                 <div class="landing-faq-answer">
-                                    {{ $faq['answer'] }}
+                                    {{ $faq['answer'] ?? '' }}
                                 </div>
 
                             </details>
-
                         @endforeach
 
                     </div>
@@ -1788,8 +1774,8 @@
 
 
         {{-- =====================================================
-             FINAL CTA
-        ====================================================== --}}
+         FINAL CTA
+    ====================================================== --}}
 
         <section class="landing-cta">
 
@@ -1799,7 +1785,7 @@
 
                     <h2>
                         Ready to turn your
-                        {{ strtolower($page['title']) }}
+                        {{ strtolower($page->title) }}
                         idea into something useful?
                     </h2>
 
@@ -1810,17 +1796,11 @@
 
                     <div class="landing-actions">
 
-                        <a
-                            href="{{ route('contact.index') }}"
-                            class="btn-primary"
-                        >
-                            {{ $page['primary_cta'] }}
+                        <a href="{{ route('contact.index') }}" class="btn-primary">
+                            {{ $page->primary_cta ?? 'Get Started' }}
                         </a>
 
-                        <a
-                            href="{{ route('service.index') }}"
-                            class="btn-secondary"
-                        >
+                        <a href="{{ route('service.index') }}" class="btn-secondary">
                             View All Services
                         </a>
 

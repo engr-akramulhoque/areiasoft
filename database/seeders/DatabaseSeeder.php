@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $seeders = [
             RolePermissionSeeder::class,
             UserSeeder::class,
+            SeoLandingPageSeeder::class,
         ];
 
         // Extra seeders for non-production environments

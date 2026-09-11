@@ -60,6 +60,13 @@ class RolePermissionSeeder extends Seeder
                 'delete_blog_comment',
             ],
 
+            'landing_pages' => [
+                'view_landing_page',
+                'create_landing_page',
+                'edit_landing_page',
+                'delete_landing_page',
+            ],
+
             'others' => [
                 'view seo-manager',
             ],

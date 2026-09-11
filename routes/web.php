@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ManageContactController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SeoLandingPageController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Frontend\BlogCommentController;
 use App\Http\Controllers\Frontend\BlogController;
@@ -47,8 +48,6 @@ Route::prefix('blog')->name('blog.')->group(function () {
 //     return view('test');
 // });
 
-Route::get('/{slug}', [LandingPageController::class, 'show'])
-    ->name('landing.show');
 
 
 Route::middleware([
@@ -95,6 +94,7 @@ Route::middleware([
     Route::post('/contacts/{contact}/archive', [ManageContactController::class, 'archive'])->name('admin.contacts.archive');
     Route::post('/contacts/bulk-action', [ManageContactController::class, 'bulkAction'])->name('admin.contacts.bulkAction');
     Route::resource('/contacts', ManageContactController::class)->names('admin.contacts');
+    Route::resource('/seo-landing-pages', SeoLandingPageController::class)->names('admin.seo-landing-pages');
 });
 
 Route::controller(ProfileController::class)->prefix('account')->group(function () {
@@ -102,3 +102,6 @@ Route::controller(ProfileController::class)->prefix('account')->group(function (
     Route::get('/two-factor-authentication', 'twoFactorAuthentication')->name('profile.two_factor_authentication');
     Route::get('/settings', 'profileSettings')->name('profile.settings');
 });
+
+Route::get('/{slug}', [LandingPageController::class, 'show'])
+    ->name('landing.show');
