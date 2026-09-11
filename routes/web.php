@@ -11,6 +11,7 @@ use App\Http\Controllers\Frontend\BlogCommentController;
 use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Frontend\LandingPageController;
 use App\Http\Controllers\Frontend\ServiceController;
 use App\Http\Controllers\Frontend\WorkController;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +42,13 @@ Route::prefix('blog')->name('blog.')->group(function () {
     Route::post('/{blogPost}/comments', [BlogCommentController::class, 'store'])->name('comments.store');
     Route::post('/comments/{comment}/reply', [BlogCommentController::class, 'reply'])->name('comments.reply');
 });
+
+// Route::get('/test', function () {
+//     return view('test');
+// });
+
+Route::get('/{slug}', [LandingPageController::class, 'show'])
+    ->name('landing.show');
 
 
 Route::middleware([

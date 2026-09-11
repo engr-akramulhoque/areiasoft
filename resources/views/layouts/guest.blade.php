@@ -32,7 +32,6 @@
     <link rel="stylesheet" href="{{ asset('static/frontend/assets/css/style.css') }}" />
 
     <!-- Styles -->
-    @livewireStyles
     @stack('styles')
 
     <!-- Google tag (gtag.js) -->
@@ -160,7 +159,6 @@
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
     </script>
 
-    @livewireScripts
     @stack('scripts')
 
     <!-- Google Tag Manager (noscript) -->
