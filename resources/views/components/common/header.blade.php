@@ -1,3 +1,20 @@
+@php
+    $companyActive = request()->routeIs(['about.index', 'global-impact', 'ceo-speech']);
+
+    $workActive = request()->routeIs(['work.index', 'case-studies']);
+
+    $solutionPages = \App\Models\SeoLandingPage::active()
+        ->ordered()
+        ->take(10)
+        ->get(['id', 'title', 'slug']);
+
+    $hasMoreSolutions = \App\Models\SeoLandingPage::active()->count() > 10;
+
+    $solutionActive =
+        request()->routeIs('landing.show') &&
+        $solutionPages->contains(fn($page) => $page->slug === request()->route('slug'));
+@endphp
+
 <style>
     .logo-container {
         display: inline-flex;
@@ -28,27 +45,27 @@
         }
     }
 </style>
-@php
-    $companyActive = request()->routeIs(['about.index', 'global-impact', 'ceo-speech']);
-
-    $workActive = request()->routeIs(['work.index', 'case-studies']);
-@endphp
 
 <header class="header" id="header">
+
     <a href="{{ route('home') }}" class="logo-container" title="Areia Soft" aria-label="Areia Soft Home">
+
         <img src="{{ asset('static/logos/logo.webp') }}" alt="Areia Soft" class="web-logo" width="180" height="72">
     </a>
 
     <button type="button" class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-controls="navLinks"
         aria-expanded="false">
+
         <span></span>
         <span></span>
         <span></span>
     </button>
 
     <nav aria-label="Primary Navigation">
+
         <ul class="nav-links" id="navLinks">
 
+            {{-- Home --}}
             <li>
                 <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}"
                     @if (request()->routeIs('home')) aria-current="page" @endif>
@@ -56,6 +73,7 @@
                 </a>
             </li>
 
+            {{-- Services --}}
             <li>
                 <a href="{{ route('service.index') }}" class="{{ request()->routeIs('service.index') ? 'active' : '' }}"
                     @if (request()->routeIs('service.index')) aria-current="page" @endif>
@@ -63,15 +81,53 @@
                 </a>
             </li>
 
-            <!-- Company -->
+            {{-- Solutions --}}
+            <li class="dropdown" id="solutionsDropdown">
+
+                <a href="#" class="dropdown-trigger {{ $solutionActive ? 'active' : '' }}" aria-haspopup="true"
+                    aria-expanded="false">
+
+                    Solutions
+                    <span class="dropdown-arrow">▾</span>
+                </a>
+
+                <ul class="dropdown-menu">
+
+                    @foreach ($solutionPages as $page)
+                        <li>
+                            <a href="{{ route('landing.show', $page->slug) }}"
+                                class="{{ request()->routeIs('landing.show') && request()->route('slug') === $page->slug ? 'active' : '' }}"
+                                @if (request()->routeIs('landing.show') && request()->route('slug') === $page->slug) aria-current="page" @endif>
+
+                                {{ $page->title }}
+
+                            </a>
+                        </li>
+                    @endforeach
+
+                    @if ($hasMoreSolutions)
+                        <li>
+                            <a href="{{ route('service.index') }}">
+                                View All Solutions
+                            </a>
+                        </li>
+                    @endif
+
+                </ul>
+            </li>
+
+            {{-- Company --}}
             <li class="dropdown" id="companyDropdown">
+
                 <a href="#" class="dropdown-trigger {{ $companyActive ? 'active' : '' }}" aria-haspopup="true"
                     aria-expanded="false">
+
                     Company
                     <span class="dropdown-arrow">▾</span>
                 </a>
 
                 <ul class="dropdown-menu">
+
                     <li>
                         <a href="{{ route('about.index') }}"
                             class="{{ request()->routeIs('about.index') ? 'active' : '' }}">
@@ -92,18 +148,22 @@
                             Message from the CEO
                         </a>
                     </li>
+
                 </ul>
             </li>
 
-            <!-- Work -->
+            {{-- Work --}}
             <li class="dropdown" id="workDropdown">
+
                 <a href="#" class="dropdown-trigger {{ $workActive ? 'active' : '' }}" aria-haspopup="true"
                     aria-expanded="false">
+
                     Work
                     <span class="dropdown-arrow">▾</span>
                 </a>
 
                 <ul class="dropdown-menu">
+
                     <li>
                         <a href="{{ route('work.index') }}"
                             class="{{ request()->routeIs('work.index') ? 'active' : '' }}">
@@ -117,9 +177,11 @@
                             Case Studies
                         </a>
                     </li>
+
                 </ul>
             </li>
 
+            {{-- Blog --}}
             <li>
                 <a href="{{ route('blog.index') }}" class="{{ request()->routeIs('blog.*') ? 'active' : '' }}"
                     @if (request()->routeIs('blog.index')) aria-current="page" @endif>
@@ -127,6 +189,7 @@
                 </a>
             </li>
 
+            {{-- Contact --}}
             <li>
                 <a href="{{ route('contact.index') }}"
                     class="nav-cta {{ request()->routeIs('contact.index') ? 'active' : '' }}"
