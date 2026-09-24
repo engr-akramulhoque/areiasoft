@@ -83,8 +83,8 @@
 
         @endif
 
-
-        <form action="{{ route('admin.seo-landing-pages.update', $page) }}" method="POST" class="space-y-6">
+        <form action="{{ route('admin.seo-landing-pages.update', $page) }}" method="POST" class="space-y-6"
+            enctype="multipart/form-data">
 
             @csrf
             @method('PUT')
@@ -283,39 +283,70 @@
 
                             </div>
 
-
                             <div>
-
                                 <label for="hero_image"
                                     class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-
                                     Hero Image
-
                                 </label>
 
-                                <input type="text" name="hero_image" id="hero_image"
-                                    value="{{ old('hero_image', $page->hero_image) }}"
-                                    placeholder="website/assets/images/services/website-development.webp"
-                                    class="mt-1 block w-full rounded-lg border-gray-300 bg-white text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder-gray-500">
+                                <input type="file" name="hero_image" id="hero_image"
+                                    accept="image/jpeg,image/png,image/webp,image/jpg"
+                                    class="mt-1 block w-full rounded-lg border border-gray-300 bg-white text-sm text-gray-900 shadow-sm
+                                        file:mr-4 file:rounded-lg file:border-0 file:bg-blue-50 file:px-4 file:py-2
+                                        file:text-sm file:font-medium file:text-blue-700
+                                        hover:file:bg-blue-100
+                                        focus:border-blue-500 focus:ring-blue-500
+                                        dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100
+                                        dark:file:bg-blue-900/30 dark:file:text-blue-400">
 
+                                {{-- Current Image --}}
                                 @if ($page->hero_image)
-                                    <div
-                                        class="mt-3 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700">
+                                    <div id="currentHeroImage"
+                                        class="mt-4 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700">
 
-                                        <img src="{{ asset($page->hero_image) }}" alt="{{ $page->hero_title }}"
-                                            class="h-48 w-full object-cover">
+                                        <div
+                                            class="border-b border-gray-200 bg-gray-50 px-3 py-2 dark:border-gray-700 dark:bg-gray-900">
+                                            <p class="text-xs font-medium text-gray-600 dark:text-gray-300">
+                                                Current Hero Image
+                                            </p>
+                                        </div>
 
+                                        <img src="{{ asset('storage/' . $page->hero_image) }}"
+                                            alt="{{ $page->hero_title }}" class="h-48 w-full object-cover">
                                     </div>
                                 @endif
 
+                                {{-- New Image Preview --}}
+                                <div id="heroImagePreview" class="mt-4 hidden">
+                                    <div
+                                        class="overflow-hidden rounded-lg border border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-900/20">
+
+                                        <div class="border-b border-blue-200 px-3 py-2 dark:border-blue-800">
+                                            <p class="text-xs font-medium text-blue-700 dark:text-blue-400">
+                                                New Hero Image Preview
+                                            </p>
+                                        </div>
+
+                                        <img id="heroImagePreviewImg" src="" alt="New hero image preview"
+                                            class="h-48 w-full object-cover">
+
+                                        <div class="border-t border-blue-200 px-3 py-2 dark:border-blue-800">
+                                            <p id="heroImageFileName"
+                                                class="truncate text-xs text-gray-500 dark:text-gray-400">
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+
                                 <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
-                                    Enter the public image path.
+                                    Upload a JPG, PNG, or WebP image. Maximum size: 2MB.
+                                    Leave empty to keep the current image.
                                 </p>
 
                                 @error('hero_image')
                                     <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
                                 @enderror
-
                             </div>
 
                         </div>
@@ -2148,6 +2179,42 @@
             });
         </script>
 
+        <script>
+            const heroImageInput = document.getElementById('hero_image');
+            const heroImagePreview = document.getElementById('heroImagePreview');
+            const heroImagePreviewImg = document.getElementById('heroImagePreviewImg');
+            const heroImageFileName = document.getElementById('heroImageFileName');
+
+            if (heroImageInput) {
+                heroImageInput.addEventListener('change', function() {
+                    const file = this.files[0];
+
+                    if (!file) {
+                        heroImagePreview.classList.add('hidden');
+                        heroImagePreviewImg.src = '';
+                        heroImageFileName.textContent = '';
+                        return;
+                    }
+
+                    if (!file.type.startsWith('image/')) {
+                        heroImagePreview.classList.add('hidden');
+                        heroImagePreviewImg.src = '';
+                        heroImageFileName.textContent = '';
+                        return;
+                    }
+
+                    const imageUrl = URL.createObjectURL(file);
+
+                    heroImagePreviewImg.src = imageUrl;
+                    heroImageFileName.textContent = file.name;
+                    heroImagePreview.classList.remove('hidden');
+
+                    heroImagePreviewImg.onload = function() {
+                        URL.revokeObjectURL(imageUrl);
+                    };
+                });
+            }
+        </script>
 
         <template id="trustPointTemplate">
 

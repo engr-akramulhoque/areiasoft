@@ -44,12 +44,6 @@ Route::prefix('blog')->name('blog.')->group(function () {
     Route::post('/comments/{comment}/reply', [BlogCommentController::class, 'reply'])->name('comments.reply');
 });
 
-// Route::get('/test', function () {
-//     return view('test');
-// });
-
-
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

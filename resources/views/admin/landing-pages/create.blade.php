@@ -73,7 +73,8 @@
 
         @endif
 
-        <form action="{{ route('admin.seo-landing-pages.store') }}" method="POST" class="space-y-6">
+        <form action="{{ route('admin.seo-landing-pages.store') }}" method="POST" class="space-y-6"
+            enctype="multipart/form-data">
 
             @csrf
 
@@ -262,26 +263,42 @@
                             </div>
 
                             <div>
-
                                 <label for="hero_image"
                                     class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-
                                     Hero Image
-
                                 </label>
 
-                                <input type="text" name="hero_image" id="hero_image" value="{{ old('hero_image') }}"
-                                    placeholder="website/assets/images/services/website-development.webp"
-                                    class="mt-1 block w-full rounded-lg border-gray-300 bg-white text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder-gray-500">
+                                <input type="file" name="hero_image" id="hero_image"
+                                    accept="image/jpeg,image/png,image/webp,image/jpg"
+                                    class="mt-1 block w-full rounded-lg border border-gray-300 bg-white text-sm text-gray-900 shadow-sm
+                                        file:mr-4 file:rounded-lg file:border-0 file:bg-blue-50 file:px-4 file:py-2
+                                        file:text-sm file:font-medium file:text-blue-700
+                                        hover:file:bg-blue-100
+                                        focus:border-blue-500 focus:ring-blue-500
+                                        dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100
+                                        dark:file:bg-blue-900/30 dark:file:text-blue-400">
 
                                 <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
-                                    Enter the public image path.
+                                    Upload a JPG, PNG, or WebP image. Maximum size: 2MB.
                                 </p>
+
+                                <div id="heroImagePreview" class="mt-4 hidden">
+                                    <div
+                                        class="relative overflow-hidden rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-900">
+                                        <img id="heroImagePreviewImg" src="" alt="Hero image preview"
+                                            class="h-auto max-h-64 w-full object-contain">
+
+                                        <div class="border-t border-gray-200 px-3 py-2 dark:border-gray-700">
+                                            <p id="heroImageFileName"
+                                                class="truncate text-xs text-gray-500 dark:text-gray-400">
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 @error('hero_image')
                                     <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
                                 @enderror
-
                             </div>
 
                         </div>
@@ -1948,6 +1965,40 @@
             });
         </script>
 
+        <script>
+            const heroImageInput = document.getElementById('hero_image');
+            const heroImagePreview = document.getElementById('heroImagePreview');
+            const heroImagePreviewImg = document.getElementById('heroImagePreviewImg');
+            const heroImageFileName = document.getElementById('heroImageFileName');
+
+            if (heroImageInput) {
+                heroImageInput.addEventListener('change', function() {
+                    const file = this.files[0];
+
+                    if (!file) {
+                        heroImagePreview.classList.add('hidden');
+                        heroImagePreviewImg.src = '';
+                        heroImageFileName.textContent = '';
+                        return;
+                    }
+
+                    if (!file.type.startsWith('image/')) {
+                        heroImagePreview.classList.add('hidden');
+                        return;
+                    }
+
+                    const imageUrl = URL.createObjectURL(file);
+
+                    heroImagePreviewImg.src = imageUrl;
+                    heroImageFileName.textContent = file.name;
+                    heroImagePreview.classList.remove('hidden');
+
+                    heroImagePreviewImg.onload = function() {
+                        URL.revokeObjectURL(imageUrl);
+                    };
+                });
+            }
+        </script>
 
         {{-- Repeater Templates --}}
 

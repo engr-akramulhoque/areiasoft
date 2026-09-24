@@ -38,7 +38,7 @@
                         <i class="bi bi-pencil-square"></i>
                         Edit
                     </a>
-                @endcan
+                @endcan 
             </div>
         </div>
     </x-slot>
@@ -169,13 +169,19 @@
                                     </p>
 
                                     <div class="overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700">
-                                        <img src="{{ asset($page->hero_image) }}" alt="{{ $page->hero_title }}"
-                                            class="h-auto max-h-80 w-full object-cover">
+                                        <img
+                                            src="{{ asset('storage/' . $page->hero_image) }}"
+                                            alt="{{ $page->hero_title ?: $page->title }}"
+                                            class="h-auto max-h-80 w-full object-cover"
+                                            loading="lazy"
+                                        >
                                     </div>
 
-                                    <p class="mt-2 break-all text-xs text-gray-500 dark:text-gray-400">
-                                        {{ $page->hero_image }}
-                                    </p>
+                                    <div class="mt-2 rounded-lg bg-gray-50 px-3 py-2 dark:bg-gray-900">
+                                        <p class="break-all text-xs text-gray-500 dark:text-gray-400">
+                                            {{ $page->hero_image }}
+                                        </p>
+                                    </div>
                                 </div>
                             @endif
                         </div>

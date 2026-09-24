@@ -125,7 +125,6 @@
             .article-featured-image {
                 position: relative;
                 max-width: 1080px;
-                aspect-ratio: 16 / 8;
                 margin: 0 auto 4rem;
                 overflow: hidden;
                 border: 1px solid var(--glass-border);
@@ -138,7 +137,7 @@
 
             .article-featured-image img {
                 width: 100%;
-                height: 100%;
+                height: auto;
                 display: block;
                 object-fit: cover;
             }
