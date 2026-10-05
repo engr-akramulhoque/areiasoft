@@ -79,6 +79,38 @@
                     </div>
                 @endcanany
 
+                @canany(['view_demo', 'create_demo', 'edit_demo', 'delete_demo', 'view_demo_category',
+                    'create_demo_category', 'edit_demo_category', 'delete_demo_category'])
+                    <div class="dropdown">
+                        <button
+                            class="dropdown-toggle flex items-center justify-between w-full p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 {{ request()->routeIs('admin.demos.*', 'admin.demo.categories.*') ? 'bg-gray-200 dark:bg-gray-700' : '' }}">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-desktop w-5"></i>
+                                <span>Demo Library</span>
+                            </div>
+                            <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+                        </button>
+
+                        <div
+                            class="dropdown-content pl-8 mt-1 space-y-1 {{ request()->routeIs('admin.demos.*', 'admin.demo.categories.*') ? '' : 'hidden' }}">
+                            @canany(['view_demo', 'create_demo', 'edit_demo', 'delete_demo'])
+                                <a href="{{ route('admin.demos.index') }}"
+                                    class="block p-2 rounded-lg {{ request()->routeIs('admin.demos.*') ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700' }}">
+                                    Demos
+                                </a>
+                            @endcanany
+
+                            @canany(['view_demo_category', 'create_demo_category', 'edit_demo_category',
+                                'delete_demo_category'])
+                                <a href="{{ route('admin.demo.categories.index') }}"
+                                    class="block p-2 rounded-lg {{ request()->routeIs('admin.demo.categories.*') ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700' }}">
+                                    Categories
+                                </a>
+                            @endcanany
+                        </div>
+                    </div>
+                @endcanany
+
                 @canany(['view role', 'view user'])
                     <div class="dropdown">
                         <button

@@ -181,6 +181,14 @@
                 </ul>
             </li>
 
+            {{-- Demo Library --}}
+            <li>
+                <a href="{{ route('demo.index') }}" class="{{ request()->routeIs('demo.*') ? 'active' : '' }}"
+                    @if (request()->routeIs('demo.index')) aria-current="page" @endif>
+                    Demo Library
+                </a>
+            </li>
+
             {{-- Blog --}}
             <li>
                 <a href="{{ route('blog.index') }}" class="{{ request()->routeIs('blog.*') ? 'active' : '' }}"

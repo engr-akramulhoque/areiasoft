@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\BlogCategoryController;
 use App\Http\Controllers\Admin\BlogPostController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DemoCategoryController;
+use App\Http\Controllers\Admin\DemoController;
 use App\Http\Controllers\Admin\ManageContactController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SeoLandingPageController;
@@ -25,6 +27,8 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/case-studies', 'caseStudy')->name('case-studies');
     Route::get('/privacy-policy', 'policy')->name('privacy.policy');
     Route::get('/terms-and-conditions', 'terms')->name('terms.conditions');
+    Route::get('/live-demo', 'demoLibery')->name('demo.index');
+    Route::get('/live-demo/{slug}', 'demoDetails')->name('demo.details');
 });
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
@@ -95,6 +99,24 @@ Route::middleware([
     Route::post('/contacts/bulk-action', [ManageContactController::class, 'bulkAction'])->name('admin.contacts.bulkAction');
     Route::resource('/contacts', ManageContactController::class)->names('admin.contacts');
     Route::resource('/seo-landing-pages', SeoLandingPageController::class)->names('admin.seo-landing-pages');
+
+    Route::resource('demos', DemoController::class)
+        ->names('admin.demos');
+
+    Route::patch('demos/{demo}/toggle-status', [DemoController::class, 'toggleStatus'])
+        ->name('admin.demos.toggle-status');
+
+    Route::patch('demos/{demo}/toggle-featured', [DemoController::class, 'toggleFeatured'])
+        ->name('admin.demos.toggle-featured');
+
+    Route::resource('demo/categories', DemoCategoryController::class)
+        ->parameters([
+            'categories' => 'demoCategory',
+        ])
+        ->names('admin.demo.categories');
+
+    Route::patch('demo/categories/{demoCategory}/toggle-status', [DemoCategoryController::class, 'toggleStatus'])
+        ->name('admin.demo.categories.toggle-status');
 });
 
 Route::controller(ProfileController::class)->prefix('account')->group(function () {

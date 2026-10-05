@@ -67,6 +67,23 @@ class RolePermissionSeeder extends Seeder
                 'delete_landing_page',
             ],
 
+            'demo_categories' => [
+                'view_demo_category',
+                'create_demo_category',
+                'edit_demo_category',
+                'delete_demo_category',
+                'toggle_demo_category_status',
+            ],
+
+            'demos' => [
+                'view_demo',
+                'create_demo',
+                'edit_demo',
+                'delete_demo',
+                'toggle_demo_status',
+                'toggle_demo_featured',
+            ],
+
             'others' => [
                 'view seo-manager',
             ],

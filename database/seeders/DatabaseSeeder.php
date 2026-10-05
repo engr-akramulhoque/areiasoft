@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             $seeders = array_merge($seeders, [
                 // Add any additional seeders for non-production environments here
                 BlogSeeder::class,
+                DemoSeeder::class,
             ]);
         }
 
