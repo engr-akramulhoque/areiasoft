@@ -108,7 +108,7 @@
 @if ($items->hasPages())
     <div class="bg-white rounded-xl shadow-sm p-4">
         <div class="pagination">
-            {{ $items->links() }}
+            {{ $items->links('pagination::tailwind') }}
         </div>
     </div>
 @endif

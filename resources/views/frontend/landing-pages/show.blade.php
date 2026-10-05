@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-guest-layout :post="$page">
 
     <style>
         /* =========================================================
@@ -1310,7 +1310,7 @@
 
                             <div class="landing-hero-image">
 
-                                <img src="{{ asset($page->hero_image) }}" alt="{{ $page->title }} - Areia Soft"
+                                <img src="{{ asset('storage/' . $page->hero_image) }}" alt="{{ $page->title }}"
                                     loading="eager" fetchpriority="high">
 
                                 <div class="landing-visual-label">

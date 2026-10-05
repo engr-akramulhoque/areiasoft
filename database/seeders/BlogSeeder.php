@@ -606,18 +606,6 @@ class BlogSeeder extends Seeder
             'status' => 'approved',
         ]);
 
-
-        /*
-        |--------------------------------------------------------------------------
-        | Finished
-        |--------------------------------------------------------------------------
-        */
-
-        $this->command?->info('Blog seeder completed successfully.');
-        $this->command?->info('Categories: ' . BlogCategory::count());
-        $this->command?->info('Posts: ' . BlogPost::count());
-        $this->command?->info('Comments: ' . BlogComment::count());
-        $this->command?->info('Replies: ' . BlogComment::whereNotNull('parent_id')->count());
     }
 
 

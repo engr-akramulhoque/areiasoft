@@ -224,7 +224,7 @@
                                             class="h-14 w-20 flex-shrink-0 overflow-hidden rounded-lg border border-gray-200 bg-gray-100 dark:border-gray-700 dark:bg-gray-900">
 
                                             @if ($page->hero_image)
-                                                <img src="{{ asset($page->hero_image) }}" alt="{{ $page->title }}"
+                                                <img src="{{ asset('storage/' . $page->hero_image) }}" alt="{{ $page->title }}"
                                                     class="h-full w-full object-cover">
                                             @else
                                                 <div class="flex h-full w-full items-center justify-center">

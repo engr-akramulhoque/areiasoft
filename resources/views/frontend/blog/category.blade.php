@@ -1,4 +1,4 @@
-<x-guest-layout :title="$category->name . ' Blog | Areia Soft'">
+<x-guest-layout :post="$category">
 
     @push('styles')
         <style>

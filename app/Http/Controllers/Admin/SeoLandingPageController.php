@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\SeoLandingPage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class SeoLandingPageController extends Controller
@@ -48,6 +49,17 @@ class SeoLandingPageController extends Controller
         $validated['related_pages'] = $this->arrayValue($request->input('related_pages'));
 
         $validated['status'] = $request->boolean('status');
+
+        if ($request->hasFile('hero_image')) {
+            $image = $request->file('hero_image');
+            $filename = $image->getClientOriginalName();
+
+            if (Storage::disk('public')->exists('uploads/seo-landing-pages/' . $filename)) {
+                $filename = pathinfo($filename, PATHINFO_FILENAME) . '-' . time() . '.' . $image->getClientOriginalExtension();
+            }
+
+            $validated['hero_image'] = $image->storeAs('uploads/seo-landing-pages', $filename, 'public');
+        }
 
         SeoLandingPage::create($validated);
 
@@ -98,6 +110,38 @@ class SeoLandingPageController extends Controller
 
         $validated['status'] = $request->boolean('status');
 
+        // Hero Image
+        if ($request->hasFile('hero_image')) {
+            $image = $request->file('hero_image');
+
+            $filename = $image->getClientOriginalName();
+
+            if (Storage::disk('public')->exists('uploads/seo-landing-pages/' . $filename)) {
+                $filename = pathinfo($filename, PATHINFO_FILENAME)
+                    . '-' . time()
+                    . '.' . $image->getClientOriginalExtension();
+            }
+
+            $newImagePath = $image->storeAs(
+                'uploads/seo-landing-pages',
+                $filename,
+                'public'
+            );
+
+            // Delete Old Hero Image
+            if (
+                $seoLandingPage->hero_image &&
+                Storage::disk('public')->exists($seoLandingPage->hero_image)
+            ) {
+                Storage::disk('public')->delete($seoLandingPage->hero_image);
+            }
+
+            $validated['hero_image'] = $newImagePath;
+        } else {
+            // Keep Existing Hero Image
+            $validated['hero_image'] = $seoLandingPage->hero_image;
+        }
+
         $seoLandingPage->update($validated);
 
         return redirect()
@@ -110,6 +154,12 @@ class SeoLandingPageController extends Controller
      */
     public function destroy(SeoLandingPage $seoLandingPage)
     {
+        if (
+            $seoLandingPage->hero_image &&
+            Storage::disk('public')->exists($seoLandingPage->hero_image)
+        ) {
+            Storage::disk('public')->delete($seoLandingPage->hero_image);
+        }
         $seoLandingPage->delete();
 
         return redirect()
@@ -122,236 +172,55 @@ class SeoLandingPageController extends Controller
         ?SeoLandingPage $seoLandingPage = null
     ): array {
         return $request->validate([
-            'title' => [
-                'required',
-                'string',
-                'max:255',
-            ],
-
+            'title' => ['required', 'string', 'max:255'],
             'slug' => [
                 'required',
                 'string',
                 'max:255',
                 'alpha_dash',
                 Rule::unique('seo_landing_pages', 'slug')
-                    ->ignore($seoLandingPage?->id),
+                    ->ignore($seoLandingPage?->id)
             ],
+            'eyebrow' => ['nullable', 'string', 'max:255'],
+            'hero_title' => ['required', 'string', 'max:500'],
+            'hero_description' => ['nullable', 'string'],
+            'hero_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
 
-            'eyebrow' => [
-                'nullable',
-                'string',
-                'max:255',
-            ],
-
-            'hero_title' => [
-                'required',
-                'string',
-                'max:500',
-            ],
-
-            'hero_description' => [
-                'nullable',
-                'string',
-            ],
-
-            'hero_image' => [
-                'nullable',
-                'string',
-                'max:500',
-            ],
-
-            'primary_cta' => [
-                'nullable',
-                'string',
-                'max:255',
-            ],
-
-            'primary_cta_url' => [
-                'nullable',
-                'string',
-                'max:500',
-            ],
-
-            'secondary_cta' => [
-                'nullable',
-                'string',
-                'max:255',
-            ],
-
-            'secondary_cta_url' => [
-                'nullable',
-                'string',
-                'max:500',
-            ],
-
-            'trust_points' => [
-                'nullable',
-                'array',
-            ],
-
-            'trust_points.*' => [
-                'nullable',
-                'string',
-                'max:500',
-            ],
-
-            'problem' => [
-                'nullable',
-                'array',
-            ],
-
-            'problem.title' => [
-                'nullable',
-                'string',
-                'max:500',
-            ],
-
-            'problem.text' => [
-                'nullable',
-                'string',
-            ],
-
-            'problem.points' => [
-                'nullable',
-                'array',
-            ],
-
-            'problem.points.*' => [
-                'nullable',
-                'string',
-                'max:500',
-            ],
-
-            'solution' => [
-                'nullable',
-                'array',
-            ],
-
-            'solution.title' => [
-                'nullable',
-                'string',
-                'max:500',
-            ],
-
-            'solution.text' => [
-                'nullable',
-                'string',
-            ],
-
-            'solution.points' => [
-                'nullable',
-                'array',
-            ],
-
-            'solution.points.*' => [
-                'nullable',
-                'string',
-                'max:500',
-            ],
-
-            'capabilities' => [
-                'nullable',
-                'array',
-            ],
-
-            'capabilities.*.title' => [
-                'nullable',
-                'string',
-                'max:255',
-            ],
-
-            'capabilities.*.text' => [
-                'nullable',
-                'string',
-            ],
-
-            'capabilities.*.icon' => [
-                'nullable',
-                'string',
-                'max:100',
-            ],
-
-            'process' => [
-                'nullable',
-                'array',
-            ],
-
-            'process.*.number' => [
-                'nullable',
-                'string',
-                'max:50',
-            ],
-
-            'process.*.title' => [
-                'nullable',
-                'string',
-                'max:255',
-            ],
-
-            'process.*.text' => [
-                'nullable',
-                'string',
-            ],
-
-            'technologies' => [
-                'nullable',
-                'array',
-            ],
-
-            'technologies.*' => [
-                'nullable',
-                'string',
-                'max:255',
-            ],
-
-            'benefits' => [
-                'nullable',
-                'array',
-            ],
-
-            'benefits.*' => [
-                'nullable',
-                'string',
-                'max:500',
-            ],
-
-            'faqs' => [
-                'nullable',
-                'array',
-            ],
-
-            'faqs.*.question' => [
-                'nullable',
-                'string',
-                'max:500',
-            ],
-
-            'faqs.*.answer' => [
-                'nullable',
-                'string',
-            ],
-
-            'related_pages' => [
-                'nullable',
-                'array',
-            ],
-
-            'related_pages.*' => [
-                'nullable',
-                'string',
-                'max:255',
-            ],
-
-            'status' => [
-                'nullable',
-                'boolean',
-            ],
-
-            'sort_order' => [
-                'nullable',
-                'integer',
-                'min:0',
-            ],
+            'primary_cta' => ['nullable', 'string', 'max:255'],
+            'primary_cta_url' => ['nullable', 'string', 'max:500'],
+            'secondary_cta' => ['nullable', 'string', 'max:255'],
+            'secondary_cta_url' => ['nullable', 'string', 'max:500'],
+            'trust_points' => ['nullable', 'array'],
+            'trust_points.*' => ['nullable', 'string', 'max:500'],
+            'problem' => ['nullable', 'array'],
+            'problem.title' => ['nullable', 'string', 'max:500'],
+            'problem.text' => ['nullable', 'string'],
+            'problem.points' => ['nullable', 'array'],
+            'problem.points.*' => ['nullable', 'string', 'max:500'],
+            'solution' => ['nullable', 'array'],
+            'solution.title' => ['nullable', 'string', 'max:500'],
+            'solution.text' => ['nullable', 'string'],
+            'solution.points' => ['nullable', 'array'],
+            'solution.points.*' => ['nullable', 'string', 'max:500'],
+            'capabilities' => ['nullable', 'array'],
+            'capabilities.*.title' => ['nullable', 'string', 'max:255'],
+            'capabilities.*.text' => ['nullable', 'string'],
+            'capabilities.*.icon' => ['nullable', 'string', 'max:100'],
+            'process' => ['nullable', 'array'],
+            'process.*.number' => ['nullable', 'string', 'max:50'],
+            'process.*.title' => ['nullable', 'string', 'max:255'],
+            'process.*.text' => ['nullable', 'string'],
+            'technologies' => ['nullable', 'array'],
+            'technologies.*' => ['nullable', 'string', 'max:255'],
+            'benefits' => ['nullable', 'array'],
+            'benefits.*' => ['nullable', 'string', 'max:500'],
+            'faqs' => ['nullable', 'array'],
+            'faqs.*.question' => ['nullable', 'string', 'max:500'],
+            'faqs.*.answer' => ['nullable', 'string'],
+            'related_pages' => ['nullable', 'array'],
+            'related_pages.*' => ['nullable', 'string', 'max:255'],
+            'status' => ['nullable', 'boolean'],
+            'sort_order' => ['nullable', 'integer', 'min:0'],
         ]);
     }
 
