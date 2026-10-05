@@ -113,11 +113,12 @@ Route::middleware([
         ->name('admin.demo.categories.toggle-status');
 });
 
-Route::controller(ProfileController::class)->prefix('account')->group(function () {
-    Route::get('/change-password', 'updatePassword')->name('profile.password.update');
-    Route::get('/two-factor-authentication', 'twoFactorAuthentication')->name('profile.two_factor_authentication');
-    Route::get('/settings', 'profileSettings')->name('profile.settings');
-});
+Route::controller(ProfileController::class)
+    ->prefix('account')->group(function () {
+        Route::get('/change-password', 'updatePassword')->name('profile.password.update');
+        Route::get('/two-factor-authentication', 'twoFactorAuthentication')->name('profile.two_factor_authentication');
+        Route::get('/settings', 'profileSettings')->name('profile.settings');
+    });
 
 Route::get('/{slug}', [LandingPageController::class, 'show'])
     ->name('landing.show');
