@@ -58,18 +58,22 @@
                     </a>
                 @endcan
 
-                @canany(['view_landing_page'])
+                @canany(['view_landing_page', 'view_service'])
                     <div class="dropdown">
                         <button
                             class="dropdown-toggle flex items-center justify-between w-full p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 {{ request()->routeIs('admin.seo-landing-pages.*') ? 'bg-gray-200 dark:bg-gray-700' : '' }}">
                             <div class="flex items-center space-x-3">
-                                <i class="fas fa-users w-5"></i>
-                                <span>Website Content</span>
+                                <i class="fas fa-layer-group w-5"></i>
+                                <span>Site Content</span>
                             </div>
                             <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
                         </button>
                         <div
-                            class="dropdown-content pl-8 mt-1 space-y-1 {{ request()->routeIs('admin.seo-landing-pages.*') ? '' : 'hidden' }}">
+                            class="dropdown-content pl-8 mt-1 space-y-1 {{ request()->routeIs('admin.seo-landing-pages.*') || request()->routeIs('admin.services.*') ? '' : 'hidden' }}">
+                            @can('view_service')
+                                <a href="{{ route('admin.services.index') }}"
+                                    class="block p-2 rounded-lg {{ request()->routeIs('admin.services.*') ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700' }}">Services</a>
+                            @endcan
                             @can('view_landing_page')
                                 <a href="{{ route('admin.seo-landing-pages.index') }}"
                                     class="block p-2 rounded-lg {{ request()->routeIs('admin.seo-landing-pages.*') ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700' }}">SEO

@@ -335,7 +335,7 @@
 
             @if ($demos->hasPages())
                 <div class="border-t border-gray-200 px-5 py-4 dark:border-gray-700">
-                    {{ $demos->links() }}
+                    {{ $demos->links('pagination::tailwind') }}
                 </div>
             @endif
         </div>
