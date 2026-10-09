@@ -58,8 +58,9 @@ class ServiceRequest extends FormRequest
 
             'image' => [
                 'nullable',
-                'string',
-                'max:2048',
+                'image',
+                'mimes:jpg,jpeg,png,webp,gif',
+                'max:4096',
             ],
 
             'alt_text' => [

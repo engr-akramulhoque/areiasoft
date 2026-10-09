@@ -16,7 +16,7 @@ class ServiceSeeder extends Seeder
                 'category' => 'Web Development',
                 'description' => 'Professional website development for businesses that need a fast, responsive, secure, and search-friendly online presence.',
                 'hero_description' => 'Areia Soft builds custom business websites that communicate your value clearly, work smoothly across devices, and provide a strong technical foundation for search visibility and lead generation.',
-                'image' => 'static/frontend/assets/images/services/website-development.webp',
+                'image' => 'uploads/services/website-development.webp',
                 'alt_text' => 'Responsive website development services by Areia Soft',
                 'overview' => 'Your website often creates the first impression of your business. Areia Soft delivers tailored website development for companies, startups, service providers, and organizations. From corporate websites and landing pages to content-managed websites, we focus on clear information architecture, accessible interfaces, responsive layouts, reliable performance, and technical SEO foundations. Each project is planned around your audience, goals, and future growth.',
                 'metrics' => [
@@ -56,7 +56,7 @@ class ServiceSeeder extends Seeder
                 'category' => 'Software Development',
                 'description' => 'Custom software development to automate business processes, connect data, and solve operational challenges with software tailored to your needs.',
                 'hero_description' => 'Areia Soft develops business software around your workflows, users, and objectives—helping teams reduce repetitive work, improve visibility, and scale with confidence.',
-                'image' => 'static/frontend/assets/images/services/custom-software-development.webp',
+                'image' => 'uploads/services/custom-software-development.webp',
                 'alt_text' => 'Custom software development solutions by Areia Soft',
                 'overview' => 'Off-the-shelf products do not always fit the way a business works. Our custom software development service turns specific requirements into maintainable applications, internal tools, and integrated business systems. We work from your process and user needs to plan the functionality, data model, permissions, integrations, and delivery approach. The result is software designed to support real operations rather than force your team into an unsuitable workflow.',
                 'metrics' => [
@@ -96,7 +96,7 @@ class ServiceSeeder extends Seeder
                 'category' => 'Web Application Development',
                 'description' => 'Secure, scalable web application development for customer portals, SaaS products, dashboards, and data-driven business platforms.',
                 'hero_description' => 'Areia Soft creates web applications that combine intuitive interfaces with dependable backend systems, helping businesses deliver useful online tools and digital services.',
-                'image' => 'static/frontend/assets/images/services/web-application-development.webp',
+                'image' => 'uploads/services/web-application-development.webp',
                 'alt_text' => 'Custom web application development by Areia Soft',
                 'overview' => 'When a standard website is not enough, a web application can help users complete tasks, manage information, and interact with your business online. Areia Soft builds custom web applications with attention to application structure, authentication, permissions, database design, APIs, and responsive user experiences. We plan for maintainability and future development so your application can evolve alongside your product and customers.',
                 'metrics' => [
@@ -136,7 +136,7 @@ class ServiceSeeder extends Seeder
                 'category' => 'Mobile App Development',
                 'description' => 'Mobile app development for Android and iOS, from cross-platform products to connected apps that support customer engagement and business workflows.',
                 'hero_description' => 'Areia Soft helps turn mobile product ideas into practical Android and iOS applications with user-focused interfaces, reliable integrations, and room to grow.',
-                'image' => 'static/frontend/assets/images/services/mobile-app-development.webp',
+                'image' => 'uploads/services/mobile-app-development.webp',
                 'alt_text' => 'Android and iOS mobile app development services by Areia Soft',
                 'overview' => 'A mobile application can make your service more accessible and help customers interact with your business wherever they are. Areia Soft plans and develops mobile apps around the intended users, core features, platform requirements, and backend systems. We consider navigation, performance, account security, API communication, notifications, and maintainability to help deliver a consistent experience across supported devices.',
                 'metrics' => [
@@ -176,7 +176,7 @@ class ServiceSeeder extends Seeder
                 'category' => 'Business Software',
                 'description' => 'Custom ERP and CRM solutions that connect business operations, organize customer information, and improve visibility across teams.',
                 'hero_description' => 'Areia Soft builds and integrates ERP and CRM systems to help businesses manage customer relationships, sales activity, inventory, teams, and operational information in a more connected way.',
-                'image' => 'static/frontend/assets/images/services/erp-crm-solutions.webp',
+                'image' => 'uploads/services/erp-crm-solutions.webp',
                 'alt_text' => 'Custom ERP and CRM business software solutions by Areia Soft',
                 'overview' => 'Disconnected business tools can create duplicate work and make it difficult to understand what is happening across an organization. Areia Soft develops ERP and CRM solutions based on your operational requirements, including customer records, sales pipelines, inventory, employee workflows, reporting, and integrations. We focus on creating a practical shared system that helps teams access consistent information and manage processes more clearly.',
                 'metrics' => [
@@ -216,7 +216,7 @@ class ServiceSeeder extends Seeder
                 'category' => 'eCommerce Development',
                 'description' => 'eCommerce website development for online stores that need product management, smooth checkout, secure payment integrations, and room to scale.',
                 'hero_description' => 'Areia Soft develops custom eCommerce websites and online stores that make it easier to showcase products, manage orders, accept payments, and deliver a smooth shopping experience.',
-                'image' => 'static/frontend/assets/images/services/ecommerce-development.webp',
+                'image' => 'uploads/services/ecommerce-development.webp',
                 'alt_text' => 'eCommerce website and online store development by Areia Soft',
                 'overview' => 'An effective online store needs more than attractive product pages. It needs clear categories, useful product information, a convenient checkout, dependable payment processing, and manageable order operations. Areia Soft develops eCommerce websites around your products, customers, and fulfillment needs, with attention to responsive design, product administration, inventory, integrations, and search-friendly page structure.',
                 'metrics' => [
@@ -256,7 +256,7 @@ class ServiceSeeder extends Seeder
                 'category' => 'UI/UX Design',
                 'description' => 'UI/UX design for websites, mobile apps, and software products focused on clarity, usability, accessibility, and consistent brand experiences.',
                 'hero_description' => 'Areia Soft designs intuitive digital experiences that help users understand your product, complete tasks with less friction, and interact confidently with your brand.',
-                'image' => 'static/frontend/assets/images/services/ui-ux-design.webp',
+                'image' => 'uploads/services/ui-ux-design.webp',
                 'alt_text' => 'UI and UX design services for digital products by Areia Soft',
                 'overview' => 'Good design makes a digital product easier to understand and use. Our UI/UX design process connects user needs with business goals through information architecture, wireframes, prototypes, interface design, and usability considerations. Whether you are planning a new website, mobile app, dashboard, or SaaS product, we work toward clear navigation, consistent visual patterns, and interfaces that support the intended tasks.',
                 'metrics' => [
@@ -296,7 +296,7 @@ class ServiceSeeder extends Seeder
                 'category' => 'AI & Automation',
                 'description' => 'AI integration and business process automation to reduce repetitive work, support information handling, and improve digital workflows.',
                 'hero_description' => 'Areia Soft helps organizations identify practical uses for AI and automation, from connecting AI services to existing software to streamlining repeatable business tasks.',
-                'image' => 'static/frontend/assets/images/services/ai-automation-solutions.webp',
+                'image' => 'uploads/services/ai-automation-solutions.webp',
                 'alt_text' => 'AI integration and business automation solutions by Areia Soft',
                 'overview' => 'AI and automation can be valuable when they solve a clearly defined business problem. Areia Soft helps scope and build AI-enabled workflows, service integrations, chatbots, document-processing features, intelligent search, and other automation tools. We consider the source and quality of data, integration requirements, human review, privacy, and how the solution will fit into existing operations rather than treating AI as a one-size-fits-all answer.',
                 'metrics' => [
@@ -336,7 +336,7 @@ class ServiceSeeder extends Seeder
                 'category' => 'Cloud & DevOps',
                 'description' => 'Cloud and DevOps services for deployment automation, application monitoring, infrastructure reliability, and scalable environments.',
                 'hero_description' => 'Areia Soft helps development teams improve delivery and reliability with practical cloud infrastructure, CI/CD pipelines, containerization, monitoring, and deployment workflows.',
-                'image' => 'static/frontend/assets/images/services/cloud-devops-solutions.webp',
+                'image' => 'uploads/services/cloud-devops-solutions.webp',
                 'alt_text' => 'Cloud infrastructure and DevOps services by Areia Soft',
                 'overview' => 'A reliable application depends on more than its code. Cloud and DevOps practices help teams deploy changes consistently, monitor system health, and manage infrastructure as applications evolve. Areia Soft supports cloud environment setup, deployment automation, containerization, server configuration, backups, and observability based on the project’s needs. We aim for a delivery process that is repeatable, understandable, and maintainable by your team.',
                 'metrics' => [
@@ -376,7 +376,7 @@ class ServiceSeeder extends Seeder
                 'category' => 'API Development',
                 'description' => 'Custom API development and third-party integrations that help websites, apps, payment services, and business systems exchange data reliably.',
                 'hero_description' => 'Areia Soft builds and connects APIs so your applications and business platforms can exchange information through clear, secure, and maintainable integrations.',
-                'image' => 'static/frontend/assets/images/services/api-development-integration.webp',
+                'image' => 'uploads/services/api-development-integration.webp',
                 'alt_text' => 'API development and third-party integration services by Areia Soft',
                 'overview' => 'Connected systems help reduce manual data transfer and make software more useful. Areia Soft develops APIs and integrates third-party services such as payment providers, CRMs, ERPs, mobile applications, and other platforms. We consider data formats, authentication, validation, error handling, documentation, and operational requirements so integrations are easier to maintain and troubleshoot.',
                 'metrics' => [
@@ -416,7 +416,7 @@ class ServiceSeeder extends Seeder
                 'category' => 'Software Support',
                 'description' => 'Software maintenance and technical support to help keep websites and applications stable, secure, updated, and aligned with changing needs.',
                 'hero_description' => 'Areia Soft provides ongoing maintenance for existing websites and applications, including troubleshooting, security updates, performance improvements, and planned enhancements.',
-                'image' => 'static/frontend/assets/images/services/software-maintenance-support.webp',
+                'image' => 'uploads/services/software-maintenance-support.webp',
                 'alt_text' => 'Software maintenance and technical support services by Areia Soft',
                 'overview' => 'Software requires attention after launch as dependencies, security expectations, infrastructure, and business needs change. Areia Soft helps maintain existing applications through bug investigation, updates, performance reviews, database care, backup planning, and feature improvements. Support can be tailored to your system and priorities, with a focus on making changes carefully and keeping your application maintainable.',
                 'metrics' => [
@@ -456,7 +456,7 @@ class ServiceSeeder extends Seeder
                 'category' => 'Digital Transformation',
                 'description' => 'Digital transformation services that modernize workflows, connect business systems, and help organizations adopt technology with a clear purpose.',
                 'hero_description' => 'Areia Soft helps businesses improve how work gets done through process analysis, workflow automation, system integration, and fit-for-purpose digital solutions.',
-                'image' => 'static/frontend/assets/images/services/digital-transformation.webp',
+                'image' => 'uploads/services/digital-transformation.webp',
                 'alt_text' => 'Digital transformation and business process modernization by Areia Soft',
                 'overview' => 'Digital transformation is not simply moving an existing process online; it is understanding where work slows down and using technology to improve it. Areia Soft helps organizations identify operational gaps and plan connected workflows, modern software, cloud adoption, integrations, and reporting tools. We focus on practical improvements that match your priorities, existing systems, and readiness for change.',
                 'metrics' => [
