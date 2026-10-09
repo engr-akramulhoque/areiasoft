@@ -277,7 +277,6 @@
 
             </div>
 
-
             <div class="glass-card" style="display:flex; flex-direction:column; justify-content:center;">
 
                 <div class="grid-2col" style="gap:1rem;">
@@ -302,6 +301,21 @@
 
         </div>
 
+        @if ($service->seo_content)
+            <div class="grid-1col">
+                <div class="glass-card">
+
+                    <h2 style="font-size:1.6rem; color:var(--cyan); margin-bottom:1rem;">
+                        Description
+                    </h2>
+
+                    <p style="color:var(--white-muted); line-height:1.7;">
+                        {!! $service->seo_content !!}
+                    </p>
+
+                </div>
+            </div>
+        @endif
 
         {{-- Key Features --}}
         <div class="glass-card">

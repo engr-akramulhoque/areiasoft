@@ -18,6 +18,7 @@ class Service extends Model
         'image',
         'alt_text',
         'overview',
+        'seo_content',
         'metrics',
         'features',
         'technologies',

@@ -74,6 +74,11 @@ class ServiceRequest extends FormRequest
                 'string',
             ],
 
+            'seo_content' => [
+                'nullable',
+                'string',
+            ],
+
             'metrics' => [
                 'nullable',
                 'array',

@@ -160,6 +160,18 @@
                                     <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
                                 @enderror
                             </div>
+
+                            <div>
+                                <label for="seo_content"
+                                    class="block text-sm font-medium text-gray-700 dark:text-gray-300">Seo Content</label>
+                                <textarea name="seo_content" id="seo_content" rows="7"
+                                    placeholder="Write the service seo content for the service detail page..."
+                                    class="mt-1 block w-full rounded-lg border-gray-300 bg-white text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100">{{ old('seo_content') }}</textarea>
+                                @error('seo_content')
+                                    <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                                @enderror
+                            </div>
+
                             <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
                                 <div>
                                     <label for="image"

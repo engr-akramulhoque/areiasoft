@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('alt_text')->nullable();
 
             $table->longText('overview')->nullable();
-            $table->longText('overview')->nullable();
+            $table->longText('seo_content')->nullable();
 
             $table->json('metrics')->nullable();
             $table->json('features')->nullable();
