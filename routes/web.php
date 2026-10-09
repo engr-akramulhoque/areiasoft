@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminServiceController;
 use App\Http\Controllers\Admin\BlogCategoryController;
 use App\Http\Controllers\Admin\BlogPostController;
 use App\Http\Controllers\Admin\CommentController;
@@ -57,6 +58,14 @@ Route::middleware([
 
     Route::resource('/users', UserController::class)->names('admin.users');
     Route::resource('/roles', RoleController::class)->names('admin.roles');
+
+    Route::resource('services', AdminServiceController::class)->names('admin.services');
+        
+    // Toggle service active/inactive status
+    Route::patch('/services/{service}/toggle-status', [
+            AdminServiceController::class,
+            'toggleStatus'
+        ])->name('admin.services.toggle-status');
 
     Route::resource('blogs', BlogPostController::class)->names('admin.blogs');
     Route::patch('blogs/{blog}/toggle-status', [BlogPostController::class, 'toggleStatus'])->name('admin.blogs.toggle-status');

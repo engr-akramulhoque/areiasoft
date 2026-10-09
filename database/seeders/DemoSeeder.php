@@ -269,7 +269,5 @@ class DemoSeeder extends Seeder
                 );
             }
         }
-
-        $this->command->info('Demo categories and demo projects seeded successfully.');
     }
 }

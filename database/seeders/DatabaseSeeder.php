@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             RolePermissionSeeder::class,
             UserSeeder::class,
             SeoLandingPageSeeder::class,
+            ServiceSeeder::class,
         ];
 
         // Extra seeders for non-production environments

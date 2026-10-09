@@ -84,6 +84,13 @@ class RolePermissionSeeder extends Seeder
                 'toggle_demo_featured',
             ],
 
+            'services' => [
+                'view_service',
+                'create_service',
+                'edit_service',
+                'delete_service',
+            ],
+
             'others' => [
                 'view seo-manager',
             ],

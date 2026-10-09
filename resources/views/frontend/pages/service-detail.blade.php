@@ -231,11 +231,11 @@
     <section class="project-hero">
 
         <h1>
-            {{ $service['title'] }}
+            {{ $service->title }}
         </h1>
 
         <p>
-            {{ $service['hero_description'] }}
+            {{ $service->hero_description }}
         </p>
 
     </section>
@@ -247,14 +247,14 @@
         {{-- Service Image --}}
         <div class="project-image">
 
-            <img src="{{ asset($service['image']) }}" alt="{{ $service['title'] }} - Areia Soft" loading="eager">
+            <img src="{{ asset($service->image) }}" alt="{{ $service->alt_text }} - Areia Soft" loading="eager">
 
         </div>
 
 
         <div class="project-tags">
 
-            @foreach ($service['technologies'] as $technology)
+            @foreach ($service->technologies as $technology)
                 <span class="project-tag">
                     {{ $technology }}
                 </span>
@@ -272,7 +272,7 @@
                 </h2>
 
                 <p style="color:var(--white-muted); line-height:1.7;">
-                    {{ $service['overview'] }}
+                    {{ $service->overview }}
                 </p>
 
             </div>
@@ -282,7 +282,7 @@
 
                 <div class="grid-2col" style="gap:1rem;">
 
-                    @foreach ($service['metrics'] as $metric)
+                    @foreach ($service->metrics as $metric)
                         <div class="metric-box">
 
                             <div class="metric-number">
@@ -312,7 +312,7 @@
 
             <ul class="feature-list">
 
-                @foreach ($service['features'] as $feature)
+                @foreach ($service->features as $feature)
                     <li>
                         {{ $feature }}
                     </li>
@@ -332,7 +332,7 @@
 
             <ul class="feature-list">
 
-                @foreach ($service['benefits'] as $benefit)
+                @foreach ($service->benefits as $benefit)
                     <li>
                         {{ $benefit }}
                     </li>
@@ -352,7 +352,7 @@
 
             <div class="tech-stack">
 
-                @foreach ($service['technologies'] as $technology)
+                @foreach ($service->technologies as $technology)
                     <span class="tech-badge">
                         {{ $technology }}
                     </span>
@@ -372,9 +372,9 @@
             <div class="tech-stack">
 
                 @foreach ($services as $otherService)
-                    @if ($otherService['slug'] !== $service['slug'])
-                        <a href="{{ route('service.show', ['service' => $otherService['slug']]) }}" class="tech-badge">
-                            {{ $otherService['title'] }}
+                    @if ($otherService->slug !== $service->slug)
+                        <a href="{{ route('service.show', $otherService->slug) }}" class="tech-badge">
+                            {{ $otherService->title }}
                         </a>
                     @endif
                 @endforeach
@@ -392,7 +392,7 @@
             </a>
 
             <a href="{{ route('contact.index') }}" class="btn-primary">
-                {{ $service['cta_button'] }}
+                {{ $service->cta_button }}
             </a>
 
         </div>

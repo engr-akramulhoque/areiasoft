@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Demo;
 use App\Models\DemoCategory;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -49,8 +50,8 @@ class FrontendController extends Controller
 
         $portfolios = config('global.portfolios', []);
         $clients = config('global.clients', []);
-        $services = config('areiasoft.services', []);
-
+        
+        $services = Service::active()->orderBy('sort_order')->take(12)->get();
 
         return view('welcome', compact('hero', 'globe', 'services', 'clients', 'portfolios'));
     }
