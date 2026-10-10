@@ -1,4 +1,5 @@
-<x-guest-layout>
+<x-guest-layout  :post="$service">
+    
     @push('styles')
         <style>
             /* Hero */
@@ -247,7 +248,7 @@
         {{-- Service Image --}}
         <div class="project-image">
 
-            <img src="{{ asset($service->image) }}" alt="{{ $service->alt_text }} - Areia Soft" loading="eager">
+            <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->alt_text }} - Areia Soft" loading="eager">
 
         </div>
 
