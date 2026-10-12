@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DemoCategoryController;
 use App\Http\Controllers\Admin\DemoController;
 use App\Http\Controllers\Admin\ManageContactController;
+use App\Http\Controllers\Admin\PortfolioController;
 use App\Http\Controllers\Admin\RobotTxtController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SeoLandingPageController;
@@ -123,6 +124,12 @@ Route::middleware([
 
     Route::patch('demo/categories/{demoCategory}/toggle-status', [DemoCategoryController::class, 'toggleStatus'])
         ->name('admin.demo.categories.toggle-status');
+
+    Route::resource('portfolios', PortfolioController::class)
+        ->names('admin.portfolios');
+
+    Route::patch('portfolios/{portfolio}/toggle-status', [PortfolioController::class, 'toggleStatus'])
+        ->name('admin.portfolios.toggle-status');
 
     Route::get('/sitemap', [SitemapController::class, 'index'])->name('admin.sitemap.index');
     Route::get('/sitemap/create', [SitemapController::class, 'create'])->name('admin.sitemap.create');
