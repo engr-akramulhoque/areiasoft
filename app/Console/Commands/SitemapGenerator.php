@@ -38,6 +38,9 @@ class SitemapGenerator extends Command
         // Add static pages & company pages
         $addUrls(array_merge($data['pages'], $data['company']), ['priority' => 1.0]);
 
+        // Add dynamic seo landing pages
+        $addUrls($data['seo_pages'], ['priority' => 0.9]);
+        
         // Add dynamic services
         $addUrls($data['services'], ['priority' => 0.9]);
 

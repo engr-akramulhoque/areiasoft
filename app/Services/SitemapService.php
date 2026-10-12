@@ -6,6 +6,7 @@ use App\Models\BlogCategory;
 use App\Models\BlogPost;
 use App\Models\Demo;
 use App\Models\Portfolio;
+use App\Models\SeoLandingPage;
 use App\Models\Service;
 
 class SitemapService
@@ -33,8 +34,16 @@ class SitemapService
             ['title' => 'Sitemap', 'url' => route('sitemap')],
         ];
 
+        // Dynamic seo_pages
+        $seo_pages = SeoLandingPage::active()->select('title', 'slug')->cursor()->map(function ($s) {
+            return [
+                'title' => $s->title,
+                'url' => route('landing.show', $s->slug)
+            ];
+        });
+
         // Dynamic services
-        $services = Service::select('title', 'slug')->cursor()->map(function ($s) {
+        $services = Service::active()->select('title', 'slug')->cursor()->map(function ($s) {
             return [
                 'title' => $s->title,
                 'url' => route('service.show', $s->slug)
@@ -42,7 +51,7 @@ class SitemapService
         });
 
         // Dynamic our_works
-        $our_works = Portfolio::select('title', 'slug')->cursor()->map(function ($p) {
+        $our_works = Portfolio::active()->select('title', 'slug')->cursor()->map(function ($p) {
             return [
                 'title' => $p->title,
                 'url' => route('work.show', $p->slug)
@@ -50,7 +59,7 @@ class SitemapService
         });
         
         // Dynamic live_demos
-        $live_demos = Demo::select('title', 'slug')->cursor()->map(function ($p) {
+        $live_demos = Demo::active()->select('title', 'slug')->cursor()->map(function ($p) {
             return [
                 'title' => $p->title,
                 'url' => route('demo.details', $p->slug)
@@ -58,7 +67,7 @@ class SitemapService
         });
 
         // Dynamic blog_categories
-        $blog_categories = BlogCategory::select('name', 'slug')->cursor()->map(function ($b) {
+        $blog_categories = BlogCategory::active()->select('name', 'slug')->cursor()->map(function ($b) {
             return [
                 'title' => $b->name,
                 'url' => route('blog.category', $b->slug)
@@ -66,13 +75,13 @@ class SitemapService
         });
 
         // Dynamic blogs
-        $blogs = BlogPost::select('title', 'slug')->cursor()->map(function ($b) {
+        $blogs = BlogPost::published()->select('title', 'slug')->cursor()->map(function ($b) {
             return [
                 'title' => $b->title,
                 'url' => route('blog.show', $b->slug)
             ];
         });
 
-        return compact('pages', 'company', 'services', 'our_works', 'blog_categories', 'blogs', 'live_demos');
+        return compact('pages', 'company', 'seo_pages', 'services', 'our_works', 'blog_categories', 'blogs', 'live_demos');
     }
 }
