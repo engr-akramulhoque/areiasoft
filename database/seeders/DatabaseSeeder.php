@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             SeoLandingPageSeeder::class,
             ServiceSeeder::class,
+            PortfolioSeeder::class,
         ];
 
         // Extra seeders for non-production environments

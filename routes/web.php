@@ -8,8 +8,10 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DemoCategoryController;
 use App\Http\Controllers\Admin\DemoController;
 use App\Http\Controllers\Admin\ManageContactController;
+use App\Http\Controllers\Admin\RobotTxtController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SeoLandingPageController;
+use App\Http\Controllers\Admin\SitemapController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Frontend\BlogCommentController;
 use App\Http\Controllers\Frontend\BlogController;
@@ -30,6 +32,7 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/terms-and-conditions', 'terms')->name('terms.conditions');
     Route::get('/live-demo', 'demoLibery')->name('demo.index');
     Route::get('/live-demo/{slug}', 'demoDetails')->name('demo.details');
+    Route::get('/sitemap', 'sitemap')->name('sitemap');
 });
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
@@ -120,6 +123,12 @@ Route::middleware([
 
     Route::patch('demo/categories/{demoCategory}/toggle-status', [DemoCategoryController::class, 'toggleStatus'])
         ->name('admin.demo.categories.toggle-status');
+
+    Route::get('/sitemap', [SitemapController::class, 'index'])->name('admin.sitemap.index');
+    Route::get('/sitemap/create', [SitemapController::class, 'create'])->name('admin.sitemap.create');
+
+    Route::get('/robots', [RobotTxtController::class, 'index'])->name('admin.robots.index');
+    Route::put('/robots/update', [RobotTxtController::class, 'update'])->name('admin.robots.update');
 });
 
 Route::controller(ProfileController::class)

@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Demo;
 use App\Models\DemoCategory;
+use App\Models\Portfolio;
 use App\Models\Service;
-use Illuminate\Http\Request;
+use App\Services\SitemapService;
 
 class FrontendController extends Controller
 {
@@ -48,9 +49,9 @@ class FrontendController extends Controller
             ],
         ];
 
-        $portfolios = config('global.portfolios', []);
         $clients = config('global.clients', []);
         
+        $portfolios = Portfolio::active()->orderBy('sort_order')->take(6)->get();
         $services = Service::active()->orderBy('sort_order')->take(12)->get();
 
         return view('welcome', compact('hero', 'globe', 'services', 'clients', 'portfolios'));
@@ -119,4 +120,11 @@ class FrontendController extends Controller
             'relatedDemos'
         ));
     }
+
+    public function sitemap()
+    {
+        $sitemap = SitemapService::get();
+        
+        return view('frontend.pages.sitemap', $sitemap);
+    } 
 }

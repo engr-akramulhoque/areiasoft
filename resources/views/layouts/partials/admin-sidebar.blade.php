@@ -115,36 +115,6 @@
                     </div>
                 @endcanany
 
-                @canany(['view role', 'view user'])
-                    <div class="dropdown">
-                        <button
-                            class="dropdown-toggle flex items-center justify-between w-full p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 {{ request()->routeIs('admin.users.*') || request()->routeIs('admin.roles.*')
-                                ? 'bg-gray-200 dark:bg-gray-700'
-                                : '' }}">
-                            <div class="flex items-center space-x-3">
-                                <i class="fas fa-users w-5"></i>
-                                <span>Manage User</span>
-                            </div>
-                            <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
-                        </button>
-                        <div
-                            class="dropdown-content pl-8 mt-1 space-y-1 {{ request()->routeIs('admin.users.*') || request()->routeIs('admin.roles.*') ? '' : 'hidden' }}">
-                            @can('view user')
-                                <a href="{{ route('admin.users.index') }}"
-                                    class="block p-2 rounded-lg {{ request()->routeIs('admin.users.*') ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700' }}">Users</a>
-                            @endcan
-                            @can('view role')
-                                <a href="{{ route('admin.roles.index') }}"
-                                    class="block p-2 rounded-lg {{ request()->routeIs('admin.roles.*') ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700' }}">Roles</a>
-                            @endcan
-                            @can('view visitor')
-                                <a href="{{ route('admin.roles.index') }}"
-                                    class="block p-2 rounded-lg {{ request()->routeIs('admin.users.*') ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700' }}">Visitors</a>
-                            @endcan
-                        </div>
-                    </div>
-                @endcanany
-
                 @canany(['view_blog_category', 'view_blog', 'view_blog_comments'])
                     <div class="dropdown">
                         <button
@@ -209,18 +179,48 @@
                         </button>
                         <div
                             class="dropdown-content pl-8 mt-1 space-y-1 {{ request()->routeIs('admin.sitemap.*') || request()->routeIs('admin.robots.*') ? '' : 'hidden' }}">
+                            @can('view_sitemap')
+                                <a href="{{ route('admin.sitemap.index') }}"
+                                    class="block p-2 rounded-lg {{ request()->routeIs('admin.sitemap.*') ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700' }}">Sitemap</a>
+                            @endcan
+                            @can('view_robots_txt')
+                                <a href="{{ route('admin.robots.index') }}"
+                                    class="block p-2 rounded-lg {{ request()->routeIs('admin.robots.*') ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700' }}">Robots
+                                    TXT</a>
+                            @endcan
                             @can('view seo-manager')
                                 <a href="{{ url(config('seo.route.prefix')) }}"
                                     class="block p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700">SEO Manager</a>
                             @endcan
-                            @can('view sitemap')
-                                <a href="{{ route('admin.sitemap.index') }}"
-                                    class="block p-2 rounded-lg {{ request()->routeIs('admin.sitemap.*') ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700' }}">Sitemap</a>
+                        </div>
+                    </div>
+                @endcanany
+
+                @canany(['view role', 'view user'])
+                    <div class="dropdown">
+                        <button
+                            class="dropdown-toggle flex items-center justify-between w-full p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 {{ request()->routeIs('admin.users.*') || request()->routeIs('admin.roles.*')
+                                ? 'bg-gray-200 dark:bg-gray-700'
+                                : '' }}">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-users w-5"></i>
+                                <span>Manage User</span>
+                            </div>
+                            <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+                        </button>
+                        <div
+                            class="dropdown-content pl-8 mt-1 space-y-1 {{ request()->routeIs('admin.users.*') || request()->routeIs('admin.roles.*') ? '' : 'hidden' }}">
+                            @can('view user')
+                                <a href="{{ route('admin.users.index') }}"
+                                    class="block p-2 rounded-lg {{ request()->routeIs('admin.users.*') ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700' }}">Users</a>
                             @endcan
-                            @can('view robots-txt')
-                                <a href="{{ route('admin.robots.index') }}"
-                                    class="block p-2 rounded-lg {{ request()->routeIs('admin.robots.*') ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700' }}">Robots
-                                    TXT</a>
+                            @can('view role')
+                                <a href="{{ route('admin.roles.index') }}"
+                                    class="block p-2 rounded-lg {{ request()->routeIs('admin.roles.*') ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700' }}">Roles</a>
+                            @endcan
+                            @can('view visitor')
+                                <a href="{{ route('admin.roles.index') }}"
+                                    class="block p-2 rounded-lg {{ request()->routeIs('admin.users.*') ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700' }}">Visitors</a>
                             @endcan
                         </div>
                     </div>

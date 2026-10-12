@@ -130,6 +130,8 @@
                     <a href="{{ route('contact.index') }}">Contact</a>
                     <a href="{{ route('privacy.policy') }}">Privacy Policy</a>
                     <a href="{{ route('terms.conditions') }}">Terms & Conditions</a>
+                    <a href="{{ route('sitemap') }}">Sitemap</a>
+                    <a href="{{ route('login') }}">Login</a>
                 </div>
                 <div class="footer-col">
                     <h4>Follow Us</h4>

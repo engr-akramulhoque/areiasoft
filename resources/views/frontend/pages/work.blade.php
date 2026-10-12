@@ -24,7 +24,7 @@
                 <div class="work-image">
                     <img src="{{ \Illuminate\Support\Str::startsWith($portfolio['image'], ['http://', 'https://'])
                         ? $portfolio['image']
-                        : asset($portfolio['image']) }}"
+                        : asset('storage/' . $portfolio['image']) }}"
                         alt="{{ $portfolio['title'] }}" loading="lazy">
                 </div>
 
@@ -38,10 +38,10 @@
 
                     <h3>{{ $portfolio['title'] }}</h3>
 
-                    <p>{{ $portfolio['description'] }}</p>
+                    <p>{{ $portfolio['overview'] }}</p>
 
-                    <a href="{{ $portfolio['url'] }}" class="work-link">
-                        View Case Study
+                    <a href="{{ route('work.show', $portfolio->slug) }}" class="work-link">
+                        View Details
                         <svg viewBox="0 0 24 24" fill="none">
                             <path d="M5 12h14M12 5l7 7-7 7" />
                         </svg>

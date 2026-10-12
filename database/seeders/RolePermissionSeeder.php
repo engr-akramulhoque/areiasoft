@@ -91,6 +91,20 @@ class RolePermissionSeeder extends Seeder
                 'delete_service',
             ],
 
+            'works' => [
+                'view_work',
+                'create_work',
+                'edit_work',
+                'delete_work',
+            ],
+
+            'seo' => [
+                'view_sitemap',
+                'edit_sitemap',
+                'view_robots_txt',
+                'edit_robots_txt',
+            ],
+
             'others' => [
                 'view seo-manager',
             ],
