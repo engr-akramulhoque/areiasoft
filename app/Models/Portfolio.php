@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use AreiaLab\LaravelSeoSolution\Traits\HasSeoMeta;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Str;
@@ -9,6 +10,7 @@ use Illuminate\Support\Str;
 class Portfolio extends Model
 {
     use HasFactory;
+    use HasSeoMeta;
 
     protected $fillable = [
         'title',

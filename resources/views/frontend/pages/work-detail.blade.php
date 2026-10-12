@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-guest-layout :post="$portfolio">
 
     @push('styles')
         <style>
@@ -298,8 +298,8 @@
 
         <section class="project-hero">
             <a href="{{ route('work.index') }}" class="back-link">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
                     <path d="M19 12H5"></path>
                     <path d="m12 19-7-7 7-7"></path>
                 </svg>
@@ -326,12 +326,8 @@
         <div class="content-container">
 
             <div class="project-image-wrapper">
-                <img
-                    src="{{ asset('storage/' . $portfolio->image) }}"
-                    alt="{{ $portfolio->title }}"
-                    class="project-image"
-                    loading="eager"
-                >
+                <img src="{{ asset('storage/' . $portfolio->image) }}" alt="{{ $portfolio->title }}"
+                    class="project-image" loading="eager">
             </div>
 
             <div class="grid-2col">
@@ -374,12 +370,8 @@
                             <li>
                                 <span class="project-info-label">Live Website</span>
                                 <span class="project-info-value">
-                                    <a
-                                        href="{{ $portfolio->url }}"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        class="project-link"
-                                    >
+                                    <a href="{{ $portfolio->url }}" target="_blank" rel="noopener noreferrer"
+                                        class="project-link">
                                         Visit Website
                                     </a>
                                 </span>
@@ -431,21 +423,12 @@
 
             <div style="text-align:center; margin-top:3rem;">
 
-                <a
-                    href="{{ route('work.index') }}"
-                    class="btn-secondary"
-                    style="margin-right:1rem;"
-                >
+                <a href="{{ route('work.index') }}" class="btn-secondary" style="margin-right:1rem;">
                     ← View More Projects
                 </a>
 
                 @if ($portfolio->url && $portfolio->url !== '#')
-                    <a
-                        href="{{ $portfolio->url }}"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="btn-primary"
-                    >
+                    <a href="{{ $portfolio->url }}" target="_blank" rel="noopener noreferrer" class="btn-primary">
                         Visit Live Website
                     </a>
                 @else
@@ -457,9 +440,7 @@
             </div>
 
         </div>
-
     @else
-
         <section class="empty-state">
             <p class="section-label">Portfolio</p>
             <h1>Project Not Found</h1>
