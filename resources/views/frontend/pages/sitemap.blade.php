@@ -277,12 +277,10 @@
                 left: 2rem;
                 right: 2rem;
                 height: 1px;
-                background: linear-gradient(
-                    90deg,
-                    transparent,
-                    rgba(0, 229, 255, 0.5),
-                    transparent
-                );
+                background: linear-gradient(90deg,
+                        transparent,
+                        rgba(0, 229, 255, 0.5),
+                        transparent);
                 transform: scaleX(0);
                 transform-origin: center;
                 transition: var(--transition);
@@ -476,6 +474,52 @@
             <div class="sitemap-card-glow"></div>
         </div>
 
+        <!-- SEO Landing Pages -->
+        <div class="sitemap-card sitemap-card-wide">
+            <div class="sitemap-card-header">
+
+                <div class="sitemap-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="3" y="3" width="18" height="18" rx="2.5"></rect>
+                        <path d="M3 8h18"></path>
+                        <circle cx="6" cy="5.5" r=".5" fill="currentColor" stroke="none"></circle>
+                        <circle cx="8" cy="5.5" r=".5" fill="currentColor" stroke="none"></circle>
+                        <path d="M7 12h4"></path>
+                        <path d="M7 15h6"></path>
+                        <path d="M7 18h3"></path>
+                        <rect x="15" y="11" width="3" height="4" rx=".5"></rect>
+                        <path d="M14.5 18h4"></path>
+                    </svg>
+                </div>
+
+                <div>
+                    <h2>Solution Pages</h2>
+                    <p>Find the best solutions for you</p>
+                </div>
+            </div>
+
+            <ul class="sitemap-links">
+                @forelse ($seo_pages as $page)
+                    <li>
+                        <a href="{{ $page['url'] }}">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M5 12h14"></path>
+                                <path d="m13 6 6 6-6 6"></path>
+                            </svg>
+                            {{ $page['title'] }}
+                        </a>
+                    </li>
+                @empty
+                    <li>
+                        <span class="sitemap-empty">No solution pages available.</span>
+                    </li>
+                @endforelse
+            </ul>
+
+            <div class="sitemap-card-glow"></div>
+        </div>
+
         <!-- Live Demos -->
         <div class="sitemap-card sitemap-card-wide">
             <div class="sitemap-card-header">
@@ -514,12 +558,13 @@
 
             <div class="sitemap-card-glow"></div>
         </div>
-        
+
         <!-- Our Works -->
         <div class="sitemap-card sitemap-card-wide">
             <div class="sitemap-card-header">
                 <div class="sitemap-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                        stroke-linecap="round" stroke-linejoin="round">
                         <rect x="3" y="7" width="18" height="13" rx="2"></rect>
                         <path d="M8 7V5.5A1.5 1.5 0 0 1 9.5 4h5A1.5 1.5 0 0 1 16 5.5V7"></path>
                         <path d="M3 12h18"></path>

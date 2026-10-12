@@ -50,7 +50,7 @@ class DemoController extends Controller implements HasMiddleware
     public function create(): View
     {
         $categories = DemoCategory::where('status', true)
-            ->orderBy('sort_order')
+            ->orderBy('serial_no')
             ->orderBy('name')
             ->get();
 
@@ -70,7 +70,7 @@ class DemoController extends Controller implements HasMiddleware
 
         $validated['status'] = $request->boolean('status');
         $validated['featured'] = $request->boolean('featured');
-        $validated['sort_order'] = $validated['sort_order'] ?? 0;
+        $validated['serial_no'] = $validated['sort_order'] ?? 0;
 
         if ($request->hasFile('thumbnail')) {
             $validated['thumbnail'] = $request->file('thumbnail')
@@ -105,7 +105,7 @@ class DemoController extends Controller implements HasMiddleware
     public function edit(Demo $demo): View
     {
         $categories = DemoCategory::where('status', true)
-            ->orderBy('sort_order')
+            ->orderBy('serial_no')
             ->orderBy('name')
             ->get();
 
@@ -135,7 +135,7 @@ class DemoController extends Controller implements HasMiddleware
 
         $validated['status'] = $request->boolean('status');
         $validated['featured'] = $request->boolean('featured');
-        $validated['sort_order'] = $validated['sort_order'] ?? 0;
+        $validated['serial_no'] = $validated['sort_order'] ?? 0;
 
         if ($request->hasFile('thumbnail')) {
             $this->deleteFile($demo->thumbnail);
