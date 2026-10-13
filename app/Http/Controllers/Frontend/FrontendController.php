@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Demo;
+use App\Models\DemoCategory;
+use App\Models\Portfolio;
+use App\Models\Service;
+use App\Services\SitemapService;
 
 class FrontendController extends Controller
 {
@@ -45,10 +49,10 @@ class FrontendController extends Controller
             ],
         ];
 
-        $portfolios = config('global.portfolios', []);
         $clients = config('global.clients', []);
-        $services= config('areiasoft.services', []);
-
+        
+        $portfolios = Portfolio::active()->orderBy('sort_order')->take(6)->get();
+        $services = Service::active()->orderBy('sort_order')->take(12)->get();
 
         return view('welcome', compact('hero', 'globe', 'services', 'clients', 'portfolios'));
     }
@@ -82,4 +86,45 @@ class FrontendController extends Controller
     {
         return view('frontend.pages.case-study');
     }
+
+    public function demoLibery()
+    {
+        $categories = DemoCategory::active()
+            ->with([
+                'activeDemos' => function ($query) {
+                    $query->orderBy('serial_no');
+                }
+            ])
+            ->orderBy('serial_no')
+            ->get();
+
+        return view('frontend.pages.demo-libery', compact('categories'));
+    }
+
+    public function demoDetails($slug)
+    {
+        $demo = Demo::active()
+            ->with('category')
+            ->where('slug', $slug)
+            ->firstOrFail();
+
+        $relatedDemos = Demo::active()
+            ->where('demo_category_id', $demo->demo_category_id)
+            ->where('id', '!=', $demo->id)
+            ->orderBy('serial_no')
+            ->take(3)
+            ->get();
+
+        return view('frontend.pages.demo-detail', compact(
+            'demo',
+            'relatedDemos'
+        ));
+    }
+
+    public function sitemap()
+    {
+        $sitemap = SitemapService::get();
+        
+        return view('frontend.pages.sitemap', $sitemap);
+    } 
 }

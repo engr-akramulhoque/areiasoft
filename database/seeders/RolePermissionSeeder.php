@@ -39,6 +39,72 @@ class RolePermissionSeeder extends Seeder
                 'delete contact',
             ],
 
+            'blog_categories' => [
+                'view_blog_category',
+                'create_blog_category',
+                'edit_blog_category',
+                'delete_blog_category',
+            ],
+
+            'blogs' => [
+                'view_blog',
+                'create_blog',
+                'edit_blog',
+                'delete_blog',
+            ],
+
+            'blog_comments' => [
+                'view_blog_comments',
+                'approve_blog_comment',
+                'reject_blog_comment',
+                'delete_blog_comment',
+            ],
+
+            'landing_pages' => [
+                'view_landing_page',
+                'create_landing_page',
+                'edit_landing_page',
+                'delete_landing_page',
+            ],
+
+            'demo_categories' => [
+                'view_demo_category',
+                'create_demo_category',
+                'edit_demo_category',
+                'delete_demo_category',
+                'toggle_demo_category_status',
+            ],
+
+            'demos' => [
+                'view_demo',
+                'create_demo',
+                'edit_demo',
+                'delete_demo',
+                'toggle_demo_status',
+                'toggle_demo_featured',
+            ],
+
+            'services' => [
+                'view_service',
+                'create_service',
+                'edit_service',
+                'delete_service',
+            ],
+
+            'works' => [
+                'view_work',
+                'create_work',
+                'edit_work',
+                'delete_work',
+            ],
+
+            'seo' => [
+                'view_sitemap',
+                'edit_sitemap',
+                'view_robots_txt',
+                'edit_robots_txt',
+            ],
+
             'others' => [
                 'view seo-manager',
             ],
@@ -54,6 +120,5 @@ class RolePermissionSeeder extends Seeder
         // role with all permissions
         $admin = Role::firstOrCreate(['name' => 'administration']);
         $admin->syncPermissions(Permission::all());
-        
     }
 }

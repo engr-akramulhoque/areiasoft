@@ -1,5 +1,6 @@
 @props([
     'title' => 'Custom Software & Website Development Company | Areia Soft',
+    'post' => null,
 ])
 
 <!DOCTYPE html>
@@ -22,12 +23,15 @@
 
     <!-- Areia SEO Solutions -->
     @seoAutoPage
+    
+    @isset($post)
+        @seoModel($post)
+    @endisset
 
     <link rel="stylesheet" href="{{ asset('static/frontend/assets/css/main.css') }}" />
     <link rel="stylesheet" href="{{ asset('static/frontend/assets/css/style.css') }}" />
 
     <!-- Styles -->
-    @livewireStyles
     @stack('styles')
 
     <!-- Google tag (gtag.js) -->
@@ -61,6 +65,34 @@
         })(window, document, 'script', 'dataLayer', 'GTM-NDB6T39B');
     </script>
     <!-- End Google Tag Manager -->
+
+    <!-- Facebook Pixel Code -->
+    <script>
+        ! function(f, b, e, v, n, t, s) {
+            if (f.fbq) return;
+            n = f.fbq = function() {
+                n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n;
+            n.push = n;
+            n.loaded = !0;
+            n.version = '2.0';
+            n.queue = [];
+            t = b.createElement(e);
+            t.async = !0;
+            t.src = v;
+            s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '27967085816289554');
+        fbq('track', 'PageView');
+    </script>
+
+    <noscript>
+        <img height="1" width="1"
+            src="https://www.facebook.com/tr?id=27967085816289554&ev=PageView&noscript=1" />
+    </noscript>
+    <!-- End Facebook Pixel Code -->
 </head>
 
 <body>
@@ -98,6 +130,8 @@
                     <a href="{{ route('contact.index') }}">Contact</a>
                     <a href="{{ route('privacy.policy') }}">Privacy Policy</a>
                     <a href="{{ route('terms.conditions') }}">Terms & Conditions</a>
+                    <a href="{{ route('sitemap') }}">Sitemap</a>
+                    <a href="{{ route('login') }}">Login</a>
                 </div>
                 <div class="footer-col">
                     <h4>Follow Us</h4>
@@ -127,7 +161,6 @@
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
     </script>
 
-    @livewireScripts
     @stack('scripts')
 
     <!-- Google Tag Manager (noscript) -->

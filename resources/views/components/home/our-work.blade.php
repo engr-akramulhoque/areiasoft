@@ -10,7 +10,7 @@
                 <article class="work-card">
 
                     <div class="work-image">
-                        <img src="{{ $portfolio['image'] }}" alt="{{ $portfolio['title'] }}" loading="lazy">
+                        <img src="{{ asset('storage/' . $portfolio['image']) }}" alt="{{ $portfolio['title'] }}" loading="lazy">
                     </div>
 
                     <div class="work-details">
@@ -23,10 +23,10 @@
 
                         <h3>{{ $portfolio['title'] }}</h3>
 
-                        <p>{{ $portfolio['description'] }}</p>
+                        <p>{{ $portfolio['overview'] }}</p>
 
-                        <a href="{{ $portfolio['url'] }}" class="work-link">
-                            View Case Study
+                        <a href="{{ route('work.show', $portfolio['slug']) }}" class="work-link">
+                            View Detail
 
                             <svg viewBox="0 0 24 24" fill="none">
                                 <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"

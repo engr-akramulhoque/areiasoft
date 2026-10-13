@@ -58,6 +58,150 @@
                     </a>
                 @endcan
 
+                @canany(['view_landing_page', 'view_service', 'view_portfolio'])
+                    <div class="dropdown">
+                        <button
+                            class="dropdown-toggle flex items-center justify-between w-full p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 {{ request()->routeIs('admin.seo-landing-pages.*') ? 'bg-gray-200 dark:bg-gray-700' : '' }}">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-layer-group w-5"></i>
+                                <span>Site Content</span>
+                            </div>
+                            <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+                        </button>
+                        <div
+                            class="dropdown-content pl-8 mt-1 space-y-1 {{ request()->routeIs('admin.seo-landing-pages.*') || request()->routeIs('admin.services.*') || request()->routeIs('admin.portfolios.*') ? '' : 'hidden' }}">
+                            @can('view_service')
+                                <a href="{{ route('admin.services.index') }}"
+                                    class="block p-2 rounded-lg {{ request()->routeIs('admin.services.*') ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700' }}">Services</a>
+                            @endcan
+                            
+                            @can('view_work')
+                                <a href="{{ route('admin.portfolios.index') }}"
+                                    class="block p-2 rounded-lg {{ request()->routeIs('admin.portfolios.*') ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700' }}">Our Works</a>
+                            @endcan
+
+                            @can('view_landing_page')
+                                <a href="{{ route('admin.seo-landing-pages.index') }}"
+                                    class="block p-2 rounded-lg {{ request()->routeIs('admin.seo-landing-pages.*') ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700' }}">SEO
+                                    Pages</a>
+                            @endcan
+                        </div>
+                    </div>
+                @endcanany
+
+                @canany(['view_demo', 'create_demo', 'edit_demo', 'delete_demo', 'view_demo_category',
+                    'create_demo_category', 'edit_demo_category', 'delete_demo_category'])
+                    <div class="dropdown">
+                        <button
+                            class="dropdown-toggle flex items-center justify-between w-full p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 {{ request()->routeIs('admin.demos.*', 'admin.demo.categories.*') ? 'bg-gray-200 dark:bg-gray-700' : '' }}">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-desktop w-5"></i>
+                                <span>Demo Library</span>
+                            </div>
+                            <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+                        </button>
+
+                        <div
+                            class="dropdown-content pl-8 mt-1 space-y-1 {{ request()->routeIs('admin.demos.*', 'admin.demo.categories.*') ? '' : 'hidden' }}">
+                            @canany(['view_demo', 'create_demo', 'edit_demo', 'delete_demo'])
+                                <a href="{{ route('admin.demos.index') }}"
+                                    class="block p-2 rounded-lg {{ request()->routeIs('admin.demos.*') ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700' }}">
+                                    Demos
+                                </a>
+                            @endcanany
+
+                            @canany(['view_demo_category', 'create_demo_category', 'edit_demo_category',
+                                'delete_demo_category'])
+                                <a href="{{ route('admin.demo.categories.index') }}"
+                                    class="block p-2 rounded-lg {{ request()->routeIs('admin.demo.categories.*') ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700' }}">
+                                    Categories
+                                </a>
+                            @endcanany
+                        </div>
+                    </div>
+                @endcanany
+
+                @canany(['view_blog_category', 'view_blog', 'view_blog_comments'])
+                    <div class="dropdown">
+                        <button
+                            class="dropdown-toggle flex w-full items-center justify-between rounded-lg p-2 hover:bg-gray-200 dark:hover:bg-gray-700 {{ request()->routeIs('admin.blog.*', 'admin.blog-comments.*') ? 'bg-gray-200 dark:bg-gray-700' : '' }}">
+
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-blog w-5"></i>
+                                <span>Blog</span>
+                            </div>
+
+                            <i
+                                class="fas fa-chevron-down text-xs transition-transform duration-200 {{ request()->routeIs('admin.blog.*', 'admin.blog-comments.*') ? 'rotate-180' : '' }}">
+                            </i>
+                        </button>
+
+                        <div
+                            class="dropdown-content mt-1 space-y-1 pl-8 {{ request()->routeIs('admin.blog.*', 'admin.blogs.*', 'admin.blog-comments.*') ? '' : 'hidden' }}">
+
+                            {{-- Categories --}}
+                            @can('view_blog_category')
+                                <a href="{{ route('admin.blog.categories.index') }}"
+                                    class="block rounded-lg p-2 {{ request()->routeIs('admin.blog.categories.*')
+                                        ? 'bg-blue-500 text-white shadow-sm'
+                                        : 'hover:bg-gray-200 dark:hover:bg-gray-700' }}">
+                                    Categories
+                                </a>
+                            @endcan
+
+                            {{-- Posts --}}
+                            @can('view_blog')
+                                <a href="{{ route('admin.blogs.index') }}"
+                                    class="block rounded-lg p-2 {{ request()->routeIs('admin.blogs.*')
+                                        ? 'bg-blue-500 text-white shadow-sm'
+                                        : 'hover:bg-gray-200 dark:hover:bg-gray-700' }}">
+                                    Posts
+                                </a>
+                            @endcan
+
+                            {{-- Comments --}}
+                            @can('view_blog_comments')
+                                <a href="{{ route('admin.blog-comments.index') }}"
+                                    class="block rounded-lg p-2 {{ request()->routeIs('admin.blog-comments.*')
+                                        ? 'bg-blue-500 text-white shadow-sm'
+                                        : 'hover:bg-gray-200 dark:hover:bg-gray-700' }}">
+                                    Comments
+                                </a>
+                            @endcan
+
+                        </div>
+                    </div>
+                @endcanany
+
+                @canany(['view seo-manager', 'view_sitemap', 'view_robots_txt'])
+                    <div class="dropdown">
+                        <button
+                            class="dropdown-toggle flex items-center justify-between w-full p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 {{ request()->routeIs('admin.sitemap.*') || request()->routeIs('admin.robots.*') ? 'bg-gray-200 dark:bg-gray-700' : '' }}">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-search w-5"></i>
+                                <span>SEO</span>
+                            </div>
+                            <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+                        </button>
+                        <div
+                            class="dropdown-content pl-8 mt-1 space-y-1 {{ request()->routeIs('admin.sitemap.*') || request()->routeIs('admin.robots.*') ? '' : 'hidden' }}">
+                            @can('view_sitemap')
+                                <a href="{{ route('admin.sitemap.index') }}"
+                                    class="block p-2 rounded-lg {{ request()->routeIs('admin.sitemap.*') ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700' }}">Sitemap</a>
+                            @endcan
+                            @can('view_robots_txt')
+                                <a href="{{ route('admin.robots.index') }}"
+                                    class="block p-2 rounded-lg {{ request()->routeIs('admin.robots.*') ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700' }}">Robots
+                                    TXT</a>
+                            @endcan
+                            @can('view seo-manager')
+                                <a href="{{ url(config('seo.route.prefix')) }}"
+                                    class="block p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700">SEO Manager</a>
+                            @endcan
+                        </div>
+                    </div>
+                @endcanany
+
                 @canany(['view role', 'view user'])
                     <div class="dropdown">
                         <button
@@ -83,35 +227,6 @@
                             @can('view visitor')
                                 <a href="{{ route('admin.roles.index') }}"
                                     class="block p-2 rounded-lg {{ request()->routeIs('admin.users.*') ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700' }}">Visitors</a>
-                            @endcan
-                        </div>
-                    </div>
-                @endcanany
-
-                @canany(['view seo-manager', 'view sitemap', 'view robots-txt'])
-                    <div class="dropdown">
-                        <button
-                            class="dropdown-toggle flex items-center justify-between w-full p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 {{ request()->routeIs('admin.sitemap.*') || request()->routeIs('admin.robots.*') ? 'bg-gray-200 dark:bg-gray-700' : '' }}">
-                            <div class="flex items-center space-x-3">
-                                <i class="fas fa-search w-5"></i>
-                                <span>SEO</span>
-                            </div>
-                            <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
-                        </button>
-                        <div
-                            class="dropdown-content pl-8 mt-1 space-y-1 {{ request()->routeIs('admin.sitemap.*') || request()->routeIs('admin.robots.*') ? '' : 'hidden' }}">
-                            @can('view seo-manager')
-                                <a href="{{ url(config('seo.route.prefix')) }}"
-                                    class="block p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700">SEO Manager</a>
-                            @endcan
-                            @can('view sitemap')
-                                <a href="{{ route('admin.sitemap.index') }}"
-                                    class="block p-2 rounded-lg {{ request()->routeIs('admin.sitemap.*') ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700' }}">Sitemap</a>
-                            @endcan
-                            @can('view robots-txt')
-                                <a href="{{ route('admin.robots.index') }}"
-                                    class="block p-2 rounded-lg {{ request()->routeIs('admin.robots.*') ? 'bg-blue-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700' }}">Robots
-                                    TXT</a>
                             @endcan
                         </div>
                     </div>

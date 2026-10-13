@@ -1,4 +1,5 @@
-<x-guest-layout>
+<x-guest-layout  :post="$service">
+    
     @push('styles')
         <style>
             /* Hero */
@@ -65,7 +66,7 @@
 
             .project-image {
                 width: 100%;
-                height: 500px;
+                height: auto;
                 border-radius: var(--radius-md);
                 background: linear-gradient(135deg, #0F1722, #1A2332);
                 display: flex;
@@ -87,7 +88,6 @@
             @media (max-width: 768px) {
                 .project-image {
                     height: auto;
-                    aspect-ratio: 1200 / 568;
                 }
 
                 .project-image img {
@@ -232,11 +232,11 @@
     <section class="project-hero">
 
         <h1>
-            {{ $service['title'] }}
+            {{ $service->title }}
         </h1>
 
         <p>
-            {{ $service['hero_description'] }}
+            {{ $service->hero_description }}
         </p>
 
     </section>
@@ -248,14 +248,14 @@
         {{-- Service Image --}}
         <div class="project-image">
 
-            <img src="{{ asset($service['image']) }}" alt="{{ $service['title'] }} - Areia Soft" loading="eager">
+            <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->alt_text }} - Areia Soft" loading="eager">
 
         </div>
 
 
         <div class="project-tags">
 
-            @foreach ($service['technologies'] as $technology)
+            @foreach ($service->technologies as $technology)
                 <span class="project-tag">
                     {{ $technology }}
                 </span>
@@ -273,17 +273,16 @@
                 </h2>
 
                 <p style="color:var(--white-muted); line-height:1.7;">
-                    {{ $service['overview'] }}
+                    {{ $service->overview }}
                 </p>
 
             </div>
-
 
             <div class="glass-card" style="display:flex; flex-direction:column; justify-content:center;">
 
                 <div class="grid-2col" style="gap:1rem;">
 
-                    @foreach ($service['metrics'] as $metric)
+                    @foreach ($service->metrics as $metric)
                         <div class="metric-box">
 
                             <div class="metric-number">
@@ -303,6 +302,21 @@
 
         </div>
 
+        @if ($service->seo_content)
+            <div class="grid-1col">
+                <div class="glass-card">
+
+                    <h2 style="font-size:1.6rem; color:var(--cyan); margin-bottom:1rem;">
+                        Description
+                    </h2>
+
+                    <p style="color:var(--white-muted); line-height:1.7;">
+                        {!! $service->seo_content !!}
+                    </p>
+
+                </div>
+            </div>
+        @endif
 
         {{-- Key Features --}}
         <div class="glass-card">
@@ -313,7 +327,7 @@
 
             <ul class="feature-list">
 
-                @foreach ($service['features'] as $feature)
+                @foreach ($service->features as $feature)
                     <li>
                         {{ $feature }}
                     </li>
@@ -333,7 +347,7 @@
 
             <ul class="feature-list">
 
-                @foreach ($service['benefits'] as $benefit)
+                @foreach ($service->benefits as $benefit)
                     <li>
                         {{ $benefit }}
                     </li>
@@ -353,7 +367,7 @@
 
             <div class="tech-stack">
 
-                @foreach ($service['technologies'] as $technology)
+                @foreach ($service->technologies as $technology)
                     <span class="tech-badge">
                         {{ $technology }}
                     </span>
@@ -373,9 +387,9 @@
             <div class="tech-stack">
 
                 @foreach ($services as $otherService)
-                    @if ($otherService['slug'] !== $service['slug'])
-                        <a href="{{ route('service.show', ['service' => $otherService['slug']]) }}" class="tech-badge">
-                            {{ $otherService['title'] }}
+                    @if ($otherService->slug !== $service->slug)
+                        <a href="{{ route('service.show', $otherService->slug) }}" class="tech-badge">
+                            {{ $otherService->title }}
                         </a>
                     @endif
                 @endforeach
@@ -393,7 +407,7 @@
             </a>
 
             <a href="{{ route('contact.index') }}" class="btn-primary">
-                {{ $service['cta_button'] }}
+                {{ $service->cta_button }}
             </a>
 
         </div>

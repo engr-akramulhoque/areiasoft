@@ -287,13 +287,13 @@
                 tmx =
                     (e.clientX /
                         window.innerWidth) *
-                        2 -
+                    2 -
                     1;
 
                 tmy =
                     -(e.clientY /
                         window.innerHeight) *
-                        2 +
+                    2 +
                     1;
             }
         );
@@ -334,7 +334,7 @@
                 if (
                     Math.abs(
                         pos[i * 3] -
-                            pd.origX
+                        pd.origX
                     ) > 12
                 ) {
                     pd.vx *= -1;
@@ -343,7 +343,7 @@
                 if (
                     Math.abs(
                         pos[i * 3 + 1] -
-                            pd.origY
+                        pd.origY
                     ) > 10
                 ) {
                     pd.vy *= -1;
@@ -352,7 +352,7 @@
                 if (
                     Math.abs(
                         pos[i * 3 + 2] -
-                            pd.origZ
+                        pd.origZ
                     ) > 10
                 ) {
                     pd.vz *= -1;
@@ -450,6 +450,11 @@
             "companyDropdown"
         );
 
+    const solutionsDropdown =
+        document.getElementById(
+            "solutionsDropdown"
+        );
+
     // ---------------------------------------------------------
     // Make sure required elements exist
     // ---------------------------------------------------------
@@ -459,7 +464,8 @@
         !menuToggle ||
         !navLinks ||
         !workDropdown ||
-        !companyDropdown
+        !companyDropdown ||
+        !solutionsDropdown
     ) {
         return;
     }
@@ -489,6 +495,11 @@
 
     const cDropdownTrigger =
         companyDropdown.querySelector(
+            ".dropdown-trigger"
+        );
+
+    const solutionsDropdownTrigger =
+        solutionsDropdown.querySelector(
             ".dropdown-trigger"
         );
 
@@ -528,6 +539,24 @@
         );
     }
 
+    if (solutionsDropdownTrigger) {
+        solutionsDropdownTrigger.addEventListener(
+            "click",
+            function (e) {
+                if (
+                    window.innerWidth <=
+                    768
+                ) {
+                    e.preventDefault();
+
+                    solutionsDropdown.classList.toggle(
+                        "open"
+                    );
+                }
+            }
+        );
+    }
+
     // ---------------------------------------------------------
     // Close Dropdown When Clicking Outside
     // ---------------------------------------------------------
@@ -555,6 +584,16 @@
                     )
                 ) {
                     companyDropdown.classList.remove(
+                        "open"
+                    );
+                }
+
+                if (
+                    !solutionsDropdown.contains(
+                        e.target
+                    )
+                ) {
+                    solutionsDropdown.classList.remove(
                         "open"
                     );
                 }
@@ -589,6 +628,10 @@
                 companyDropdown.classList.remove(
                     "open"
                 );
+
+                solutionsDropdown.classList.remove(
+                    "open"
+                );
             }
         }
     );
@@ -618,6 +661,10 @@
                     );
 
                     companyDropdown.classList.remove(
+                        "open"
+                    );
+
+                    solutionsDropdown.classList.remove(
                         "open"
                     );
                 }

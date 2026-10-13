@@ -9,17 +9,18 @@
     <title>{{ config('app.name', 'Laravel') }} - Admin Dashboard</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="{{ asset('static/logos/favicon.png') }}">
-    <link rel="apple-touch-icon" href="{{ asset('static/logos/favicon.png') }}">
+    <link rel="icon" href="{{ asset('static/logos/favicon.jpg') }}">
+    <link rel="apple-touch-icon" href="{{ asset('static/logos/favicon.jpg') }}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.13.1/font/bootstrap-icons.min.css"/>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.13.1/font/bootstrap-icons.min.css" />
 
     <!-- Scripts -->
     @if (app()->environment('local'))
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     @else
-        <link rel="stylesheet" href="{{ asset('build/assets/app-srianpS0.css') }}" />
+        <link rel="stylesheet" href="{{ asset('build/assets/app-BpR8yzXg.css') }}" />
         <script src="{{ asset('build/assets/app-BvRk9kiK.js') }}"></script>
     @endif
 
